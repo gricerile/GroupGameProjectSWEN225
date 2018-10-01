@@ -1,12 +1,13 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import com.sun.prism.paint.Color;
+
 
 public class GraphicsWindow extends JPanel {
 
@@ -26,7 +27,13 @@ public class GraphicsWindow extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-	//	redraw(g);
+		super.paintComponent(g);
+		setBackground(Color.WHITE);
+
+	}
+	
+	public void redraw() {
+		repaint();
 	}
 
 

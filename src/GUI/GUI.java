@@ -36,9 +36,9 @@ public abstract class GUI {
 		});
 	}
 
-	//public void redraw() {
-	//	frame.repaint();
-	//}
+	public void redraw() {
+		frame.graphicsWindow.redraw();
+	}
 
 	public void initialise() {
 

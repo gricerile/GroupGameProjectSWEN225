@@ -1,3 +1,4 @@
+package main;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -6,6 +7,7 @@ import GUI.GUI;
 public class Main extends GUI {
 	public static void main(String[] args) {
 		Main main = new Main();
+		
 	}
 
 	@Override

@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
-	private NavigationPanel navigationPanel;
-	private GraphicsWindow graphicsWindow;
+	NavigationPanel navigationPanel;
+	GraphicsWindow graphicsWindow;
 
 	public GameFrame(String s) {
 		super(s);
