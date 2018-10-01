@@ -2,40 +2,32 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
-
-
 
 public class GameFrame extends JFrame {
 
 	private NavigationPanel navigationPanel;
-
-
+	private GraphicsWindow graphicsWindow;
 
 	public GameFrame(String s) {
 		super(s);
 
-
-		//set layout
+		// set layout
 		setLayout(new BorderLayout());
-		
-		//components
+
+		// components
 		navigationPanel = new NavigationPanel();
-		
-		//add components to content pane
+		graphicsWindow = new GraphicsWindow();
+
+		// add components to content pane
 		Container c = getContentPane();
 
 		c.add(navigationPanel, BorderLayout.NORTH);
+		c.add(graphicsWindow, BorderLayout.CENTER);
 
-
-		//behaviour
-	
-
+		// behaviour
 
 	}
+
 }
