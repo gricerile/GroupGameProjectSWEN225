@@ -20,7 +20,7 @@ public abstract class GUI {
 
 	public void initialise() {
 
-		JFrame frame = new JFrame(gameName);
+		GameFrame frame = new GameFrame(gameName);
 
 		frame.setSize(frameWidth, frameHeight);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
