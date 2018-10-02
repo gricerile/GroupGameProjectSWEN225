@@ -1,4 +1,5 @@
 
-public abstract class GameObject {
-	//fields
+public interface GameObject {
+
+	public String getStatus();
 }

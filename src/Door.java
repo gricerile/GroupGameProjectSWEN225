@@ -1,5 +1,5 @@
 
-public class Door extends GameObject {
+public class Door implements GameObject {
 	// fields
 	private Segment seg1;
 	private Segment seg2;
@@ -55,4 +55,16 @@ public class Door extends GameObject {
 	public Segment getSeg2() {
 		return this.seg2;
 	}
+
+	@Override
+	public String getStatus() {
+		if(this.unlocked==false) {
+			return "The door is closed and locked.";
+		} else if(this.unlocked==true && this.open==false) {
+			return "The door is closed and unlocked.";
+		}	 else {
+			return "The door is open.";
+		}
+	}
+
 }

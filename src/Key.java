@@ -1,5 +1,5 @@
 
-public class Key extends GameObject {
+public class Key implements GameObject {
 	// fields
 	private Door door;
 
@@ -21,5 +21,10 @@ public class Key extends GameObject {
 
 	public String getKeysDoorName() {
 		return this.door.getDoorName();
+	}
+
+	@Override
+	public String getStatus() {
+		return ("The Key unlocks/locks the door " + getKeysDoorName());
 	}
 }

@@ -1,5 +1,5 @@
 
-public class Chest extends GameObject {
+public class Chest implements GameObject {
 	// fields
 	private boolean open;
 	private Key key;
@@ -26,6 +26,15 @@ public class Chest extends GameObject {
 			return k;
 		} else {
 			return null;
+		}
+	}
+
+	@Override
+	public String getStatus() {
+		if(this.open==true){
+			return "The chest is open.";
+		} else {
+			return "The chest is closed.";
 		}
 	}
 }
