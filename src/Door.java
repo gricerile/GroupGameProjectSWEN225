@@ -48,4 +48,11 @@ public class Door extends GameObject {
 		return "You must use the correct key on the door.";
 	}
 
+	public Segment getSeg1() {
+		return this.seg1;
+	}
+
+	public Segment getSeg2() {
+		return this.seg2;
+	}
 }
