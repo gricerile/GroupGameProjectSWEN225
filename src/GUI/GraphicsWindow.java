@@ -11,8 +11,8 @@ import renderer.Canvas;
 
 public class GraphicsWindow extends JPanel {
 
-	private int dimensionHeight = 200;
-	private int dimensionWidth = 500;
+	private int dimensionHeight = 400;
+	private int dimensionWidth = 650;
 
 	public GraphicsWindow() {
 

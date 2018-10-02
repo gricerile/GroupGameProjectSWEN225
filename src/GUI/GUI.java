@@ -8,8 +8,8 @@ import javax.swing.SwingUtilities;
 
 public abstract class GUI {
 	private String gameName = "Game";
-	private int frameWidth = 500;
-	private int frameHeight = 400;
+	private int frameWidth = 700;
+	private int frameHeight = 700;
 
 	private GameFrame frame;
 

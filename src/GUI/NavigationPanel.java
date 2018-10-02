@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class NavigationPanel extends JPanel {
 
 	private int dimensionHeight =80;
-	private int dimensionWidth =200;
+	private int dimensionWidth =650;
 	private String panelName = "Navigation";
 
 

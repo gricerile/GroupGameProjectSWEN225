@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
-	
+
 	GraphicsWindow graphicsWindow;
 	EventOutputPanel eventOutputPanel;
 	InventoryPanel inventoryPanel;
@@ -22,31 +22,22 @@ public class GameFrame extends JFrame {
 		super(s);
 
 		// set layout
-		//setLayout(new BorderLayout());
-		setLayout(new GridBagLayout());
-		GridBagConstraints grid = new GridBagConstraints();
+		setLayout(new BorderLayout());
 
 		// components
-		
 		graphicsWindow = new GraphicsWindow();
 		eventOutputPanel = new EventOutputPanel();
 		inventoryPanel = new InventoryPanel();
 		navigationPanel = new NavigationPanel();
-		
+
 
 		// add components to content pane
 		Container c = getContentPane();
 
-		////c.add(navigationPanel, BorderLayout.NORTH);
-		////c.add(graphicsWindow, BorderLayout.CENTER);
-		
-		grid.gridx=0;
-		grid.gridy=0;
-		c.add(graphicsWindow, grid);
-		
-		grid.gridx=0;
-		grid.gridy=1;
-		c.add(navigationPanel, grid);
+		c.add(graphicsWindow, BorderLayout.NORTH);
+		c.add(eventOutputPanel, BorderLayout.CENTER);
+		c.add(inventoryPanel, BorderLayout.CENTER);
+		c.add(navigationPanel, BorderLayout.SOUTH);
 
 		// behaviour
 
