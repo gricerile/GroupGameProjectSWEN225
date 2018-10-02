@@ -17,6 +17,7 @@ public class Canvas {
 	public void draw(Graphics g) {
 		// test draw
 		g.fillRect(20, 20, 100, 50);
+		
 	}
 
 }
