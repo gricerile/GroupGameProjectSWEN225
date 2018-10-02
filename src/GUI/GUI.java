@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Graphics;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -12,19 +13,12 @@ public abstract class GUI {
 
 	private GameFrame frame;
 
-
 	/**
 	 * redraws graphical interface when called
 	 *
 	 * @param g
 	 */
 	protected abstract void redraw(Graphics g);
-
-
-
-
-
-
 
 	public GUI() {
 		SwingUtilities.invokeLater(new Runnable() {
