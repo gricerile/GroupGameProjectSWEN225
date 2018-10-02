@@ -1,0 +1,51 @@
+
+public class Door extends GameObject {
+	// fields
+	private Segment seg1;
+	private Segment seg2;
+	private Key key;
+	private String doorName; //code name for door and key association, unique for each door and key
+	private boolean open;
+	private boolean unlocked;
+
+	public Door(Segment s1, Segment s2, Key k, String s) {
+		this.seg1 = s1;
+		this.seg2 = s2;
+		this.key = k;
+		this.doorName = s;
+		this.open = false;
+		this.unlocked = false;
+	}
+
+	public String getDoorName() {
+		return this.doorName;
+	}
+
+	public String openAndClose() {
+		if (this.unlocked == true && this.open == false) {
+			this.open = true;
+			return "The door is now open.";
+		} else if (this.open == true) {
+			this.open = false;
+			return "The door is now closed.";
+		} else {
+			return "The door is locked and closed, you must unlock it first.";
+		}
+	}
+
+	public String unlockAndLock(Key k) {
+		if (this.key.equals(k)) {
+			if (this.unlocked == true && this.open == true) {
+				return "The door must be closed first to lock it.";
+			} else if (this.unlocked == true && this.open == false) {
+				this.unlocked = false;
+				return "The door is now locked.";
+			} else if (this.unlocked == false && this.open == false) {
+				this.unlocked = true;
+				return "The door is now unlocked.";
+			}
+		}
+		return "You must use the correct key on the door.";
+	}
+
+}
