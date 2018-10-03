@@ -157,13 +157,11 @@ public class Parser {
                 System.out.println(obj);
             }
         }
-
     }
 
 
     public static void main(String[] args) {
         Parser p = new Parser();
         p.loadMap(new File(testMapFileName));
-
     }
 }
