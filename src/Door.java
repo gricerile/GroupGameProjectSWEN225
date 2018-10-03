@@ -7,14 +7,16 @@ public class Door implements GameObject {
 	private String doorName; //code name for door and key association, unique for each door and key
 	private boolean open;
 	private boolean unlocked;
+	private int direction;
 
-	public Door(Segment s1, Segment s2, Key k, String s) {
+	public Door(Segment s1, Segment s2, Key k, String s, int direction) {
 		this.seg1 = s1;
 		this.seg2 = s2;
 		this.key = k;
 		this.doorName = s;
 		this.open = false;
 		this.unlocked = false;
+		this.direction=direction;
 	}
 
 	public String getDoorName() {
@@ -65,6 +67,11 @@ public class Door implements GameObject {
 		}	 else {
 			return "The door is open.";
 		}
+	}
+
+	@Override
+	public int getDirection() {
+		return this.direction;
 	}
 
 }
