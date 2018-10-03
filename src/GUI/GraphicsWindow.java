@@ -14,77 +14,89 @@ import javax.swing.JPanel;
 
 import renderer.Canvas;
 
+@SuppressWarnings("serial")
 public class GraphicsWindow extends JPanel implements MouseListener {
 
-	private BufferedImage image;
+  private BufferedImage image;
 
-	private int dimensionHeight = 400;
-	private int dimensionWidth = 650;
+  private int dimensionHeight = 400;
+  private int dimensionWidth = 650;
 
-	private GameFrame frame;
+  private GameFrame frame;
 
-	public GraphicsWindow(GameFrame frame) {
-		this.frame = frame;
+  /**
+   * GraphicsWindow is the JPanel which the game graphics will be painted on.
+   * GraphicsWindow also implements mouseListener to track click events.
+   *
+   * @param frame
+   *          instance of GameFrame which this class is contained in, encase class
+   *          needs to reference back.
+   */
+  public GraphicsWindow(GameFrame frame) {
+    this.frame = frame;
 
-		// set dimensions
-		Dimension dimension = getPreferredSize();
-		dimension.width = dimensionWidth;
-		dimension.height = dimensionHeight;
-		setPreferredSize(dimension);
+    // set dimensions
+    Dimension dimension = getPreferredSize();
+    dimension.width = dimensionWidth;
+    dimension.height = dimensionHeight;
+    setPreferredSize(dimension);
 
-		// set border
-		setBorder(BorderFactory.createEtchedBorder());
+    // set border
+    setBorder(BorderFactory.createEtchedBorder());
 
-		// add mouseListeners
-		addMouseListener(this);
-	}
+    // add mouseListeners
+    addMouseListener(this);
+  }
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
+  public void setImage(BufferedImage image) {
+    this.image = image;
+  }
 
-	public void redraw() {
-		repaint();
-	}
+  public void redraw() {
+    repaint();
+  }
 
-	// in progress
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		setBackground(Color.WHITE);
+  /**
+   * Paint component of GraphicsWindow, allows window to be painted on and is
+   * refreshed by a repaint call on this class.
+   */
+  public void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    setBackground(Color.WHITE);
 
-		if (image == null) {
+    if (image == null) {
 
-			g.setColor(Color.BLACK);
-			g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
+      g.setColor(Color.BLACK);
+      g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
 
-		} else {
+    } else {
 
-			g.drawImage(image, 0, 0, null);
+      g.drawImage(image, 0, 0, null);
 
-		}
+    }
 
-	}
+  }
 
-	//////////////// Mouse Listeners/////////////////////////////////
+  //////////////// Mouse Listeners/////////////////////////////////
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		System.out.print("x: " + e.getX() + "y: " + e.getY());
-	}
+  @Override
+  public void mouseReleased(MouseEvent e) {
+    System.out.print("x: " + e.getX() + "y: " + e.getY());
+  }
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-	}
+  @Override
+  public void mouseClicked(MouseEvent e) {
+  }
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
+  @Override
+  public void mousePressed(MouseEvent e) {
+  }
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
+  @Override
+  public void mouseEntered(MouseEvent e) {
+  }
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
+  @Override
+  public void mouseExited(MouseEvent e) {
+  }
 }

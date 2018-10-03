@@ -9,78 +9,95 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class GameFrame extends JFrame implements KeyListener {
 
-	private GUI gui;
+  private GUI gui;
 
-	GraphicsWindow graphicsWindow;
-	EventOutputPanel eventOutputPanel;
-	InventoryPanel inventoryPanel;
-	NavigationPanel navigationPanel;
+  GraphicsWindow graphicsWindow;
+  EventOutputPanel eventOutputPanel;
+  InventoryPanel inventoryPanel;
+  NavigationPanel navigationPanel;
 
-	public GameFrame(String s, GUI gui) {
-		super(s);
-		this.gui = gui;
+  /**
+   * GameFrame is an exention of JFrame and contains all JPanel components for the
+   * GUI.
+   *
+   * @param s
+   *          String name for the GameFrame
+   * @param gui
+   *          reference to the GUI instance which contains the instance of
+   *          GameFrame
+   */
+  public GameFrame(String s, GUI gui) {
+    super(s);
+    this.gui = gui;
 
-		// set layout
-		setLayout(new BorderLayout());
+    // components
+    graphicsWindow = new GraphicsWindow(this);
+    eventOutputPanel = new EventOutputPanel(this);
+    inventoryPanel = new InventoryPanel(this);
+    navigationPanel = new NavigationPanel(this);
 
-		// components
-		graphicsWindow = new GraphicsWindow(this);
-		eventOutputPanel = new EventOutputPanel(this);
-		inventoryPanel = new InventoryPanel(this);
-		navigationPanel = new NavigationPanel(this);
+    // add components to content pane
+    Container c = getContentPane();
 
+    // set layout
+    setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
-		// add components to content pane
-		Container c = getContentPane();
+    c.add(graphicsWindow);
+    c.add(eventOutputPanel);
+    c.add(inventoryPanel);
+    c.add(navigationPanel);
 
-		c.add(graphicsWindow, BorderLayout.NORTH);
-		c.add(eventOutputPanel, BorderLayout.CENTER);
-		c.add(inventoryPanel, BorderLayout.CENTER);
-		c.add(navigationPanel, BorderLayout.SOUTH);
+    // add keyListener
+    addKeyListener(this);
+    setFocusable(true);
 
-		// add keyListener
-		addKeyListener(this);
-		setFocusable(true);
+  }
 
-	}
+  /**
+   * returns the instance of GUI which contains this classes instance, used by
+   * JPanel classes to reference back through to the GUI.
+   *
+   * @return instance of GUI
+   */
+  public GUI getGui() {
+    return gui;
+  }
 
-	public GUI getGUI() {
-		return gui;
-	}
+  ///////// KeyListener///////////////
 
-	/////////KeyListener///////////////
+  @Override
+  public void keyTyped(KeyEvent e) {
+  }
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
+  @Override
+  public void keyPressed(KeyEvent e) {
+  }
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-	}
+  @Override
+  public void keyReleased(KeyEvent e) {
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		
-		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) {// left
-			// TODO add functionality
-			System.out.print("left");
-		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) {// right
-			// TODO
-			System.out.print("right");
+    if (e.getKeyCode() == 37 || e.getKeyCode() == 65) { // left
+      // TODO add functionality
+      System.out.print("left");
+    } else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // right
+      // TODO
+      System.out.print("right");
 
-		} else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) {// up
-			// TODO
-			System.out.print("up");
+    } else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) { // up
+      // TODO
+      System.out.print("up");
 
-		} else if (e.getKeyCode() == 40 || e.getKeyCode() == 83) {// down
-			// TODO
-			System.out.print("down");
-		}
-		
-	}
+    } else if (e.getKeyCode() == 40 || e.getKeyCode() == 83) { // down
+      // TODO
+      System.out.print("down");
+    }
+
+  }
 }

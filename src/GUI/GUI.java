@@ -1,59 +1,57 @@
 package GUI;
 
-import java.awt.Graphics;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import main.Main;
-import renderer.Canvas;
 
 public class GUI {
 
-	private String gameName = "Team 25 Game";
-	private int frameWidth = 700;
-	private int frameHeight = 700;
+  private String gameName = "Team 25 Game";
+  private int frameWidth = 700;
+  private int frameHeight = 700;
 
-	private Main main;
-	private GameFrame frame;
+  private Main main;
+  private GameFrame frame;
 
+  /**
+   * GUI class starts a new thread for the GUI, and constructs the GameFrame.
+   *
+   * @param main
+   *          takes in instance of Main as a parameter to keep a reference to that
+   *          outer class
+   */
 
+  public GUI(Main main) {
+    this.main = main;
+    SwingUtilities.invokeLater(new Runnable() {
 
-	//protected abstract void move();
+      @Override
+      public void run() {
+        initialise();
+      }
+    });
+  }
 
+  public void redraw() {
+    frame.graphicsWindow.redraw();
+  }
 
+  /**
+   * initialises the GameFrame (JFrame) for the GUI.
+   */
+  public void initialise() {
 
-	public GUI(Main main) {
-		this.main = main;
-		SwingUtilities.invokeLater(new Runnable() {
+    frame = new GameFrame(gameName, this);
 
-			@Override
-			public void run() {
-				initialise();
-			}
-		});
-	}
+    frame.setSize(frameWidth, frameHeight);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setVisible(true);
 
-	public void redraw() {
-		frame.graphicsWindow.redraw();
-	}
+  }
 
-	public void initialise() {
-
-		frame = new GameFrame(gameName, this);
-
-		frame.setSize(frameWidth, frameHeight);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-
-
-
-	}
-
-	public Main getMain() {
-		return main;
-	}
+  public Main getMain() {
+    return main;
+  }
 
 }
