@@ -52,4 +52,8 @@ public class GUI {
 
 	}
 
+	public Main getMain() {
+		return main;
+	}
+
 }

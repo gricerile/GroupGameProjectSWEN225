@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -47,11 +49,14 @@ public class NavigationPanel extends JPanel implements ActionListener {
 		setLayout(new GridBagLayout());
 		GridBagConstraints grid = new GridBagConstraints();
 
-		//actionlistner
+		//actionlistners
+
 		left.addActionListener(this);
 		right.addActionListener(this);
 		up.addActionListener(this);
 		down.addActionListener(this);
+
+
 
 		/////first column/////
 

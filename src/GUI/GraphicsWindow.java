@@ -3,6 +3,10 @@ package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
@@ -10,7 +14,7 @@ import javax.swing.JPanel;
 
 import renderer.Canvas;
 
-public class GraphicsWindow extends JPanel {
+public class GraphicsWindow extends JPanel implements MouseListener {
 
 	private BufferedImage image;
 
@@ -30,6 +34,9 @@ public class GraphicsWindow extends JPanel {
 
 		// set border
 		setBorder(BorderFactory.createEtchedBorder());
+
+		// add mouseListeners
+		addMouseListener(this);
 	}
 
 	public void setImage(BufferedImage image) {
@@ -56,8 +63,28 @@ public class GraphicsWindow extends JPanel {
 
 		}
 
-
-
 	}
 
+	//////////////// Mouse Listeners/////////////////////////////////
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		System.out.print("x: " + e.getX() + "y: " + e.getY());
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
 }
