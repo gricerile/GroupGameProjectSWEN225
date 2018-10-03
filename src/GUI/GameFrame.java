@@ -14,22 +14,25 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
+	private GUI gui;
+
 	GraphicsWindow graphicsWindow;
 	EventOutputPanel eventOutputPanel;
 	InventoryPanel inventoryPanel;
 	NavigationPanel navigationPanel;
 
-	public GameFrame(String s) {
+	public GameFrame(String s, GUI gui) {
 		super(s);
+		this.gui = gui;
 
 		// set layout
 		setLayout(new BorderLayout());
 
 		// components
-		graphicsWindow = new GraphicsWindow();
-		eventOutputPanel = new EventOutputPanel();
-		inventoryPanel = new InventoryPanel();
-		navigationPanel = new NavigationPanel();
+		graphicsWindow = new GraphicsWindow(this);
+		eventOutputPanel = new EventOutputPanel(this);
+		inventoryPanel = new InventoryPanel(this);
+		navigationPanel = new NavigationPanel(this);
 
 
 		// add components to content pane

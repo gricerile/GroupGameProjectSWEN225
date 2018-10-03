@@ -20,7 +20,10 @@ public class InventoryPanel extends JPanel {
 	private int dimensionWidth =650;
 	private String panelName = "Inventory";
 
-	public InventoryPanel() {
+	private GameFrame frame;
+
+	public InventoryPanel(GameFrame frame) {
+		this.frame = frame;
 
 		//set dimensions
 		Dimension dimension = getPreferredSize();
@@ -52,6 +55,8 @@ public class InventoryPanel extends JPanel {
 		GridBagConstraints grid = new GridBagConstraints();
 
 		//set components
+
+
 
 		grid.gridx=0;
 		grid.gridy=0;

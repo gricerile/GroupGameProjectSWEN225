@@ -14,8 +14,10 @@ public class EventOutputPanel extends JPanel {
 	private int dimensionWidth =650;
 	private String panelName = "Event Output";
 
+	private GameFrame frame;
 
-	public EventOutputPanel() {
+	public EventOutputPanel(GameFrame frame) {
+		this.frame = frame;
 
 		//set dimensions
 		Dimension dimension = getPreferredSize();

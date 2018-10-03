@@ -11,14 +11,22 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class NavigationPanel extends JPanel {
+public class NavigationPanel extends JPanel implements ActionListener {
 
 	private int dimensionHeight =80;
 	private int dimensionWidth =650;
 	private String panelName = "Navigation";
 
+	private JButton left;
+	private JButton right;
+	private JButton up;
+	private JButton down;
 
-	public NavigationPanel() {
+	private GameFrame frame;
+
+
+	public NavigationPanel(GameFrame frame) {
+		this.frame = frame;
 
 		//set dimensions
 		Dimension dimension = getPreferredSize();
@@ -30,14 +38,20 @@ public class NavigationPanel extends JPanel {
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
 
 		//add elements
-		JButton left = new JButton("\u2190");
-		JButton right = new JButton("\u2192");
-		JButton up = new JButton("\u2191");
-		JButton down = new JButton("\u2193");
+		left = new JButton("\u2190");
+		right = new JButton("\u2192");
+		up = new JButton("\u2191");
+		down = new JButton("\u2193");
 
 		//set layout
 		setLayout(new GridBagLayout());
 		GridBagConstraints grid = new GridBagConstraints();
+
+		//actionlistner
+		left.addActionListener(this);
+		right.addActionListener(this);
+		up.addActionListener(this);
+		down.addActionListener(this);
 
 		/////first column/////
 
@@ -68,5 +82,20 @@ public class NavigationPanel extends JPanel {
 		grid.gridx=2;
 		grid.gridy=1;
 		add(right, grid);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == left) {
+			// TODO add functionality
+		} else if(e.getSource() == right) {
+			// TODO
+		} else if(e.getSource() == up) {
+			// TODO
+		} else if(e.getSource() == down) {
+			// TODO
+		}
+
 	}
 }

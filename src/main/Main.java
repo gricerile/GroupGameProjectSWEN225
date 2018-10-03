@@ -1,20 +1,18 @@
 package main;
-import java.awt.image.BufferedImage;
-
 import GUI.GUI;
 
-public class Main extends GUI {
+public class Main {
+	GUI gui;
+
+	public Main() {
+		gui = new GUI(this);
+	}
+
+
+
 
 
 	public static void main(String[] args) {
 		Main main = new Main();
-
 	}
-
-	@Override
-	protected BufferedImage render() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
