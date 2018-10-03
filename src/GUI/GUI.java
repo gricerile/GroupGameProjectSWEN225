@@ -14,7 +14,7 @@ public class GUI {
   private Main main;
   private GameFrame frame;
 
-  enum moveDirection{
+  public enum moveDirection{
     up, down, left, right;
   }
 

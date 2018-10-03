@@ -3,8 +3,6 @@ package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -81,7 +79,7 @@ public class GraphicsWindow extends JPanel implements MouseListener {
 
   @Override
   public void mouseReleased(MouseEvent e) {
-    //frame.getGui().getMain().mouseClick(e.getX(), e.getY());
+    frame.getGui().getMain().clickedScreen(e.getX(), e.getY());
   }
 
   @Override

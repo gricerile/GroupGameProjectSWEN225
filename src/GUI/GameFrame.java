@@ -86,13 +86,13 @@ public class GameFrame extends JFrame implements KeyListener {
   public void keyReleased(KeyEvent e) {
 
     if (e.getKeyCode() == 37 || e.getKeyCode() == 65) { // left
-      //frame.getGui().getMain().movePlayer(moveDirection.left);
+      gui.getMain().movePlayer(moveDirection.left);
     } else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // right
-        //frame.getGui().getMain().movePlayer(moveDirection.right);
+        gui.getMain().movePlayer(moveDirection.right);
     } else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) { // up
-        //frame.getGui().getMain().movePlayer(moveDirection.up);
+        gui.getMain().movePlayer(moveDirection.up);
     } else if (e.getKeyCode() == 40 || e.getKeyCode() == 83) { // down
-        //frame.getGui().getMain().movePlayer(moveDirection.down);
+        gui.getMain().movePlayer(moveDirection.down);
     }
 
   }

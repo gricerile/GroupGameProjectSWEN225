@@ -5,8 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -108,19 +106,19 @@ public class NavigationPanel extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == left) {
-      //frame.getGui().getMain().movePlayer(moveDirection.left);
+      frame.getGui().getMain().movePlayer(moveDirection.left);
     } else if (e.getSource() == right) {
-        //frame.getGui().getMain().movePlayer(moveDirection.right);
+        frame.getGui().getMain().movePlayer(moveDirection.right);
     } else if (e.getSource() == up) {
-        //frame.getGui().getMain().movePlayer(moveDirection.up);
+        frame.getGui().getMain().movePlayer(moveDirection.up);
     } else if (e.getSource() == down) {
-        //frame.getGui().getMain().movePlayer(moveDirection.down);
+        frame.getGui().getMain().movePlayer(moveDirection.down);
     } else if (e.getSource() == save) {
-        //frame.getGui().getMain().saveGame();
+        frame.getGui().getMain().saveGame();
     } else if (e.getSource() == load) {
-        //frame.getGui().getMain().loadGame();
+        frame.getGui().getMain().loadGame();
     } else if (e.getSource() == quit) {
-        //frame.getGui().getMain().quitGame();
+        frame.getGui().getMain().quitGame();
     }
 
   }

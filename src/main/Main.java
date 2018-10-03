@@ -1,49 +1,63 @@
 package main;
+
 import java.io.File;
 
 import GUI.GUI;
 import parser.Parser;
 
+import GUI.GUI.moveDirection;
+
 public class Main {
-	private Segment[][] segmentsBoard = new Segment[2][1]; // the size can change but for testing the size is 2 segments
-	private Player player;
-	private GUI g;
+  private Segment[][] segmentsBoard = new Segment[2][1]; // the size can change but for testing the size is 2 segments
+  private Player player;
+  private GUI g;
 
-	public static void main(String[] args) {
-		Main m = new Main();
-	}
+  public static void main(String[] args) {
+    Main m = new Main();
+  }
 
-	public Main() {
-		Parser p = new Parser();
-		p.loadMap(new File("ParsingTester.xml"));
-		//this.segmentsBpoard=p.getSegments(); will be created
-		//this.player=p.getPlayer(); will be created, lets do this
-		this.g = new GUI(this);
-	}
+  public Main() {
+    Parser p = new Parser();
+    p.loadMap(new File("ParsingTester.xml"));
+    // this.segmentsBpoard=p.getSegments(); will be created
+    // this.player=p.getPlayer(); will be created, lets do this
+    this.g = new GUI(this);
+  }
 
-	public Segment[][] getSegments(){
-		return this.segmentsBoard;
-	}
+  public Segment[][] getSegments() {
+    return this.segmentsBoard;
+  }
 
-	public Player getPlayer(){
-		return this.player;
-	}
+  public Player getPlayer() {
+    return this.player;
+  }
 
-	public GUI getGUI() {
-		return this.g;
-	}
+  public GUI getGUI() {
+    return this.g;
+  }
 
-	public void movePlayer() {
+  public void movePlayer(moveDirection direction) {
 
-	}
+  }
 
-	public void clickedScreen(int x, int y) {
+  public void clickedScreen(int x, int y) {
 
-	}
+  }
 
-	public void pressedKey() {
+  public void pressedKey() {
 
-	}
+  }
 
+  public void saveGame() {
+
+  }
+
+  public void loadGame() {
+
+  }
+
+  public void quitGame() {
+
+  }
 
 }
