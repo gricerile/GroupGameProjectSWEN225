@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
-
 	GraphicsWindow graphicsWindow;
 	EventOutputPanel eventOutputPanel;
 	InventoryPanel inventoryPanel;

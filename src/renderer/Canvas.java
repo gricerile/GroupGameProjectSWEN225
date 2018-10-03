@@ -1,6 +1,7 @@
 package renderer;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import GUI.GraphicsWindow;
 
@@ -9,15 +10,17 @@ public class Canvas {
 
 	GraphicsWindow graphicsWindow;
 	Graphics g;
+	BufferedImage image;
 
-	public Canvas(GraphicsWindow graphicsWindow) {
+	public Canvas(GraphicsWindow graphicsWindow, BufferedImage image) {
 		g = graphicsWindow.getGraphics();
+		this.image=image;
 	}
 
-	public void draw(Graphics g) {
+	public void drawScene(Graphics g) {
 		// test draw
-		g.fillRect(20, 20, 100, 50);
-		
+		g.drawImage(image, 0, 0, null);
+
 	}
 
 }

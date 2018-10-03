@@ -1,24 +1,23 @@
 package GUI;
 
-import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import renderer.Canvas;
+
 public abstract class GUI {
-	private String gameName = "Game";
+	private String gameName = "Team 25 Game";
 	private int frameWidth = 700;
 	private int frameHeight = 700;
 
 	private GameFrame frame;
+	private Canvas canvas;
 
-	/**
-	 * redraws graphical interface when called
-	 *
-	 * @param g
-	 */
-	protected abstract void redraw(Graphics g);
+	protected abstract BufferedImage render();
+
+
 
 	public GUI() {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -38,9 +37,13 @@ public abstract class GUI {
 
 		frame = new GameFrame(gameName);
 
+		//frame.graphicsWindow.setImage(render());
+
 		frame.setSize(frameWidth, frameHeight);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+
+
 	}
 
 }
