@@ -24,3 +24,17 @@ public class Canvas {
 	}
 
 }
+
+/*
+	public void draw(Graphics g) {
+		// test draw
+    g.drawLine((int)(1+sf), (int)(1+sf), (int)(100+sf), (int)(100+sf));
+    g.drawLine((int)(300+sf), (int)(1+sf), (int)(200+sf), (int)(100+sf));
+    g.drawRect(100, 100, 100, 100);
+    g.drawLine(1, 300, 100, 200);
+    g.drawLine(300, 300, 200, 200);
+  }
+
+
+
+*/
