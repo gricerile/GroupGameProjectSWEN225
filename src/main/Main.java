@@ -33,4 +33,12 @@ public class Main {
 		return this.g;
 	}
 
+	public void movePlayer() {
+
+	}
+
+	public void rotatePlayer() {
+
+	}
+
 }
