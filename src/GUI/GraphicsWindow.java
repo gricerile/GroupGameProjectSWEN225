@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import renderer.Canvas;
 
 @SuppressWarnings("serial")
 public class GraphicsWindow extends JPanel implements MouseListener {

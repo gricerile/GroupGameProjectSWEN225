@@ -38,7 +38,7 @@ public class GUI {
   }
 
   public void redraw() {
-    frame.graphicsWindow.redraw();
+    frame.getGraphicsWindow().redraw();
   }
 
   /**
@@ -56,6 +56,10 @@ public class GUI {
 
   public Main getMain() {
     return main;
+  }
+
+  public GameFrame getFrame() {
+    return this.frame;
   }
 
 }

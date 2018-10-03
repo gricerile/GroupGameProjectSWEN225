@@ -1,16 +1,10 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import GUI.GUI.moveDirection;
@@ -20,10 +14,10 @@ public class GameFrame extends JFrame implements KeyListener {
 
   private GUI gui;
 
-  GraphicsWindow graphicsWindow;
-  EventOutputPanel eventOutputPanel;
-  InventoryPanel inventoryPanel;
-  NavigationPanel navigationPanel;
+  private GraphicsWindow graphicsWindow;
+  private EventOutputPanel eventOutputPanel;
+  private InventoryPanel inventoryPanel;
+  private NavigationPanel navigationPanel;
 
   /**
    * GameFrame is an exention of JFrame and contains all JPanel components for the
@@ -72,6 +66,22 @@ public class GameFrame extends JFrame implements KeyListener {
     return gui;
   }
 
+  public GraphicsWindow getGraphicsWindow() {
+    return this.graphicsWindow;
+  }
+
+  public EventOutputPanel getEventOutputPanel() {
+    return this.eventOutputPanel;
+  }
+
+  public InventoryPanel getInventoryPanel() {
+    return this.inventoryPanel;
+  }
+
+  public NavigationPanel getNavigationPanel() {
+    return this.navigationPanel;
+  }
+
   ///////// KeyListener///////////////
 
   @Override
@@ -88,11 +98,11 @@ public class GameFrame extends JFrame implements KeyListener {
     if (e.getKeyCode() == 37 || e.getKeyCode() == 65) { // left
       gui.getMain().movePlayer(moveDirection.left);
     } else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // right
-        gui.getMain().movePlayer(moveDirection.right);
+      gui.getMain().movePlayer(moveDirection.right);
     } else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) { // up
-        gui.getMain().movePlayer(moveDirection.up);
+      gui.getMain().movePlayer(moveDirection.up);
     } else if (e.getKeyCode() == 40 || e.getKeyCode() == 83) { // down
-        gui.getMain().movePlayer(moveDirection.down);
+      gui.getMain().movePlayer(moveDirection.down);
     }
 
   }

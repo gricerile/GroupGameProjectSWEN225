@@ -3,13 +3,11 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -55,9 +53,9 @@ public class InventoryPanel extends JPanel implements ListSelectionListener {
     // add elements
     JList<String> listOfItems = new JList<String>(listData);
 
-    listOfItems.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);////////
-    listOfItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);////////
-    listOfItems.setVisibleRowCount(-1);////////
+    listOfItems.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+    listOfItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+    listOfItems.setVisibleRowCount(-1);
 
     itemDescriptions = new JTextField();
 

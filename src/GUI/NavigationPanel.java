@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import GUI.GUI.moveDirection;
 
+@SuppressWarnings("serial")
 public class NavigationPanel extends JPanel implements ActionListener {
 
   private int dimensionHeight = 80;
