@@ -1,3 +1,5 @@
+package main;
+
 public class Chest implements GameObject {
 	// fields
 	private boolean open;

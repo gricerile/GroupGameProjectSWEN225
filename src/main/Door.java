@@ -1,3 +1,5 @@
+package main;
+
 public class Door implements GameObject {
 	// fields
 	private Segment seg1;

@@ -1,4 +1,4 @@
-package Victor.GroupProject.src;
+package parser;
 
 import java.util.ArrayList;
 

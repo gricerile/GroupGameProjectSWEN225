@@ -1,3 +1,4 @@
+package main;
 
 public class Key implements GameObject {
 	// fields
