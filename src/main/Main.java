@@ -1,8 +1,7 @@
-package GUI;
+package main;
 import java.io.File;
 
-import main.Player;
-import main.Segment;
+import GUI.GUI;
 import parser.Parser;
 
 public class Main {

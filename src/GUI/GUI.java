@@ -3,6 +3,8 @@ package GUI;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import main.Main;
+
 public class GUI {
 
   private String gameName = "Team 25 Game";
