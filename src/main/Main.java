@@ -17,7 +17,7 @@ public class Main {
 		Parser p = new Parser();
 		p.loadMap(new File("ParsingTester.xml"));
 		//this.segmentsBpoard=p.getSegments(); will be created
-		//this.player=p.getPlayer(); will be created
+		//this.player=p.getPlayer(); will be created, lets do this
 		this.g = new GUI(this);
 	}
 
@@ -32,5 +32,18 @@ public class Main {
 	public GUI getGUI() {
 		return this.g;
 	}
+
+	public void movePlayer() {
+
+	}
+
+	public void clickedScreen(int x, int y) {
+
+	}
+
+	public void pressedKey() {
+
+	}
+
 
 }

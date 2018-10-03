@@ -11,6 +11,12 @@ public class Segment {
 		this.doors=doors;
 	}
 
+	public ArrayList<Door> getDoors(){
+		return this.doors;
+	}
 
+	public ArrayList<GameObject> getObjects(){
+		return this.objects;
+	}
 }
 

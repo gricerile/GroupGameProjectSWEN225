@@ -4,12 +4,10 @@ public class Chest implements GameObject {
 	// fields
 	private boolean open;
 	private Key key;
-	private int direction;
 
-	public Chest(Key k, int direction) {
+	public Chest(Key k) {
 		this.key = k;
 		this.open = false;
-		this.direction = direction;
 	}
 
 	public String openAndClose() {
@@ -43,8 +41,4 @@ public class Chest implements GameObject {
 		}
 	}
 
-	@Override
-	public int getDirection() {
-		return this.direction;
-	}
 }
