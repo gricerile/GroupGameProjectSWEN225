@@ -17,7 +17,7 @@ public class Main {
 		Parser p = new Parser();
 		p.loadMap(new File("ParsingTester.xml"));
 		//this.segmentsBpoard=p.getSegments(); will be created
-		//this.player=p.getPlayer(); will be created
+		//this.player=p.getPlayer(); will be created, lets do this
 		this.g = new GUI(this);
 	}
 
