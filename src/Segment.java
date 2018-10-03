@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Segment {
 	//fields
-	private int locx;
-	private int locy;
+	Door door1;
+	Door door2;
 	ArrayList<GameObject> objects = new ArrayList<GameObject>();
 }

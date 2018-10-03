@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 
-public class Main {
+public class Main extends GUI{
 	// fields
 	ArrayList<Segment> segments = new ArrayList<Segment>();
-	Player player = new Player(0,0);
+	Player player;
+
+	//start game function
 
 	//onClick events
 	//on game objects
@@ -15,4 +17,6 @@ public class Main {
 
 	//keyboard events WASD/wasd
 	//moving players perspective
+
+
 }
