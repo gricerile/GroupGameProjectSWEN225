@@ -13,6 +13,8 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import GUI.GUI.moveDirection;
+
 public class NavigationPanel extends JPanel implements ActionListener {
 
   private int dimensionHeight = 80;
@@ -23,6 +25,10 @@ public class NavigationPanel extends JPanel implements ActionListener {
   private JButton right;
   private JButton up;
   private JButton down;
+
+  private JButton save;
+  private JButton load;
+  private JButton quit;
 
   private GameFrame frame;
 
@@ -52,12 +58,20 @@ public class NavigationPanel extends JPanel implements ActionListener {
     up = new JButton("\u2191");
     down = new JButton("\u2193");
 
+    save = new JButton("Save");
+    load = new JButton("Load");
+    quit = new JButton("Quit");
+
     // actionlistners
 
     left.addActionListener(this);
     right.addActionListener(this);
     up.addActionListener(this);
     down.addActionListener(this);
+
+    save.addActionListener(this);
+    load.addActionListener(this);
+    quit.addActionListener(this);
 
     // set layout
     setLayout(new GridBagLayout());
@@ -94,13 +108,19 @@ public class NavigationPanel extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == left) {
-      // TODO add functionality
+      //frame.getGui().getMain().movePlayer(moveDirection.left);
     } else if (e.getSource() == right) {
-      // TODO
+        //frame.getGui().getMain().movePlayer(moveDirection.right);
     } else if (e.getSource() == up) {
-      // TODO
+        //frame.getGui().getMain().movePlayer(moveDirection.up);
     } else if (e.getSource() == down) {
-      // TODO
+        //frame.getGui().getMain().movePlayer(moveDirection.down);
+    } else if (e.getSource() == save) {
+        //frame.getGui().getMain().saveGame();
+    } else if (e.getSource() == load) {
+        //frame.getGui().getMain().loadGame();
+    } else if (e.getSource() == quit) {
+        //frame.getGui().getMain().quitGame();
     }
 
   }

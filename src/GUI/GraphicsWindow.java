@@ -81,7 +81,7 @@ public class GraphicsWindow extends JPanel implements MouseListener {
 
   @Override
   public void mouseReleased(MouseEvent e) {
-    System.out.print("x: " + e.getX() + "y: " + e.getY());
+    //frame.getGui().getMain().mouseClick(e.getX(), e.getY());
   }
 
   @Override

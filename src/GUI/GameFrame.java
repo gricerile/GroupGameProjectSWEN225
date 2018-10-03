@@ -13,6 +13,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import GUI.GUI.moveDirection;
+
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame implements KeyListener {
 
@@ -84,19 +86,13 @@ public class GameFrame extends JFrame implements KeyListener {
   public void keyReleased(KeyEvent e) {
 
     if (e.getKeyCode() == 37 || e.getKeyCode() == 65) { // left
-      // TODO add functionality
-      System.out.print("left");
+      //frame.getGui().getMain().movePlayer(moveDirection.left);
     } else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // right
-      // TODO
-      System.out.print("right");
-
+        //frame.getGui().getMain().movePlayer(moveDirection.right);
     } else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) { // up
-      // TODO
-      System.out.print("up");
-
+        //frame.getGui().getMain().movePlayer(moveDirection.up);
     } else if (e.getKeyCode() == 40 || e.getKeyCode() == 83) { // down
-      // TODO
-      System.out.print("down");
+        //frame.getGui().getMain().movePlayer(moveDirection.down);
     }
 
   }

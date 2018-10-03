@@ -14,6 +14,10 @@ public class GUI {
   private Main main;
   private GameFrame frame;
 
+  enum moveDirection{
+    up, down, left, right;
+  }
+
   /**
    * GUI class starts a new thread for the GUI, and constructs the GameFrame.
    *
