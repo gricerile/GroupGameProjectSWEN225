@@ -12,7 +12,8 @@ import renderer.Canvas;
 
 public class GraphicsWindow extends JPanel {
 
-	private BufferedImage image;
+	//private BufferedImage image;
+	Canvas canvas;
 
 	private int dimensionHeight = 400;
 	private int dimensionWidth = 650;
@@ -27,11 +28,12 @@ public class GraphicsWindow extends JPanel {
 
 		// set border
 		setBorder(BorderFactory.createEtchedBorder());
+		canvas = new Canvas(this);
 	}
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
+	//public void setImage(BufferedImage image) {
+	//	this.image = image;
+	//}
 
 	public void redraw() {
 		repaint();
@@ -42,16 +44,18 @@ public class GraphicsWindow extends JPanel {
 		super.paintComponent(g);
 		setBackground(Color.WHITE);
 
-		if (image == null) {
-
-			g.setColor(Color.BLACK);
-			g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
-
-		} else {
-
-			g.drawImage(image, 0, 0, null);
-
-		}
+//		if (image == null) {
+//
+//			g.setColor(Color.BLACK);
+//			g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
+//
+//		} else {
+//
+//			g.drawImage(image, 0, 0, null);
+//
+//		}
+		canvas.drawScene(g);
+		
 
 	}
 

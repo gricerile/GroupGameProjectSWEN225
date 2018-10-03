@@ -1,5 +1,4 @@
 package main;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import GUI.GUI;
@@ -17,6 +16,5 @@ public class Main extends GUI {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

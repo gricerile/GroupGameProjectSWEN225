@@ -10,16 +10,25 @@ public class Canvas {
 
 	GraphicsWindow graphicsWindow;
 	Graphics g;
-	BufferedImage image;
+	double sf = 1.2;
 
-	public Canvas(GraphicsWindow graphicsWindow, BufferedImage image) {
+	public Canvas(GraphicsWindow graphicsWindow) {
 		g = graphicsWindow.getGraphics();
-		this.image=image;
+
 	}
 
 	public void drawScene(Graphics g) {
 		// test draw
-		g.drawImage(image, 0, 0, null);
+	    g.drawLine((int)(1+sf), (int)(1+sf), (int)(100+sf), (int)(100+sf));
+	    g.drawLine((int)(500+sf), (int)(1+sf), (int)(300+sf), (int)(100+sf));
+
+
+	    g.drawRect(100, 100, 200, 100);
+
+	    g.drawLine(1, 300, 100, 200);
+	    g.drawLine(500, 300, 300, 200);
+
+
 
 	}
 

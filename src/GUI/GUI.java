@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
@@ -15,7 +16,10 @@ public abstract class GUI {
 	private GameFrame frame;
 	private Canvas canvas;
 
-	protected abstract BufferedImage render();
+
+
+
+	protected abstract BufferedImage render();//in progress
 
 
 
@@ -42,6 +46,7 @@ public abstract class GUI {
 		frame.setSize(frameWidth, frameHeight);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+
 
 
 	}
