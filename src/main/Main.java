@@ -37,8 +37,13 @@ public class Main {
 
 	}
 
-	public void rotatePlayer() {
+	public void clickedScreen(int x, int y) {
 
 	}
+
+	public void pressedKey() {
+
+	}
+
 
 }

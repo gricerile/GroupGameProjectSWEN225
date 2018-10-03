@@ -3,12 +3,10 @@ package main;
 public class Key implements GameObject {
 	// fields
 	private Door door;
-	private int direction;
 	private boolean canBeSeen;
 
-	public Key(Door d, int direction) {
+	public Key(Door d) {
 		this.door = d;
-		this.direction=direction;
 	}
 
 	public Door getDoor() {
@@ -30,10 +28,5 @@ public class Key implements GameObject {
 	@Override
 	public String getStatus() {
 		return ("The Key unlocks/locks the door " + getKeysDoorName());
-	}
-
-	@Override
-	public int getDirection() {
-		return this.direction;
 	}
 }
