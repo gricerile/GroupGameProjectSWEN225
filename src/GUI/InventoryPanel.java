@@ -102,16 +102,5 @@ public class InventoryPanel extends JPanel {// implements ListSelectionListener 
     grid.gridy = 0;
     add(splitPane, grid);
 
-    
-    //listOfItems.addListSelectionListener(this);
   }
-
-//  @Override
-//  public void valueChanged(ListSelectionEvent e) {
-//    // TODO Auto-generated method stub
-//    //this.itemDescriptions.setText("gog");
-//    if(this.itemDescriptions!=null && this.listOfItems!=null) {
-//    this.itemDescriptions.setText("eoe");
-//    }
-//  }
 }
