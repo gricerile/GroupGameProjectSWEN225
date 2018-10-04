@@ -64,10 +64,6 @@ public class NavigationPanel extends JPanel implements ActionListener {
     setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
 
     // add elements
-   // left = new JButton("\u2190");
-    //right = new JButton("\u2192");
-    //up = new JButton("\u2191");
-    //down = new JButton("\u2193");
     upLeft = new JButton(shrinkImage("arrowImages/arrowUpLeft.png"));
     upLeft.setMargin(new Insets(0, 0, 0, 0));
     upRight = new JButton(shrinkImage("arrowImages/arrowUpRight.png"));
@@ -76,8 +72,6 @@ public class NavigationPanel extends JPanel implements ActionListener {
     downLeft.setMargin(new Insets(0, 0, 0, 0));
     downRight = new JButton(shrinkImage("arrowImages/arrowDownRight.png"));
     downRight.setMargin(new Insets(0, 0, 0, 0));
-
-
 
 
     save = new JButton("Save");
