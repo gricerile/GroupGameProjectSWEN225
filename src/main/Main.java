@@ -8,8 +8,8 @@ import renderer.Renderer;
 import GUI.GUI.moveDirection;
 
 public class Main {
-	private Segment[][] segmentsBoard = new Segment[2][1]; // the size can change but for testing the size is 2 segments
-	private Player player;
+	private main.Segment[][] segmentsBoard = new main.Segment[3][3]; // the size can change but for testing the size is 2 segments
+	private main.Player player;
 	private GUI g;
 
 	private Renderer renderer;
@@ -24,14 +24,14 @@ public class Main {
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
 		this.g = new GUI(this);
-		this.renderer = new Renderer();
+		this.renderer = new Renderer(this);
 	}
 
-	public Segment[][] getSegments() {
+	public main.Segment[][] getSegments() {
 		return this.segmentsBoard;
 	}
 
-	public Player getPlayer() {
+	public main.Player getPlayer() {
 		return this.player;
 	}
 
