@@ -68,10 +68,6 @@ public class Main {
 		reDraw();
 	}
 
-	public void pressedKey() {
-
-	}
-
 	public void saveGame() {
 
 	}
