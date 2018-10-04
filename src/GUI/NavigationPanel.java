@@ -13,14 +13,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
-
 import GUI.GUI.moveDirection;
 
 @SuppressWarnings("serial")
 public class NavigationPanel extends JPanel implements ActionListener {
 
-  private int dimensionHeight = 80;
+  private int dimensionHeight = 90;
   private int dimensionWidth = 650;
 
   private int buttonWidth = 30;
@@ -56,7 +54,7 @@ public class NavigationPanel extends JPanel implements ActionListener {
     dimension.height = dimensionHeight;
     setPreferredSize(dimension);
 
-    //set button dimensions
+    // set button dimensions
     Dimension buttonSize = new Dimension();
     buttonSize.setSize(buttonWidth, buttonHeight);
 
@@ -64,21 +62,20 @@ public class NavigationPanel extends JPanel implements ActionListener {
     setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
 
     // add elements
-    upLeft = new JButton(shrinkImage("arrowImages/arrowUpLeft.png"));
+    upLeft = new JButton(GUI.resizeImage("arrowImages/arrowUpLeft.png", this.buttonWidth, this.buttonHeight));
     upLeft.setMargin(new Insets(0, 0, 0, 0));
-    upRight = new JButton(shrinkImage("arrowImages/arrowUpRight.png"));
+    upRight = new JButton(GUI.resizeImage("arrowImages/arrowUpRight.png", this.buttonWidth, this.buttonHeight));
     upRight.setMargin(new Insets(0, 0, 0, 0));
-    downLeft = new JButton(shrinkImage("arrowImages/arrowDownLeft.png"));
+    downLeft = new JButton(GUI.resizeImage("arrowImages/arrowDownLeft.png", this.buttonWidth, this.buttonHeight));
     downLeft.setMargin(new Insets(0, 0, 0, 0));
-    downRight = new JButton(shrinkImage("arrowImages/arrowDownRight.png"));
+    downRight = new JButton(GUI.resizeImage("arrowImages/arrowDownRight.png", this.buttonWidth, this.buttonHeight));
     downRight.setMargin(new Insets(0, 0, 0, 0));
-
 
     save = new JButton("Save");
     load = new JButton("Load");
     quit = new JButton("Quit");
-////////////////////////
-   // JButton left = new JButton(new ImageIcon("tempArrow.png"));
+    ////////////////////////
+    // JButton left = new JButton(new ImageIcon("tempArrow.png"));
     //////////////////////////////////////
     // actionlistners
 
@@ -121,30 +118,30 @@ public class NavigationPanel extends JPanel implements ActionListener {
     if (e.getSource() == upLeft) {
       frame.getGui().getMain().movePlayer(moveDirection.left);
     } else if (e.getSource() == upRight) {
-        frame.getGui().getMain().movePlayer(moveDirection.right); // TODO
+      frame.getGui().getMain().movePlayer(moveDirection.right); // TODO
     } else if (e.getSource() == downLeft) {
-        frame.getGui().getMain().movePlayer(moveDirection.up);
+      frame.getGui().getMain().movePlayer(moveDirection.up);
     } else if (e.getSource() == downRight) {
-        frame.getGui().getMain().movePlayer(moveDirection.down);
+      frame.getGui().getMain().movePlayer(moveDirection.down);
     }
-
 
     else if (e.getSource() == save) {
-        frame.getGui().getMain().saveGame();
+      frame.getGui().getMain().saveGame();
     } else if (e.getSource() == load) {
-        frame.getGui().getMain().loadGame();
+      frame.getGui().getMain().loadGame();
     } else if (e.getSource() == quit) {
-        frame.getGui().getMain().quitGame();
+      frame.getGui().getMain().quitGame();
     }
 
   }
-  
-  private ImageIcon shrinkImage(String imageAddress) {
-    ImageIcon imageIcon = new ImageIcon(imageAddress);
-    Image image = imageIcon.getImage();
-    Image newImage = image.getScaledInstance(this.buttonWidth, this.buttonHeight, Image.SCALE_SMOOTH);
-    imageIcon = new ImageIcon(newImage);
-    return imageIcon;
-  }
-  
+
+  // private ImageIcon shrinkImage(String imageAddress) {
+  // ImageIcon imageIcon = new ImageIcon(imageAddress);
+  // Image image = imageIcon.getImage();
+  // Image newImage = image.getScaledInstance(this.buttonWidth, this.buttonHeight,
+  // Image.SCALE_SMOOTH);
+  // imageIcon = new ImageIcon(newImage);
+  // return imageIcon;
+  // }
+
 }
