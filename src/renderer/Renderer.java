@@ -102,8 +102,6 @@ public class Renderer {
   
   public void updateBoard() {}
   
-  //public
-  
   
   // turning regular 2d array into isometric
   // isoX = cartX - cartY;

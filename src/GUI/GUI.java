@@ -1,5 +1,8 @@
 package GUI;
 
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -60,6 +63,14 @@ public class GUI {
 
   public GameFrame getFrame() {
     return this.frame;
+  }
+  
+  public static ImageIcon resizeImage(String imageAddress, int width, int height) {
+    ImageIcon imageIcon = new ImageIcon(imageAddress);
+    Image image = imageIcon.getImage();
+    Image newImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    imageIcon = new ImageIcon(newImage);
+    return imageIcon;
   }
 
 }

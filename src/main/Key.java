@@ -1,11 +1,11 @@
 package main;
 
-public class Key implements GameObject {
+public class Key extends GameItem {
 	// fields
 	private Door door;
-	private boolean canBeSeen;
 
-	public Key(Door d) {
+	public Key(Door d, String description, String name) {
+		super(description, name);
 		this.door = d;
 	}
 
@@ -25,8 +25,12 @@ public class Key implements GameObject {
 		return this.door.getDoorName();
 	}
 
-	@Override
 	public String getStatus() {
 		return ("The Key unlocks/locks the door " + getKeysDoorName());
+	}
+
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Key";
 	}
 }

@@ -45,10 +45,11 @@ public class GameFrame extends JFrame implements KeyListener {
     // set layout
     setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
+    c.add(navigationPanel);
     c.add(graphicsWindow);
     c.add(eventOutputPanel);
     c.add(inventoryPanel);
-    c.add(navigationPanel);
+    
 
     // add keyListener
     addKeyListener(this);
