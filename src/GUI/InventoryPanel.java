@@ -16,13 +16,14 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import main.GameObject;
 
 @SuppressWarnings("serial")
-public class InventoryPanel extends JPanel {// implements ListSelectionListener {
+public class InventoryPanel extends JPanel {
 
   private int dimensionHeight = 100;
   private int dimensionWidth = 650;
@@ -82,19 +83,23 @@ public class InventoryPanel extends JPanel {// implements ListSelectionListener 
 
     // JPanel containing Jlabel and JTextArea (right section of JSplitPane)
 
-    JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png", 50, 50));
+    //JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png", 50, 50));
 
     itemDescriptions = new JTextArea();
     itemDescriptions.setLineWrap(true);
 
-    rightPanel = new JPanel();
-    rightPanel.setLayout(new BorderLayout());
+    //rightPanel = new JPanel();
+    //rightPanel.setLayout(new BorderLayout());
 
-    rightPanel.add(image, BorderLayout.WEST);
-    rightPanel.add(itemDescriptions, BorderLayout.CENTER);
+    //rightPanel.add(image, BorderLayout.WEST);
+    //rightPanel.add(itemDescriptions, BorderLayout.CENTER);
+    
+    
+    
+    
 
     // JSPlitPane
-    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listOfItems, rightPanel);
+    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listOfItems, itemDescriptions);
     splitPane.setOneTouchExpandable(true);
     splitPane.setDividerLocation(splitPaneWidth / 2);
     splitPane.setPreferredSize(new Dimension(splitPaneWidth, splitPaneHeight));
@@ -118,14 +123,10 @@ public class InventoryPanel extends JPanel {// implements ListSelectionListener 
 
         tempGameObject ob = listOfItems.getSelectedValue();
         itemDescriptions.setText(ob.getDescription());
-        image.setIcon(ob.getImage());
+       // image.setIcon(ob.getImage());
+        //image.setIcon(GUI.resizeImage("arrowImages/noImage.bmp", 50, 50));
 
       }
     });
-
-
-
-
-
   }
 }
