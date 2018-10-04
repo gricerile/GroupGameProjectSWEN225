@@ -41,4 +41,10 @@ public class Chest implements GameObject {
 		}
 	}
 
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Chest";
+	}
+
 }

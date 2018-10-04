@@ -1,59 +1,30 @@
 package main;
 
-import main.GameObject;
 import main.Key;
-import main.Segment;
 
 public class Door implements GameObject {
 	// fields
-	private Segment seg1;
-	private Segment seg2;
 	private Key key;
-	private String doorName; //code name for door and key association, unique for each door and key
-	private boolean open;
+	private String doorName; // code name for door and key association, unique for each door and key
 	private boolean unlocked;
 
-	public Door(Segment s1, Segment s2, Key k, String s, String l) {
-		this.seg1 = s1;
-		this.seg2 = s2;
+	public Door( Key k, String s, boolean unlocked) {
 		this.key = k;
 		this.doorName = s;
-		this.open = false;
-		this.unlocked = false;
+		this.unlocked = unlocked;
 	}
 
 	public String getDoorName() {
 		return this.doorName;
 	}
 
-	public boolean getOpen() {
-		return this.open;
-	}
-
 	public boolean getUnlocked() {
 		return this.unlocked;
 	}
 
-	public String openAndClose() {
-		if (this.unlocked == true && this.open == false) {
-			this.open = true;
-			return "The door is now open.";
-		} else if (this.open == true) {
-			this.open = false;
-			return "The door is now closed.";
-		} else {
-			return "The door is locked and closed, you must unlock it first.";
-		}
-	}
-
-	public String unlockAndLock(Key k) {
+	public String unlock(Key k) {
 		if (this.key.equals(k)) {
-			if (this.unlocked == true && this.open == true) {
-				return "The door must be closed first to lock it.";
-			} else if (this.unlocked == true && this.open == false) {
-				this.unlocked = false;
-				return "The door is now locked.";
-			} else if (this.unlocked == false && this.open == false) {
+			if (this.unlocked == false) {
 				this.unlocked = true;
 				return "The door is now unlocked.";
 			}
@@ -61,23 +32,22 @@ public class Door implements GameObject {
 		return "You must use the correct key on the door.";
 	}
 
-	public Segment getSeg1() {
-		return this.seg1;
-	}
-
-	public Segment getSeg2() {
-		return this.seg2;
+	@Override
+	public String getStatus() {
+		if (this.unlocked == false) {
+			return "The door is closed and locked.";
+		} else {
+			return "The door is open.";
+		}
 	}
 
 	@Override
-	public String getStatus() {
-		if(this.unlocked==false) {
-			return "The door is closed and locked.";
-		} else if(this.unlocked==true && this.open==false) {
-			return "The door is closed and unlocked.";
-		}	 else {
-			return "The door is open.";
+	public String getType() {
+		// TODO Auto-generated method stub
+		if(unlocked) {
+			return "Door Unlocked";
 		}
+		return "Door Locked";
 	}
 
 }
