@@ -5,16 +5,21 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import main.GameObject;
+
 @SuppressWarnings("serial")
-public class InventoryPanel extends JPanel implements ListSelectionListener {
+public class InventoryPanel extends JPanel {// implements ListSelectionListener {
 
   private int dimensionHeight = 100;
   private int dimensionWidth = 650;
@@ -25,7 +30,7 @@ public class InventoryPanel extends JPanel implements ListSelectionListener {
   private GameFrame frame;
 
   JList<String> listOfItems;
-  JTextField itemDescriptions;
+  JTextArea itemDescriptions;
   JSplitPane splitPane;
   String[] listData = {"Red Key", "Yellow Key", "Brown Key", "Beans"};
 
@@ -51,13 +56,32 @@ public class InventoryPanel extends JPanel implements ListSelectionListener {
     setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
 
     // add elements
-    JList<String> listOfItems = new JList<String>(listData);
+    JList<tempGameObject> listOfItems = new JList<>();
 
+    DefaultListModel<tempGameObject> listModel = new DefaultListModel<>();
+    listOfItems.setModel(listModel);
+    
+    listModel.addElement(new TempKey("Red Key","This is a reddish-brown key. it is very old and speccled with rust"));
+    listModel.addElement(new TempKey("Torch","This is an old torch. The torch allows you to see much further"));
+    listModel.addElement(new TempKey("Beans","The gift from the gods, the holy treasure. This is your most valuable possetion. Use it well."));
+
+    listOfItems.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        tempGameObject ob = listOfItems.getSelectedValue();
+        itemDescriptions.setText(ob.getDescription());
+      }
+    });
+    
+    
+    
     listOfItems.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     listOfItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
     listOfItems.setVisibleRowCount(-1);
 
-    itemDescriptions = new JTextField();
+    itemDescriptions = new JTextArea();
+    itemDescriptions.setLineWrap(true);
 
     splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listOfItems, itemDescriptions);
     splitPane.setOneTouchExpandable(true);
@@ -78,11 +102,16 @@ public class InventoryPanel extends JPanel implements ListSelectionListener {
     grid.gridy = 0;
     add(splitPane, grid);
 
+    
+    //listOfItems.addListSelectionListener(this);
   }
 
-  @Override
-  public void valueChanged(ListSelectionEvent e) {
-    // TODO Auto-generated method stub
-
-  }
+//  @Override
+//  public void valueChanged(ListSelectionEvent e) {
+//    // TODO Auto-generated method stub
+//    //this.itemDescriptions.setText("gog");
+//    if(this.itemDescriptions!=null && this.listOfItems!=null) {
+//    this.itemDescriptions.setText("eoe");
+//    }
+//  }
 }
