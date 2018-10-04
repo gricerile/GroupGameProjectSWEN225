@@ -8,7 +8,9 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.BorderFactory;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 
 @SuppressWarnings("serial")
@@ -21,6 +23,7 @@ public class GraphicsWindow extends JPanel implements MouseListener {
 
   private GameFrame frame;
 
+  private JPopupMenu popUp;
   /**
    * GraphicsWindow is the JPanel which the game graphics will be painted on.
    * GraphicsWindow also implements mouseListener to track click events.
@@ -31,6 +34,7 @@ public class GraphicsWindow extends JPanel implements MouseListener {
    */
   public GraphicsWindow(GameFrame frame) {
     this.frame = frame;
+    this.popUp = new JPopupMenu();
 
     // set dimensions
     Dimension dimension = getPreferredSize();
@@ -41,6 +45,17 @@ public class GraphicsWindow extends JPanel implements MouseListener {
     // set border
     setBorder(BorderFactory.createEtchedBorder());
 
+    // popupMenu elements
+    JMenuItem pickupItem = new JMenuItem("Pickup Item");
+    JMenuItem dropItem = new JMenuItem("Drop Item");
+    JMenuItem OpenDoor = new JMenuItem("Open Door");
+    JMenuItem unlockDoor = new JMenuItem("Unlock Door");
+    
+    this.popUp.add(pickupItem);
+    this.popUp.add(dropItem);
+    this.popUp.add(OpenDoor);
+    this.popUp.add(unlockDoor);
+    
     // add mouseListeners
     addMouseListener(this);
   }
@@ -77,7 +92,14 @@ public class GraphicsWindow extends JPanel implements MouseListener {
 
   @Override
   public void mouseReleased(MouseEvent e) {
-    frame.getGui().getMain().clickedScreen(e.getX(), e.getY());
+    
+    if(e.getButton()==1) {
+      frame.getGui().getMain().clickedScreen(e.getX(), e.getY());
+    } else if(e.getButton()==3) {
+      //getType of tile clicked on and show different pop ups depending
+      this.popUp.show(this, e.getX(), e.getY());
+    }
+    
   }
 
   @Override
