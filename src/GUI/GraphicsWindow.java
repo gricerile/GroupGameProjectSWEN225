@@ -67,7 +67,8 @@ public class GraphicsWindow extends JPanel implements MouseListener {
       g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
 
     } else {
-      this.frame.getGui().getMain().getRenderer().draw(g);
+
+      this.frame.getGui().getMain().getRenderer().draw(g, getWidth(), getHeight());
     }
 
   }
