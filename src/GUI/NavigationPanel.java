@@ -3,13 +3,17 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+
 
 import GUI.GUI.moveDirection;
 
@@ -18,12 +22,16 @@ public class NavigationPanel extends JPanel implements ActionListener {
 
   private int dimensionHeight = 80;
   private int dimensionWidth = 650;
+
+  private int buttonWidth = 30;
+  private int buttonHeight = 30;
+
   private String panelName = "Navigation";
 
-  private JButton left;
-  private JButton right;
-  private JButton up;
-  private JButton down;
+  private JButton upLeft;
+  private JButton upRight;
+  private JButton downLeft;
+  private JButton downRight;
 
   private JButton save;
   private JButton load;
@@ -48,25 +56,42 @@ public class NavigationPanel extends JPanel implements ActionListener {
     dimension.height = dimensionHeight;
     setPreferredSize(dimension);
 
+    //set button dimensions
+    Dimension buttonSize = new Dimension();
+    buttonSize.setSize(buttonWidth, buttonHeight);
+
     // set border
     setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
 
     // add elements
-    left = new JButton("\u2190");
-    right = new JButton("\u2192");
-    up = new JButton("\u2191");
-    down = new JButton("\u2193");
+   // left = new JButton("\u2190");
+    //right = new JButton("\u2192");
+    //up = new JButton("\u2191");
+    //down = new JButton("\u2193");
+    upLeft = new JButton(shrinkImage("arrowImages/arrowUpLeft.png"));
+    upLeft.setMargin(new Insets(0, 0, 0, 0));
+    upRight = new JButton(shrinkImage("arrowImages/arrowUpRight.png"));
+    upRight.setMargin(new Insets(0, 0, 0, 0));
+    downLeft = new JButton(shrinkImage("arrowImages/arrowDownLeft.png"));
+    downLeft.setMargin(new Insets(0, 0, 0, 0));
+    downRight = new JButton(shrinkImage("arrowImages/arrowDownRight.png"));
+    downRight.setMargin(new Insets(0, 0, 0, 0));
+
+
+
 
     save = new JButton("Save");
     load = new JButton("Load");
     quit = new JButton("Quit");
-
+////////////////////////
+   // JButton left = new JButton(new ImageIcon("tempArrow.png"));
+    //////////////////////////////////////
     // actionlistners
 
-    left.addActionListener(this);
-    right.addActionListener(this);
-    up.addActionListener(this);
-    down.addActionListener(this);
+    upLeft.addActionListener(this);
+    upRight.addActionListener(this);
+    downLeft.addActionListener(this);
+    downRight.addActionListener(this);
 
     save.addActionListener(this);
     load.addActionListener(this);
@@ -80,41 +105,37 @@ public class NavigationPanel extends JPanel implements ActionListener {
 
     grid.gridx = 0;
     grid.gridy = 0;
+    add(upLeft, grid);
 
     grid.gridx = 0;
     grid.gridy = 1;
-    add(left, grid);
+    add(downLeft, grid);
 
     ///// second column/////
     grid.gridx = 1;
     grid.gridy = 0;
-    add(up, grid);
+    add(upRight, grid);
 
     grid.gridx = 1;
     grid.gridy = 1;
-    add(down, grid);
+    add(downRight, grid);
 
-    ///// third column/////
-    grid.gridx = 2;
-    grid.gridy = 0;
-    add(Box.createRigidArea(right.getSize()), grid);
-
-    grid.gridx = 2;
-    grid.gridy = 1;
-    add(right, grid);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == left) {
+    if (e.getSource() == upLeft) {
       frame.getGui().getMain().movePlayer(moveDirection.left);
-    } else if (e.getSource() == right) {
-        frame.getGui().getMain().movePlayer(moveDirection.right);
-    } else if (e.getSource() == up) {
+    } else if (e.getSource() == upRight) {
+        frame.getGui().getMain().movePlayer(moveDirection.right); // TODO
+    } else if (e.getSource() == downLeft) {
         frame.getGui().getMain().movePlayer(moveDirection.up);
-    } else if (e.getSource() == down) {
+    } else if (e.getSource() == downRight) {
         frame.getGui().getMain().movePlayer(moveDirection.down);
-    } else if (e.getSource() == save) {
+    }
+
+
+    else if (e.getSource() == save) {
         frame.getGui().getMain().saveGame();
     } else if (e.getSource() == load) {
         frame.getGui().getMain().loadGame();
@@ -123,4 +144,13 @@ public class NavigationPanel extends JPanel implements ActionListener {
     }
 
   }
+  
+  private ImageIcon shrinkImage(String imageAddress) {
+    ImageIcon imageIcon = new ImageIcon(imageAddress);
+    Image image = imageIcon.getImage();
+    Image newImage = image.getScaledInstance(this.buttonWidth, this.buttonHeight, Image.SCALE_SMOOTH);
+    imageIcon = new ImageIcon(newImage);
+    return imageIcon;
+  }
+  
 }
