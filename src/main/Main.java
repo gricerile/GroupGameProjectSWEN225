@@ -4,13 +4,15 @@ import java.io.File;
 
 import GUI.GUI;
 import parser.Parser;
-
+import renderer.Renderer;
 import GUI.GUI.moveDirection;
 
 public class Main {
   private Segment[][] segmentsBoard = new Segment[2][1]; // the size can change but for testing the size is 2 segments
   private Player player;
   private GUI g;
+
+  private Renderer renderer;
 
   public static void main(String[] args) {
     Main m = new Main();
@@ -22,6 +24,7 @@ public class Main {
     // this.segmentsBpoard=p.getSegments(); will be created
     // this.player=p.getPlayer(); will be created, lets do this
     this.g = new GUI(this);
+    this.renderer= new Renderer();
   }
 
   public Segment[][] getSegments() {
@@ -36,12 +39,16 @@ public class Main {
     return this.g;
   }
 
-  public void movePlayer(moveDirection direction) {
+  public Renderer getRenderer() {
+    return this.renderer;
+  }
 
+  public void movePlayer(moveDirection direction) {
+    reDraw();
   }
 
   public void clickedScreen(int x, int y) {
-
+    reDraw();
   }
 
   public void pressedKey() {
@@ -58,6 +65,10 @@ public class Main {
 
   public void quitGame() {
 
+  }
+
+  public void reDraw() {
+    this.g.getFrame().getGraphicsWindow().redraw();
   }
 
 }

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GraphicsWindow extends JPanel implements MouseListener {
 
-  private BufferedImage image;
+  //private BufferedImage image;
 
   private int dimensionHeight = 400;
   private int dimensionWidth = 650;
@@ -45,9 +45,9 @@ public class GraphicsWindow extends JPanel implements MouseListener {
     addMouseListener(this);
   }
 
-  public void setImage(BufferedImage image) {
-    this.image = image;
-  }
+ // public void setImage(BufferedImage image) {
+ //   this.image = image;
+ // }
 
   public void redraw() {
     repaint();
@@ -61,15 +61,13 @@ public class GraphicsWindow extends JPanel implements MouseListener {
     super.paintComponent(g);
     setBackground(Color.WHITE);
 
-    if (image == null) {
+    if (this.frame.getGui().getMain().getRenderer() == null) {
 
       g.setColor(Color.BLACK);
       g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
 
     } else {
-
-      g.drawImage(image, 0, 0, null);
-
+      this.frame.getGui().getMain().getRenderer().draw(g);
     }
 
   }
