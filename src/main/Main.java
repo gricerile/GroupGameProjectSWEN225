@@ -24,7 +24,7 @@ public class Main {
 		p.loadMap(new File("ParsingTester.xml"));
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
-		this.renderer = new Renderer();
+		this.renderer = new Renderer(this);
 	}
 
 	public Segment[][] getSegments() {
@@ -105,7 +105,7 @@ public class Main {
 	}
 
 	public void quitGame() {
-
+		System.exit(0);
 	}
 
 	public void reDraw() {

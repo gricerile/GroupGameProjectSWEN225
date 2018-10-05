@@ -5,17 +5,17 @@ import main.Key;
 public class Door implements GameObject {
 	// fields
 	private Key key;
-	private String doorName; // code name for door and key association, unique for each door and key
+	private int ID; // code name for door and key association, unique for each door and key
 	private boolean unlocked;
 
-	public Door( Key k, String s, boolean unlocked) {
+	public Door( Key k, int s, boolean unlocked) {
 		this.key = k;
-		this.doorName = s;
+		this.ID = s;
 		this.unlocked = unlocked;
 	}
 
-	public String getDoorName() {
-		return this.doorName;
+	public int ID() {
+		return this.ID;
 	}
 
 	public boolean getUnlocked() {
@@ -43,7 +43,6 @@ public class Door implements GameObject {
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		if(unlocked) {
 			return "Door Unlocked";
 		}
