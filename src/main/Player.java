@@ -1,4 +1,5 @@
 package main;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -33,8 +34,8 @@ public class Player {
     this.segment = s;
   }
 
-  public ArrayList<GameItem> getInventory(){
-	  return this.inventory;
+  public ArrayList<GameItem> getInventory() {
+    return this.inventory;
   }
 
 }
