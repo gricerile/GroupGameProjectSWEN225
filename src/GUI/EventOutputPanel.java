@@ -35,15 +35,14 @@ public class EventOutputPanel extends JPanel {
     Dimension dimension = getPreferredSize();
     dimension.height = dimensionHeight;
     setPreferredSize(dimension);
-	setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
-	setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
+    setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
+    setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
 
     // set border
     setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
 
     // add elements
     textArea = new JLabel();
-
 
     // set layout
     setLayout(new GridBagLayout());

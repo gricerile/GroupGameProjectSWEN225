@@ -38,7 +38,6 @@ public class InventoryPanel extends JPanel {
   JSplitPane splitPane;
 
   JPanel rightPanel;
-  //JLabel image;
   JTextArea itemDescriptions;
 
   /**
@@ -57,8 +56,8 @@ public class InventoryPanel extends JPanel {
     Dimension dimension = getPreferredSize();
     dimension.height = dimensionHeight;
     setPreferredSize(dimension);
-	setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
-	setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
+    setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
+    setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
 
     // set border
     setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
@@ -66,8 +65,7 @@ public class InventoryPanel extends JPanel {
     //////////////////////////// Add Elements///////////////////////////////////
 
     // JList (left section of JSplitPane)
-   
-    
+
     listOfItems = new JList<>();
     listModel = new DefaultListModel<>();
 
@@ -75,30 +73,23 @@ public class InventoryPanel extends JPanel {
     listOfItems.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     listOfItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
     listOfItems.setVisibleRowCount(-1);
-    
+
     scrollPane = new JScrollPane(listOfItems);
 
-    //listModel.addElement(new Key(null, "A gift from the gods, the holy treasure. This is your most valuable possession. Use it well.", "Beans"));
-
-
-
     // JPanel containing Jlabel and JTextArea (right section of JSplitPane)
-
-    //JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png", 50, 50));
 
     itemDescriptions = new JTextArea();
     itemDescriptions.setLineWrap(true);
     itemDescriptions.setEditable(false);
 
-    //rightPanel = new JPanel();
-    //rightPanel.setLayout(new BorderLayout());
+    // JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png",
+    // 50, 50));
 
-    //rightPanel.add(image, BorderLayout.WEST);
-    //rightPanel.add(itemDescriptions, BorderLayout.CENTER);
+    // rightPanel = new JPanel();
+    // rightPanel.setLayout(new BorderLayout());
 
-
-
-
+    // rightPanel.add(image, BorderLayout.WEST);
+    // rightPanel.add(itemDescriptions, BorderLayout.CENTER);
 
     // JSPlitPane
     splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, itemDescriptions);
@@ -116,23 +107,21 @@ public class InventoryPanel extends JPanel {
     grid.gridy = 0;
     add(splitPane, grid);
 
-
-    //add listener
+    // add listener
     listOfItems.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
       @Override
       public void valueChanged(ListSelectionEvent e) {
 
-        GameItem ob = listOfItems.getSelectedValue();
-        itemDescriptions.setText(ob.getDescription());
-       // image.setIcon(ob.getImage());
-        //image.setIcon(GUI.resizeImage("arrowImages/noImage.bmp", 50, 50));
+        GameItem object = listOfItems.getSelectedValue();
+        itemDescriptions.setText(object.getDescription());
+        // image.setIcon(ob.getImage());
 
       }
     });
   }
-  
+
   public DefaultListModel<GameItem> getItems() {
-	  return this.listModel;
+    return this.listModel;
   }
 }

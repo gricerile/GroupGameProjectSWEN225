@@ -21,102 +21,99 @@ import GUI.GUI.moveDirection;
 @SuppressWarnings("serial")
 public class NavigationPanel extends JPanel implements ActionListener {
 
-	private int dimensionHeight = 100;
+  private int dimensionHeight = 100;
 
-	private int buttonWidth = 30;
-	private int buttonHeight = 30;
+  private int buttonWidth = 30;
+  private int buttonHeight = 30;
 
-	private String panelName = "Navigation";
+  private String panelName = "Navigation";
 
-	private JButton upLeft;
-	private JButton upRight;
-	private JButton downLeft;
-	private JButton downRight;
+  private JButton upLeft;
+  private JButton upRight;
+  private JButton downLeft;
+  private JButton downRight;
 
-	private GameFrame frame;
+  private GameFrame frame;
 
-	/**
-	 * Navigation panel contains navigation buttons for the player to navigate the
-	 * map.
-	 *
-	 * @param frame
-	 *            instance of GameFrame which the instance of this class is
-	 *            contained in to reference back.
-	 */
-	public NavigationPanel(GameFrame frame) {
-		this.frame = frame;
+  /**
+   * Navigation panel contains navigation buttons for the player to navigate the
+   * map.
+   *
+   * @param frame
+   *          instance of GameFrame which the instance of this class is contained
+   *          in to reference back.
+   */
+  public NavigationPanel(GameFrame frame) {
+    this.frame = frame;
 
-		// set dimensions
-		Dimension dimension = getPreferredSize();
-		dimension.height = dimensionHeight;
-		setPreferredSize(dimension);
-		setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
+    // set dimensions
+    Dimension dimension = getPreferredSize();
+    dimension.height = dimensionHeight;
+    setPreferredSize(dimension);
+    setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
 
-		// set button dimensions
-		Dimension buttonSize = new Dimension();
-		buttonSize.setSize(buttonWidth, buttonHeight);
+    // set button dimensions
+    Dimension buttonSize = new Dimension();
+    buttonSize.setSize(buttonWidth, buttonHeight);
 
-		// set border
-		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
+    // set border
+    setBorder(BorderFactory.createEtchedBorder());
 
-		// add elements
-		upLeft = new JButton(GUI.resizeImage("arrowImages/arrowUpLeft.png", this.buttonWidth, this.buttonHeight));
-		upLeft.setMargin(new Insets(0, 0, 0, 0));
-		upRight = new JButton(GUI.resizeImage("arrowImages/arrowUpRight.png", this.buttonWidth, this.buttonHeight));
-		upRight.setMargin(new Insets(0, 0, 0, 0));
-		downLeft = new JButton(GUI.resizeImage("arrowImages/arrowDownLeft.png", this.buttonWidth, this.buttonHeight));
-		downLeft.setMargin(new Insets(0, 0, 0, 0));
-		downRight = new JButton(GUI.resizeImage("arrowImages/arrowDownRight.png", this.buttonWidth, this.buttonHeight));
-		downRight.setMargin(new Insets(0, 0, 0, 0));
+    // add elements
+    upLeft = new JButton(GUI.resizeImage("arrowImages/arrowUpLeft.png", this.buttonWidth, this.buttonHeight));
+    upLeft.setMargin(new Insets(0, 0, 0, 0));
+    upRight = new JButton(GUI.resizeImage("arrowImages/arrowUpRight.png", this.buttonWidth, this.buttonHeight));
+    upRight.setMargin(new Insets(0, 0, 0, 0));
+    downLeft = new JButton(GUI.resizeImage("arrowImages/arrowDownLeft.png", this.buttonWidth, this.buttonHeight));
+    downLeft.setMargin(new Insets(0, 0, 0, 0));
+    downRight = new JButton(GUI.resizeImage("arrowImages/arrowDownRight.png", this.buttonWidth, this.buttonHeight));
+    downRight.setMargin(new Insets(0, 0, 0, 0));
 
+    ////////////////////////
+    // JButton left = new JButton(new ImageIcon("tempArrow.png"));
+    //////////////////////////////////////
+    // actionlistners
 
+    upLeft.addActionListener(this);
+    upRight.addActionListener(this);
+    downLeft.addActionListener(this);
+    downRight.addActionListener(this);
 
+    // set layout
+    setLayout(new GridBagLayout());
+    GridBagConstraints grid = new GridBagConstraints();
 
-		////////////////////////
-		// JButton left = new JButton(new ImageIcon("tempArrow.png"));
-		//////////////////////////////////////
-		// actionlistners
+    ///// first column/////
 
-		upLeft.addActionListener(this);
-		upRight.addActionListener(this);
-		downLeft.addActionListener(this);
-		downRight.addActionListener(this);
+    grid.gridx = 0;
+    grid.gridy = 0;
+    add(upLeft, grid);
 
-		// set layout
-		setLayout(new GridBagLayout());
-		GridBagConstraints grid = new GridBagConstraints();
+    grid.gridx = 0;
+    grid.gridy = 1;
+    add(downLeft, grid);
 
-		///// first column/////
+    ///// second column/////
+    grid.gridx = 1;
+    grid.gridy = 0;
+    add(upRight, grid);
 
-		grid.gridx = 0;
-		grid.gridy = 0;
-		add(upLeft, grid);
+    grid.gridx = 1;
+    grid.gridy = 1;
+    add(downRight, grid);
 
-		grid.gridx = 0;
-		grid.gridy = 1;
-		add(downLeft, grid);
+  }
 
-		///// second column/////
-		grid.gridx = 1;
-		grid.gridy = 0;
-		add(upRight, grid);
-
-		grid.gridx = 1;
-		grid.gridy = 1;
-		add(downRight, grid);
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == upLeft) {
-			frame.getGui().getMain().movePlayer(moveDirection.left);
-		} else if (e.getSource() == upRight) {
-			frame.getGui().getMain().movePlayer(moveDirection.right); // TODO
-		} else if (e.getSource() == downLeft) {
-			frame.getGui().getMain().movePlayer(moveDirection.up);
-		} else if (e.getSource() == downRight) {
-			frame.getGui().getMain().movePlayer(moveDirection.down);
-		}
-	}
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == upLeft) {
+      frame.getGui().getMain().movePlayer(moveDirection.left);
+    } else if (e.getSource() == upRight) {
+      frame.getGui().getMain().movePlayer(moveDirection.right); // TODO
+    } else if (e.getSource() == downLeft) {
+      frame.getGui().getMain().movePlayer(moveDirection.up);
+    } else if (e.getSource() == downRight) {
+      frame.getGui().getMain().movePlayer(moveDirection.down);
+    }
+  }
 }
