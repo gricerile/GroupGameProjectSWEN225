@@ -105,7 +105,7 @@ public class Main {
 	}
 
 	public void quitGame() {
-
+		System.exit(0);
 	}
 
 	public void reDraw() {
