@@ -16,4 +16,9 @@ public abstract class GameItem {
 	public String getDescription() {
 		return this.description;
 	}
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }

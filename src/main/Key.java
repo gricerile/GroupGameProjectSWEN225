@@ -1,36 +1,33 @@
 package main;
 
+
+
 public class Key extends GameItem {
 	// fields
-	private Door door;
+	private int ID;
 
-	public Key(Door d, String description, String name) {
+	public Key(int ID, String description, String name) {
 		super(description, name);
-		this.door = d;
+		this.ID = ID;
 	}
 
-	public Door getDoor() {
-		return this.door;
+	public int getID() {
+		return this.ID;
 	}
 
-	public boolean equals(Key k) {
-		if (this.door.getDoorName().equals(k.getDoor().getDoorName())) {
+	public boolean equals(int doorID) {
+		if (this.ID==doorID) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public String getKeysDoorName() {
-		return this.door.getDoorName();
-	}
-
 	public String getStatus() {
-		return ("The Key unlocks/locks the door " + getKeysDoorName());
+		return ("The Key unlocks/locks the door " + this.ID);
 	}
 
 	public String getType() {
-		// TODO Auto-generated method stub
 		return "Key";
 	}
 }

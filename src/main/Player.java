@@ -1,10 +1,9 @@
 package main;
-
 import java.util.ArrayList;
 
 public class Player {
   // fields
-  private ArrayList<Key> inventory = new ArrayList<Key>();
+  private ArrayList<GameItem> inventory = new ArrayList<GameItem>();
   private Segment segment;
   private int direction; // 1-north 2-east 3-south 4-west
 
@@ -34,14 +33,8 @@ public class Player {
     this.segment = s;
   }
 
-  public String getInventory() {
-    if (this.inventory.isEmpty() || this.inventory == null) {
-      return "The inventory is empty.";
-    }
-    String s = "";
-    for (Key k : this.inventory) {
-      s += (" " + k.getKeysDoorName());
-    }
-    return s;
+  public ArrayList<GameItem> getInventory(){
+	  return this.inventory;
   }
+
 }
