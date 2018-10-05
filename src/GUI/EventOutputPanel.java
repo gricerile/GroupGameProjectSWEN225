@@ -16,7 +16,6 @@ public class EventOutputPanel extends JPanel {
   JLabel textArea;
 
   private int dimensionHeight = 50;
-  private int dimensionWidth = 650;
   private String panelName = "Event Output";
 
   private GameFrame frame;
@@ -34,9 +33,10 @@ public class EventOutputPanel extends JPanel {
 
     // set dimensions
     Dimension dimension = getPreferredSize();
-    dimension.width = dimensionWidth;
     dimension.height = dimensionHeight;
     setPreferredSize(dimension);
+	setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
+	setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
 
     // set border
     setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));

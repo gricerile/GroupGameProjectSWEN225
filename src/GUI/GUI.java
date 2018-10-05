@@ -11,8 +11,8 @@ import main.Main;
 public class GUI {
 
   private String gameName = "Team 25 Game";
-  private int frameWidth = 700;
-  private int frameHeight = 700;
+  private int frameWidth = 750;
+  private int frameHeight = 750;
 
   private Main main;
   private GameFrame frame;
@@ -53,7 +53,7 @@ public class GUI {
 
     frame.setSize(frameWidth, frameHeight);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setVisible(true);
+    
 
   }
 

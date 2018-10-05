@@ -16,10 +16,8 @@ import javax.swing.JPopupMenu;
 @SuppressWarnings("serial")
 public class GraphicsWindow extends JPanel implements MouseListener {
 
-  //private BufferedImage image;
-
-  private int dimensionHeight = 400;
-  private int dimensionWidth = 650;
+  private int dimensionHeight = 600;
+  private int dimensionWidth = 600;
 
   private GameFrame frame;
 
@@ -41,6 +39,8 @@ public class GraphicsWindow extends JPanel implements MouseListener {
     dimension.width = dimensionWidth;
     dimension.height = dimensionHeight;
     setPreferredSize(dimension);
+	//setMaximumSize(dimension);
+	//setMinimumSize(new Dimension(100, 100));
 
     // set border
     setBorder(BorderFactory.createEtchedBorder());
