@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Room>
+<hasNorthWall> true </hasNorthWall>
+<hasSouthWall> false </hasSouthWall>
+<hasEastWall> true </hasEastWall>
+<hasWestWall> true </hasWestWall>
+<door> true north locked </door>
+<hasObjects> true </hasObjects>
+<objects> key book cup wizardhat </objects>
+</Room>
