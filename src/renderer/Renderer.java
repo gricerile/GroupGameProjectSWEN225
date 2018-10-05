@@ -11,6 +11,7 @@ import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
 import GUI.GUI;
+import GUI.GUI.moveDirection;
 import GUI.GameFrame;
 import main.Main;
 import main.Segment;
@@ -37,11 +38,14 @@ public class Renderer {
   }
 
   private void loadImage() {
-	  ImageIcon i = new ImageIcon("tx/grass.jpg");
+	  ImageIcon i = new ImageIcon("/GroupProject/src/tx/grass.jpg");
 	  image = i.getImage();
   }
 
   public void draw(Graphics g, int windowWidth, int windowHeight) {
+
+//	  drawPlayer();
+
 
 
 	  int startX = windowWidth/2;
@@ -98,6 +102,31 @@ public class Renderer {
           startX += SEG_WIDTH/3;
       }*/
 
+
+
+      	// there is a wall fill the rectangle to indicate that it is a wall
+      	if(checkWall()) {
+      		g.fillRect(10, 10, 10, 10);
+      	}
+
+  }
+
+//  public void drawPlayer() {
+//	  m.getPlayer().loadImage();
+//  }
+
+  public boolean checkWall() {
+	  for(int i = 0; i < board.length; i++) {
+		  for(int j = 0; j < board[i].length; j++) {
+			  if(board[i][j] == null) {
+				  return false;
+			  }
+			  if(board[i][j].getObject().getType().equals("Wall")) {
+				  return true;
+			  }
+		  }
+	  }
+	  return false;
   }
 
 
