@@ -119,7 +119,7 @@ public class Renderer {
 
 
   /*each square in a 2d grid is an segment object
-   * use polygons to draw the new isometric square
+   * get each segment and use coords to use in polygons to draw the new isometric square
    *
    * */
 
