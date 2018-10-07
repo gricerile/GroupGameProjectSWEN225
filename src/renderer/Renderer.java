@@ -37,14 +37,18 @@ public class Renderer {
 
   }
 
-  private void loadImage() {
-	  ImageIcon i = new ImageIcon("/GroupProject/src/tx/grass.jpg");
-	  image = i.getImage();
-  }
 
   public void draw(Graphics g, int windowWidth, int windowHeight) {
 
 //	  drawPlayer();
+
+
+      Texture t = new Texture();
+	  Image img = t.onLoad("/tx/dirt.png");
+	  g.drawImage(img, 10, 10, null);
+	  
+	  Image character = t.onLoad("/tx/grass.png");
+	  g.drawImage(character, 100, 100, null);
 
 
 
