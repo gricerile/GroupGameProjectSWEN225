@@ -105,7 +105,17 @@ public class Renderer {
           startY += SEG_HEIGHT/2;
           startX += SEG_WIDTH/3;
       }*/
-
+    
+    
+    
+    
+        // this part is for the 2D rendering of the board, just to get the functions working while
+        // I try to get isometric rendering complete
+      for(int i = 0; i < board.length; i++) {
+		  for(int j = 0; j < board[i].length; j++) {
+			  g.drawRect((windowWidth/2) - i*SEG_WIDTH, (windowHeight/2) - j*SEG_HEIGHT, SEG_WIDTH, SEG_HEIGHT);
+		  }
+	  }
 
 
       	// there is a wall fill the rectangle to indicate that it is a wall
