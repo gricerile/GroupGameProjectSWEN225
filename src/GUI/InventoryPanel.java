@@ -1,45 +1,43 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import main.GameObject;
+import main.Door;
+import main.GameItem;
+import main.Key;
 
 @SuppressWarnings("serial")
 public class InventoryPanel extends JPanel {
 
-  private int dimensionHeight = 100;
-  private int dimensionWidth = 650;
+  private int dimensionHeight = 120;
   private int splitPaneWidth = 600;
   private int splitPaneHeight = 80;
   private String panelName = "Inventory";
 
   private GameFrame frame;
 
-  JList<tempGameObject> listOfItems;
-  DefaultListModel<tempGameObject> listModel;
+  JScrollPane scrollPane;
+  JList<GameItem> listOfItems;
+  DefaultListModel<GameItem> listModel;
 
   JSplitPane splitPane;
 
   JPanel rightPanel;
-  JLabel image;
   JTextArea itemDescriptions;
 
   /**
@@ -56,9 +54,10 @@ public class InventoryPanel extends JPanel {
 
     // set dimensions
     Dimension dimension = getPreferredSize();
-    dimension.width = dimensionWidth;
     dimension.height = dimensionHeight;
     setPreferredSize(dimension);
+    setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
+    setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
 
     // set border
     setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
@@ -66,6 +65,7 @@ public class InventoryPanel extends JPanel {
     //////////////////////////// Add Elements///////////////////////////////////
 
     // JList (left section of JSplitPane)
+
     listOfItems = new JList<>();
     listModel = new DefaultListModel<>();
 
@@ -74,32 +74,25 @@ public class InventoryPanel extends JPanel {
     listOfItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
     listOfItems.setVisibleRowCount(-1);
 
-    listModel.addElement(new TempKey("Red Key", "This is a reddish-brown key. it is very old and speccled with rust", null));
-    listModel.addElement(new TempKey("Torch", "This is an old torch. The torch allows you to see much further", null));
-    listModel.addElement(new TempKey("Beans",
-        "The gift from the gods, the holy treasure. This is your most valuable possetion. Use it well.", null));
-
-
+    scrollPane = new JScrollPane(listOfItems);
 
     // JPanel containing Jlabel and JTextArea (right section of JSplitPane)
 
-    //JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png", 50, 50));
-
     itemDescriptions = new JTextArea();
     itemDescriptions.setLineWrap(true);
+    itemDescriptions.setEditable(false);
 
-    //rightPanel = new JPanel();
-    //rightPanel.setLayout(new BorderLayout());
+    // JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png",
+    // 50, 50));
 
-    //rightPanel.add(image, BorderLayout.WEST);
-    //rightPanel.add(itemDescriptions, BorderLayout.CENTER);
-    
-    
-    
-    
+    // rightPanel = new JPanel();
+    // rightPanel.setLayout(new BorderLayout());
+
+    // rightPanel.add(image, BorderLayout.WEST);
+    // rightPanel.add(itemDescriptions, BorderLayout.CENTER);
 
     // JSPlitPane
-    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listOfItems, itemDescriptions);
+    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, itemDescriptions);
     splitPane.setOneTouchExpandable(true);
     splitPane.setDividerLocation(splitPaneWidth / 2);
     splitPane.setPreferredSize(new Dimension(splitPaneWidth, splitPaneHeight));
@@ -114,19 +107,21 @@ public class InventoryPanel extends JPanel {
     grid.gridy = 0;
     add(splitPane, grid);
 
-
-    //add listener
+    // add listener
     listOfItems.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
       @Override
       public void valueChanged(ListSelectionEvent e) {
 
-        tempGameObject ob = listOfItems.getSelectedValue();
-        itemDescriptions.setText(ob.getDescription());
-       // image.setIcon(ob.getImage());
-        //image.setIcon(GUI.resizeImage("arrowImages/noImage.bmp", 50, 50));
+        GameItem object = listOfItems.getSelectedValue();
+        itemDescriptions.setText(object.getDescription());
+        // image.setIcon(ob.getImage());
 
       }
     });
+  }
+
+  public DefaultListModel<GameItem> getItems() {
+    return this.listModel;
   }
 }
