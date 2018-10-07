@@ -1,7 +1,7 @@
 package parser;
 
-import javafx.stage.FileChooser;
-import javafx.stage.StageStyle;
+//import javafx.stage.FileChooser;
+//import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.io.*;
