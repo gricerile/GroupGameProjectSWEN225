@@ -26,7 +26,9 @@ public class Renderer {
   };
 
   private int sz = 20;
-
+  private Image image;
+  public int isox;
+  public int isoy;
   private int SEG_WIDTH = 40;
   private int SEG_HEIGHT = 40;
 
@@ -38,6 +40,8 @@ public class Renderer {
     this.m = main;
     this.board = m.getSegments(); // initialise the board with the 2D array of segs stored in the main class
     // this.board = new Segment[10][10];
+    	  Texture t = new Texture();
+	  this.image = t.onLoad("/tx/dirt.png");
 
   }
 
