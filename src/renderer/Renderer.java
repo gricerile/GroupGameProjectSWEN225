@@ -47,83 +47,94 @@ public class Renderer {
 //	  drawPlayer();
 
 
-      Texture t = new Texture();
-	  Image img = t.onLoad("/tx/dirt.png");
-	  g.drawImage(img, 10, 10, null);
+//       Texture t = new Texture();
+// 	  Image img = t.onLoad("/tx/dirt.png");
+// 	  g.drawImage(img, 10, 10, null);
 	  
-	  Image character = t.onLoad("/tx/grass.png");
-	  g.drawImage(character, 100, 100, null);
+// 	  Image character = t.onLoad("/tx/grass.png");
+// 	  g.drawImage(character, 100, 100, null);
 
 
 
-	  int startX = windowWidth/2;
-	  int startY = windowHeight/2;
-	  for (int i = 0; i < board.length; i++) {
-		  for(int j = 0; j<board[i].length; j++) {
-				g.drawLine(startX, startY, startX+(SEG_WIDTH/2), startY+(SEG_HEIGHT/3));
-				startX += SEG_WIDTH/2;
-				startY += SEG_HEIGHT/3;
+// 	  int startX = windowWidth/2;
+// 	  int startY = windowHeight/2;
+// 	  for (int i = 0; i < board.length; i++) {
+// 		  for(int j = 0; j<board[i].length; j++) {
+// 				g.drawLine(startX, startY, startX+(SEG_WIDTH/2), startY+(SEG_HEIGHT/3));
+// 				startX += SEG_WIDTH/2;
+// 				startY += SEG_HEIGHT/3;
+// 		  }
+//           startX = windowWidth/2 - (SEG_WIDTH*(i+1))/2;
+// 		  startY = windowHeight/2 + (SEG_HEIGHT*(i+1))/3;
+// 	  }
+// 	  for (int i = 0; i < board.length; i++) {
+//           g.drawLine(startX, startY, startX + SEG_WIDTH/2, startY + SEG_HEIGHT/3);
+//           startX += SEG_WIDTH/2;
+//           startY += SEG_HEIGHT/3;
+//       }
+
+//       startX = windowWidth/2;
+//       startY = windowHeight/2;
+//       for (int i = 0; i < board.length; i++) {
+//           for(int j = 0; j<board[i].length; j++) {
+//               g.drawLine(startX, startY, startX - (SEG_WIDTH/2), startY + (SEG_HEIGHT/3));
+//               startX -= SEG_WIDTH/2;
+//               startY += SEG_HEIGHT/3;
+//           }
+//           startX = windowWidth/2 + (SEG_WIDTH*(i+1))/2;
+//           startY = windowHeight/2 + (SEG_HEIGHT*(i+1))/3;
+//       }
+//       for (int i = 0; i < board.length; i++) {
+
+// 	          g.drawLine(startX, startY, startX - SEG_WIDTH/2, startY + SEG_HEIGHT/3);
+// 	          startX -= SEG_WIDTH/2;
+// 	          startY += SEG_HEIGHT/3;
+//       }
+//       startX = windowWidth / 2 - (SEG_WIDTH * (i + 1)) / 2;
+//       startY = windowHeight / 2 + (SEG_HEIGHT * (i + 1)) / 3;
+//     }
+//     for (int i = 0; i < board.length; i++) {
+//       g.drawLine(startX, startY, startX + SEG_WIDTH / 2, startY + SEG_HEIGHT / 3);
+//       startX += SEG_WIDTH / 2;
+//       startY += SEG_HEIGHT / 3;
+//     }
+
+//     startX = windowWidth / 2;
+//     startY = windowHeight / 2;
+//     for (int i = 0; i < board.length; i++) {
+//       for (int j = 0; j < board[i].length; j++) {
+//         g.drawLine(startX, startY, startX - (SEG_WIDTH / 2), startY + (SEG_HEIGHT / 3));
+//         startX -= SEG_WIDTH / 2;
+//         startY += SEG_HEIGHT / 3;
+//       }
+//       for (int i = 0; i < 3; i++) {
+//           g.drawLine(startX, startY, startX + SEG_WIDTH/3, startY + SEG_HEIGHT/2);
+//           startY += SEG_HEIGHT/2;
+//           startX += SEG_WIDTH/3;
+//       }*/
+    
+    
+    
+    
+//         // this part is for the 2D rendering of the board, just to get the functions working while
+//         // I try to get isometric rendering complete
+//       for(int i = 0; i < board.length; i++) {
+// 		  for(int j = 0; j < board[i].length; j++) {
+// 			  g.drawRect((windowWidth/2) - i*SEG_WIDTH, (windowHeight/2) - j*SEG_HEIGHT, SEG_WIDTH, SEG_HEIGHT);
+// 		  }
+// 	  }
+
+	  for(int i = 0; i < board.length; i++) {
+		  for(int j = board[i].length; j >= 0; j--) {
+
+
+			  //g.drawRect(SEG_WIDTH/2*i+SEG_HEIGHT/2*j, SEG_WIDTH/2*i+SEG_HEIGHT/2*j, sz, sz);
+			  g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
+			  // g.drawRect((windowWidth/2) -i*SEG_WIDTH,(windowHeight/2) -  j*SEG_HEIGHT, sz, sz);
+			  //g.drawImage(img, (windowWidth/2) - ((i-j) *segWidth/2), (windowHeight/2) - ((i + j)*segHeight/2), null);
+
 		  }
-          startX = windowWidth/2 - (SEG_WIDTH*(i+1))/2;
-		  startY = windowHeight/2 + (SEG_HEIGHT*(i+1))/3;
 	  }
-	  for (int i = 0; i < board.length; i++) {
-          g.drawLine(startX, startY, startX + SEG_WIDTH/2, startY + SEG_HEIGHT/3);
-          startX += SEG_WIDTH/2;
-          startY += SEG_HEIGHT/3;
-      }
-
-      startX = windowWidth/2;
-      startY = windowHeight/2;
-      for (int i = 0; i < board.length; i++) {
-          for(int j = 0; j<board[i].length; j++) {
-              g.drawLine(startX, startY, startX - (SEG_WIDTH/2), startY + (SEG_HEIGHT/3));
-              startX -= SEG_WIDTH/2;
-              startY += SEG_HEIGHT/3;
-          }
-          startX = windowWidth/2 + (SEG_WIDTH*(i+1))/2;
-          startY = windowHeight/2 + (SEG_HEIGHT*(i+1))/3;
-      }
-      for (int i = 0; i < board.length; i++) {
-
-	          g.drawLine(startX, startY, startX - SEG_WIDTH/2, startY + SEG_HEIGHT/3);
-	          startX -= SEG_WIDTH/2;
-	          startY += SEG_HEIGHT/3;
-      }
-      startX = windowWidth / 2 - (SEG_WIDTH * (i + 1)) / 2;
-      startY = windowHeight / 2 + (SEG_HEIGHT * (i + 1)) / 3;
-    }
-    for (int i = 0; i < board.length; i++) {
-      g.drawLine(startX, startY, startX + SEG_WIDTH / 2, startY + SEG_HEIGHT / 3);
-      startX += SEG_WIDTH / 2;
-      startY += SEG_HEIGHT / 3;
-    }
-
-    startX = windowWidth / 2;
-    startY = windowHeight / 2;
-    for (int i = 0; i < board.length; i++) {
-      for (int j = 0; j < board[i].length; j++) {
-        g.drawLine(startX, startY, startX - (SEG_WIDTH / 2), startY + (SEG_HEIGHT / 3));
-        startX -= SEG_WIDTH / 2;
-        startY += SEG_HEIGHT / 3;
-      }
-      for (int i = 0; i < 3; i++) {
-          g.drawLine(startX, startY, startX + SEG_WIDTH/3, startY + SEG_HEIGHT/2);
-          startY += SEG_HEIGHT/2;
-          startX += SEG_WIDTH/3;
-      }*/
-    
-    
-    
-    
-        // this part is for the 2D rendering of the board, just to get the functions working while
-        // I try to get isometric rendering complete
-      for(int i = 0; i < board.length; i++) {
-		  for(int j = 0; j < board[i].length; j++) {
-			  g.drawRect((windowWidth/2) - i*SEG_WIDTH, (windowHeight/2) - j*SEG_HEIGHT, SEG_WIDTH, SEG_HEIGHT);
-		  }
-	  }
-
 
       	// there is a wall fill the rectangle to indicate that it is a wall
       	if(checkWall()) {
