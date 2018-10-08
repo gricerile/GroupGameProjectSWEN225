@@ -167,15 +167,25 @@ public class Renderer {
   // turning regular 2d array into isometric
   // isoX = cartX - cartY;
   // isoY = (cartX + cartY) / 2
-  public void toIso() {
-    for (int i = 0; i < board.length; i++) {
-      for (int j = 0; j < board[i].length; j++) {
+	private int isoX(int x, int y) {
+		// convert x into isometric x
+		  int segWidth = image.getWidth(null) + 10;
 
-        // screen.x = map.x * SEG_HEIGHT
-        // screen.y = map.y * SEG_WIDTH
-      }
-    }
-  }
+		int isoX;
+		isoX = (int) ((x * segWidth / 2) - (y * segWidth / 2));
+		return isoX;
+	}
+
+	private int isoY(int x, int y) {
+		// convert y into isometric y
+		int segHeight = image.getHeight(null) - 10;
+		int isoY;
+		isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
+
+		return isoY;
+	}
+  
+  
 
 
   /*each square in a 2d grid is an segment object
