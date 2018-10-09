@@ -66,31 +66,23 @@ public class Main {
 	}
 
 	public Segment getNextSegment(moveDirection direction) {//this only works for 3 by 3 double array
-		int xs=0;
-		int ys=0;
-		for(int x = 0; x < 3; x++) {
-			for(int y = 0; y < 3; y++) {
-				if(this.segmentsBoard[x][y].equals(this.player.getSegment())){
-					xs=x;
-					ys=y;
-					break;
-				}
-			}
-		}
-		if(direction==moveDirection.up) {
-			if((ys-1)>=0) {
+		int xs=this.player.getSegment().getX();
+		int ys=this.player.getSegment().getY();
+
+		if(direction==moveDirection.upLeft) {
+			if((ys+1)<this.segmentsBoard.length) {
 				return this.segmentsBoard[xs][ys-1];
 			}
-		} else if (direction==moveDirection.right) {
-			if((xs+1)<3) {
+		} else if (direction==moveDirection.upRight) {
+			if((xs+1)<this.segmentsBoard.length) {
 				return this.segmentsBoard[xs+1][ys];
 			}
-		} else if (direction==moveDirection.down) {
-			if((ys+1)<3) {
+		} else if (direction==moveDirection.downLeft) {
+			if((xs-1)>=0) {
 				return this.segmentsBoard[xs][ys+1];
 			}
-		} else if (direction==moveDirection.left) {
-			if((xs-1)>=0) {
+		} else if (direction==moveDirection.downRight) {
+			if((ys-1)>=0) {
 				return this.segmentsBoard[xs-1][ys];
 			}
 		}
