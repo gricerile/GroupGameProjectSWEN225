@@ -1,5 +1,6 @@
 package main;
 
+
 import java.io.File;
 
 import GUI.GUI;
@@ -11,6 +12,7 @@ public class Main {
 	private Segment[][] segmentsBoard = new Segment[3][3]; // the size can change but for testing the size is 2 segments
 	private Player player;
 	private GUI g;
+	private Parser p;
 
 	private Renderer renderer;
 
@@ -19,7 +21,7 @@ public class Main {
 	}
 
 	public Main() {
-		Parser p = new Parser();
+		this.p = new Parser();
 		this.g = new GUI(this);
 		p.loadMap(new File("ParsingTester.xml"));
 		// this.segmentsBpoard=p.getSegments(); will be created
@@ -51,6 +53,9 @@ public class Main {
 	}
 
 	public boolean canMove(moveDirection direction) {
+		if(this.player==null||this.player.getSegment()==null) {
+			return false;
+		}
 		Segment next = getNextSegment(direction);
 		if (next != null) {
 			if (next.getObject().getType().equals("FreeTile")||next.getObject().getType().equals("Door Unlocked")) {
@@ -97,15 +102,15 @@ public class Main {
 	}
 
 	public void saveGame() {
-
+		//this.p.saveGame(this.segmentsBoard,this.player);
 	}
 
 	public void loadGame() {
-
+		//this.p.loadMap(FileChooser());//or victor can choose the file himself in the parser
 	}
 
 	public void quitGame() {
-
+		System.exit(0);
 	}
 
 	public void reDraw() {

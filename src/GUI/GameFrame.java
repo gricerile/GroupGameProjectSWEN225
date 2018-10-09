@@ -1,16 +1,21 @@
 package GUI;
 
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import GUI.GUI.moveDirection;
 
 @SuppressWarnings("serial")
-public class GameFrame extends JFrame implements KeyListener {
+public class GameFrame extends JFrame implements KeyListener, ActionListener {
 
   private GUI gui;
 
@@ -18,6 +23,12 @@ public class GameFrame extends JFrame implements KeyListener {
   private EventOutputPanel eventOutputPanel;
   private InventoryPanel inventoryPanel;
   private NavigationPanel navigationPanel;
+
+  private JMenuBar menuBar;
+  private JMenu menu;
+  private JMenuItem save;
+  private JMenuItem load;
+  private JMenuItem quit;
 
   /**
    * GameFrame is an exention of JFrame and contains all JPanel components for the
@@ -39,22 +50,41 @@ public class GameFrame extends JFrame implements KeyListener {
     inventoryPanel = new InventoryPanel(this);
     navigationPanel = new NavigationPanel(this);
 
+    // menu
+
+    save = new JMenuItem("Save");
+    load = new JMenuItem("Load");
+    quit = new JMenuItem("Quit");
+
+    save.addActionListener(this);
+    load.addActionListener(this);
+    quit.addActionListener(this);
+
+    menu = new JMenu("Menu");
+    menu.add(save);
+    menu.add(load);
+    menu.add(quit);
+
+    menuBar = new JMenuBar();
+    menuBar.add(menu);
+
     // add components to content pane
     Container c = getContentPane();
 
     // set layout
     setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
+    setJMenuBar(menuBar);
+
     c.add(navigationPanel);
     c.add(graphicsWindow);
     c.add(eventOutputPanel);
     c.add(inventoryPanel);
-    
 
     // add keyListener
     addKeyListener(this);
-    setFocusable(true);
 
+    setFocusable(true);
   }
 
   /**
@@ -106,5 +136,18 @@ public class GameFrame extends JFrame implements KeyListener {
       gui.getMain().movePlayer(moveDirection.down);
     }
 
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == save) {
+      this.gui.getMain().saveGame();
+    } else if (e.getSource() == load) {
+      this.gui.getMain().loadGame();
+    } else if (e.getSource() == quit) {
+      this.gui.getMain().quitGame();
+      ;
+
+    }
   }
 }

@@ -9,14 +9,15 @@ public class Texture {
 
 	private String fileLocation;	// path to image
 
+
+
 	public Texture() {
 		this.fileLocation = fileLocation;
 		// call the onLoad method
 	}
 
+
 	public synchronized BufferedImage onLoad(String path) {
-
-
 			try {
 				BufferedImage img = null;
 				img = ImageIO.read(getClass().getResource(path));
@@ -30,7 +31,6 @@ public class Texture {
 			return null;
 
 	}
-
 
 
 	// set up the different textures

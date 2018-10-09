@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import GUI.GUI.moveDirection;
@@ -18,8 +21,7 @@ import GUI.GUI.moveDirection;
 @SuppressWarnings("serial")
 public class NavigationPanel extends JPanel implements ActionListener {
 
-  private int dimensionHeight = 90;
-  private int dimensionWidth = 650;
+  private int dimensionHeight = 100;
 
   private int buttonWidth = 30;
   private int buttonHeight = 30;
@@ -30,10 +32,6 @@ public class NavigationPanel extends JPanel implements ActionListener {
   private JButton upRight;
   private JButton downLeft;
   private JButton downRight;
-
-  private JButton save;
-  private JButton load;
-  private JButton quit;
 
   private GameFrame frame;
 
@@ -50,16 +48,16 @@ public class NavigationPanel extends JPanel implements ActionListener {
 
     // set dimensions
     Dimension dimension = getPreferredSize();
-    dimension.width = dimensionWidth;
     dimension.height = dimensionHeight;
     setPreferredSize(dimension);
+    setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
 
     // set button dimensions
     Dimension buttonSize = new Dimension();
     buttonSize.setSize(buttonWidth, buttonHeight);
 
     // set border
-    setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
+    setBorder(BorderFactory.createEtchedBorder());
 
     // add elements
     upLeft = new JButton(GUI.resizeImage("arrowImages/arrowUpLeft.png", this.buttonWidth, this.buttonHeight));
@@ -71,9 +69,6 @@ public class NavigationPanel extends JPanel implements ActionListener {
     downRight = new JButton(GUI.resizeImage("arrowImages/arrowDownRight.png", this.buttonWidth, this.buttonHeight));
     downRight.setMargin(new Insets(0, 0, 0, 0));
 
-    save = new JButton("Save");
-    load = new JButton("Load");
-    quit = new JButton("Quit");
     ////////////////////////
     // JButton left = new JButton(new ImageIcon("tempArrow.png"));
     //////////////////////////////////////
@@ -83,10 +78,6 @@ public class NavigationPanel extends JPanel implements ActionListener {
     upRight.addActionListener(this);
     downLeft.addActionListener(this);
     downRight.addActionListener(this);
-
-    save.addActionListener(this);
-    load.addActionListener(this);
-    quit.addActionListener(this);
 
     // set layout
     setLayout(new GridBagLayout());
@@ -124,24 +115,5 @@ public class NavigationPanel extends JPanel implements ActionListener {
     } else if (e.getSource() == downRight) {
       frame.getGui().getMain().movePlayer(moveDirection.down);
     }
-
-    else if (e.getSource() == save) {
-      frame.getGui().getMain().saveGame();
-    } else if (e.getSource() == load) {
-      frame.getGui().getMain().loadGame();
-    } else if (e.getSource() == quit) {
-      frame.getGui().getMain().quitGame();
-    }
-
   }
-
-  // private ImageIcon shrinkImage(String imageAddress) {
-  // ImageIcon imageIcon = new ImageIcon(imageAddress);
-  // Image image = imageIcon.getImage();
-  // Image newImage = image.getScaledInstance(this.buttonWidth, this.buttonHeight,
-  // Image.SCALE_SMOOTH);
-  // imageIcon = new ImageIcon(newImage);
-  // return imageIcon;
-  // }
-
 }

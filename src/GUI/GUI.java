@@ -11,13 +11,13 @@ import main.Main;
 public class GUI {
 
   private String gameName = "Team 25 Game";
-  private int frameWidth = 700;
-  private int frameHeight = 700;
+  private int frameWidth = 750;
+  private int frameHeight = 750;
 
   private Main main;
   private GameFrame frame;
 
-  public enum moveDirection{
+  public enum moveDirection {
     up, down, left, right;
   }
 
@@ -54,7 +54,6 @@ public class GUI {
     frame.setSize(frameWidth, frameHeight);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
-
   }
 
   public Main getMain() {
@@ -64,7 +63,18 @@ public class GUI {
   public GameFrame getFrame() {
     return this.frame;
   }
-  
+
+  /**
+   * Static method to resize images used in the GUI.
+   *
+   * @param imageAddress
+   *          address of image to be resized
+   * @param width
+   *          required width of final image
+   * @param height
+   *          required height of final image
+   * @return
+   */
   public static ImageIcon resizeImage(String imageAddress, int width, int height) {
     ImageIcon imageIcon = new ImageIcon(imageAddress);
     Image image = imageIcon.getImage();
