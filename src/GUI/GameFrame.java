@@ -127,13 +127,13 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
   public void keyReleased(KeyEvent e) {
 
     if (e.getKeyCode() == 37 || e.getKeyCode() == 65) { // left
-      gui.getMain().movePlayer(moveDirection.left);
+      gui.getMain().movePlayer(moveDirection.downLeft);
     } else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // right
-      gui.getMain().movePlayer(moveDirection.right);
+      gui.getMain().movePlayer(moveDirection.upRight);
     } else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) { // up
-      gui.getMain().movePlayer(moveDirection.up);
+      gui.getMain().movePlayer(moveDirection.upLeft);
     } else if (e.getKeyCode() == 40 || e.getKeyCode() == 83) { // down
-      gui.getMain().movePlayer(moveDirection.down);
+      gui.getMain().movePlayer(moveDirection.downRight);
     }
 
   }
