@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -45,6 +46,7 @@ public class NavigationPanel extends JPanel implements ActionListener {
    */
   public NavigationPanel(GameFrame frame) {
     this.frame = frame;
+    this.setBackground(new Color(51, 153, 255));
 
     // set dimensions
     Dimension dimension = getPreferredSize();
@@ -57,7 +59,8 @@ public class NavigationPanel extends JPanel implements ActionListener {
     buttonSize.setSize(buttonWidth, buttonHeight);
 
     // set border
-    setBorder(BorderFactory.createEtchedBorder());
+    //setBorder(BorderFactory.createEtchedBorder());
+      setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
     // add elements
     upLeft = new JButton(GUI.resizeImage("arrowImages/arrowUpLeft.png", this.buttonWidth, this.buttonHeight));
@@ -70,7 +73,10 @@ public class NavigationPanel extends JPanel implements ActionListener {
     downRight.setMargin(new Insets(0, 0, 0, 0));
 
     ////////////////////////
-    // JButton left = new JButton(new ImageIcon("tempArrow.png"));
+    upLeft.setBackground(Color.BLACK);
+    upRight.setBackground(Color.BLACK);
+    downLeft.setBackground(Color.BLACK);
+    downRight.setBackground(Color.BLACK);
     //////////////////////////////////////
     // actionlistners
 
@@ -107,13 +113,13 @@ public class NavigationPanel extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == upLeft) {
-      frame.getGui().getMain().movePlayer(moveDirection.left);
+      frame.getGui().getMain().movePlayer(moveDirection.upLeft);
     } else if (e.getSource() == upRight) {
-      frame.getGui().getMain().movePlayer(moveDirection.right); // TODO
+      frame.getGui().getMain().movePlayer(moveDirection.upRight);
     } else if (e.getSource() == downLeft) {
-      frame.getGui().getMain().movePlayer(moveDirection.up);
+      frame.getGui().getMain().movePlayer(moveDirection.downLeft);
     } else if (e.getSource() == downRight) {
-      frame.getGui().getMain().movePlayer(moveDirection.down);
+      frame.getGui().getMain().movePlayer(moveDirection.downRight);
     }
   }
 }

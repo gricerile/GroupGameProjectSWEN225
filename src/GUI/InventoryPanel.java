@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -51,6 +52,7 @@ public class InventoryPanel extends JPanel {
    */
   public InventoryPanel(GameFrame frame) {
     this.frame = frame;
+    this.setBackground(new Color(51, 153, 255));
 
     // set dimensions
     Dimension dimension = getPreferredSize();
@@ -60,7 +62,8 @@ public class InventoryPanel extends JPanel {
     setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
 
     // set border
-    setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
+    //setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
+    setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
     //////////////////////////// Add Elements///////////////////////////////////
 
