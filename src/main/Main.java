@@ -82,11 +82,11 @@ public class Main {
 			}
 		} else if (direction == moveDirection.downLeft) {
 			if ((xs - 1) >= 0) {
-				return this.segmentsBoard[xs][ys - 1];
+				return this.segmentsBoard[xs - 1][ys];
 			}
 		} else if (direction == moveDirection.downRight) {
 			if ((ys - 1) >= 0) {
-				return this.segmentsBoard[xs - 1][ys];
+				return this.segmentsBoard[xs][ys - 1];
 			}
 		}
 		return null;
