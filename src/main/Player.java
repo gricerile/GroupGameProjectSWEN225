@@ -37,5 +37,4 @@ public class Player {
   public ArrayList<GameItem> getInventory() {
     return this.inventory;
   }
-
 }

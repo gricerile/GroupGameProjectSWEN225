@@ -1,20 +1,26 @@
 package main;
 
 
+import java.awt.Image;
 import java.io.File;
 
 import GUI.GUI;
 import parser.Parser;
 import renderer.Renderer;
+import renderer.Texture;
 import GUI.GUI.moveDirection;
 
 public class Main {
-	private Segment[][] segmentsBoard = new Segment[3][3]; // the size can change but for testing the size is 2 segments
+	private Segment[][] segmentsBoard = new Segment[5][5]; // the size can change but for testing the size is 2 segments
 	private Player player;
 	private GUI g;
 	private Parser p;
-
+	private Texture texture = new Texture();
 	private Renderer renderer;
+	private Image image;
+
+	public int x;
+	public int y;
 
 	public static void main(String[] args) {
 		Main m = new Main();
@@ -24,6 +30,7 @@ public class Main {
 		this.p = new Parser();
 		this.g = new GUI(this);
 		p.loadMap(new File("ParsingTester.xml"));
+		// this.image = texture.onLoad("/tx/grass.png");
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
 		this.renderer = new Renderer(this);
@@ -65,6 +72,14 @@ public class Main {
 		return false;
 	}
 
+	public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
+	}
+
 	public Segment getNextSegment(moveDirection direction) {//this only works for 3 by 3 double array
 		int xs=0;
 		int ys=0;
@@ -77,19 +92,21 @@ public class Main {
 				}
 			}
 		}
-		if(direction==moveDirection.up) {
+		if(direction==moveDirection.downLeft) {
 			if((ys-1)>=0) {
+				this.x += 20;
+				this.y += 20;
 				return this.segmentsBoard[xs][ys-1];
 			}
-		} else if (direction==moveDirection.right) {
+		} else if (direction==moveDirection.upRight) {
 			if((xs+1)<3) {
 				return this.segmentsBoard[xs+1][ys];
 			}
-		} else if (direction==moveDirection.down) {
+		} else if (direction==moveDirection.downLeft) {
 			if((ys+1)<3) {
 				return this.segmentsBoard[xs][ys+1];
 			}
-		} else if (direction==moveDirection.left) {
+		} else if (direction==moveDirection.downLeft) {
 			if((xs-1)>=0) {
 				return this.segmentsBoard[xs-1][ys];
 			}
