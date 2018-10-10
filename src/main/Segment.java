@@ -16,6 +16,7 @@ public class Segment {
 		this.object=object;
 		this.x=x;
 		this.y=y;
+		this.hasPlayer = false;
 	}
 
 	public boolean hasPlayer() {
