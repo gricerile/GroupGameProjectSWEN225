@@ -1,9 +1,15 @@
 package main;
 
+import java.awt.Image;
+
+import renderer.Texture;
+
 public class Segment {
 	//fields
 	private GameObject object;
 	private int x,y;
+	private Image image;
+	private Texture texture = new Texture();
 
 	public Segment(GameObject object, int x,int y) {
 		this.object=object;
@@ -29,6 +35,22 @@ public class Segment {
 		} else {
 			return false;
 		}
+	}
+
+	public String opensChest() {
+		if(this.object instanceof Chest) {
+			Chest c = (Chest) this.object;
+			return c.openAndClose();
+		}
+		return "";
+	}
+
+	public Key takeFromChest() {
+		if(this.object instanceof Chest) {
+			Chest c = (Chest) this.object;
+			return c.takeKey();
+		}
+		return null;
 	}
 }
 
