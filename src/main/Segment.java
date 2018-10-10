@@ -10,11 +10,20 @@ public class Segment {
 	private int x,y;
 	private Image image;
 	private Texture texture = new Texture();
+	private boolean hasPlayer;
 
 	public Segment(GameObject object, int x,int y) {
 		this.object=object;
 		this.x=x;
 		this.y=y;
+	}
+
+	public boolean hasPlayer() {
+		return this.hasPlayer;
+	}
+
+	public void setHasPlayer(boolean b) {
+		 this.hasPlayer = b;
 	}
 
 	public GameObject getObject(){
