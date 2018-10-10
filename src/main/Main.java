@@ -50,6 +50,7 @@ public class Main {
 	public void movePlayer(moveDirection direction) {
 		if (canMove(direction)) {
 			player.move(getNextSegment(direction));
+			//this.renderer.drawMove(direction);
 		}
 		reDraw();
 	}
@@ -91,8 +92,35 @@ public class Main {
 		return null;
 	}
 
-	public void playerAttempUnlock() {
+	public String playerAttempUnlock() {
+		if (getNextSegment(moveDirection.upLeft) != null
+				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("Door Locked")) {
+			return unlock(getNextSegment(moveDirection.upLeft));
+		} else if (getNextSegment(moveDirection.upRight) != null
+				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("Door Locked")) {
+			return unlock(getNextSegment(moveDirection.upRight));
+		} else if (getNextSegment(moveDirection.downLeft) != null
+				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("Door Locked")) {
+			return unlock(getNextSegment(moveDirection.downLeft));
+		} else if (getNextSegment(moveDirection.downRight) != null
+				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("Door Locked")) {
+			return unlock(getNextSegment(moveDirection.downRight));
+		}
+		return "There is no door adjacent to the Player.";
+	}
 
+	public String unlock(Segment s) {
+		Door d = (Door) s.getObject();
+		for (GameItem g : player.getInventory()) {
+			if (g instanceof Key) {
+				Key k = (Key) g;
+				d.unlock(k);
+				if (d.getUnlocked()) {
+					return ("Door (ID: " + d.ID() + ") is unlocked");
+				}
+			}
+		}
+		return "Player does not have the right Key.";
 	}
 
 	public void takeFromChest() {
@@ -111,8 +139,10 @@ public class Main {
 			k = getNextSegment(moveDirection.downRight).takeFromChest();
 		}
 		if (k != null) {
-			this.player.giveKey(k);
-			System.out.println("Player has recieved Key with ID of: "+k.getID());
+			System.out.println(this.player.giveKey(k));
+			System.out.println("Player has recieved Key with ID of: " + k.getID());
+		} else if (k==null) {
+			System.out.println("You have got nothing from the Chest.");
 		}
 	}
 
@@ -129,6 +159,8 @@ public class Main {
 		} else if (getNextSegment(moveDirection.downRight) != null
 				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("Chest")) {
 			System.out.println(getNextSegment(moveDirection.downRight).opensChest());
+		} else {
+			System.out.println("There is no Chest nearby.");
 		}
 	}
 
@@ -174,12 +206,20 @@ public class Main {
 	}
 
 	public void test1() {
-		System.out.println(this.player.getSegment().getX() + " " + this.player.getSegment().getY());
+		System.out.println("Test begining");
+		System.out.println("Player Starts at: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
 		movePlayer(moveDirection.upLeft);
-		System.out.println(this.player.getSegment().getX() + " " + this.player.getSegment().getY());
+		System.out.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
 		openChest();
 		takeFromChest();
-		playerAttempUnlock();
+		takeFromChest();
+		System.out.println(playerAttempUnlock());
+		movePlayer(moveDirection.upRight);
+		System.out.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
+		movePlayer(moveDirection.upRight);
+		System.out.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
+		movePlayer(moveDirection.upLeft);
+		System.out.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
 	}
 
 }
