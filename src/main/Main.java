@@ -23,7 +23,7 @@ public class Main {
 	public Main() {
 		this.p = new Parser();
 		this.g = new GUI(this);
-		p.loadMap(new File("ParsingTester.xml"));
+		p.loadMap(new File(Parser.testMapFileName));
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
 		this.renderer = new Renderer(this);

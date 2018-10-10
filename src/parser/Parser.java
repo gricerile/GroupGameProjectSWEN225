@@ -1,14 +1,19 @@
 package parser;
 
-//import javafx.stage.FileChooser;
-//import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import javax.xml.*;
+import javax.xml.stream.XMLEventFactory;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.*;
 
 public class Parser {
-  public static final String testMapFileName = "src/Victor/GroupProject/ParsingTester.xml";
+  public static final String testMapFileName = "ParsingTester.xml";
 
   public static final String TRUECHECKER = "true";
   public static final String FALSECHECKER = "false";
@@ -22,6 +27,7 @@ public class Parser {
 
   private ArrayList<TestingSegment> listOfSegmentRooms = new ArrayList<>();
 
+  /*
   public void loadMap(File mapFile) {
     listOfSegmentRooms = new ArrayList<>();
     try {
@@ -140,10 +146,112 @@ public class Parser {
         System.out.println(obj);
       }
     }
+  }*/
+
+  public void loadMap(File mapFile) {
+    try {
+      XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+
+      InputStream in = new FileInputStream(mapFile);
+      XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+      TestingSegment room = null;
+      while (eventReader.hasNext()) {
+        XMLEvent event = eventReader.nextEvent();
+
+
+        if (event.isStartElement()) {
+          StartElement startElement = event.asStartElement();
+          //If we have found a room, we start the room parsing.
+          if (startElement.getName().getLocalPart().equals("Room")) {
+            room = new TestingSegment();
+
+          }
+
+            if (event.asStartElement().getName().getLocalPart().equals(NORTHWALLCHECKER)) {
+              event = eventReader.nextEvent();
+
+              if (event.asCharacters().getData().equals(TRUECHECKER)) {
+                room.setHasNorthWall(true);
+                //System.out.println(":)");
+              }
+              else {
+                room.setHasNorthWall(false);
+              }
+              continue;
+            }
+
+            if (event.asStartElement().getName().getLocalPart().equals(SOUTHWALLCHECKER)) {
+              event = eventReader.nextEvent();
+
+              if (event.asCharacters().getData().equals(TRUECHECKER)) {
+                room.setHasSouthWall(true);
+              }
+              else {
+                room.setHasSouthWall(false);
+              }
+              continue;
+            }
+
+            if (event.asStartElement().getName().getLocalPart().equals(EASTWALLCHECKER)) {
+              event = eventReader.nextEvent();
+              if (event.asCharacters().getData().equals(TRUECHECKER)) {
+                room.setHasEastWall(true);
+              }
+              else {
+                room.setHasEastWall(false);
+              }
+              continue;
+            }
+
+            if (event.asStartElement().getName().getLocalPart().equals(WESTWALLCHECKER)) {
+              event = eventReader.nextEvent();
+              if (event.asCharacters().getData().equals(TRUECHECKER)) {
+                room.setHasWestWall(true);
+              }
+              else {
+                room.setHasWestWall(false);
+              }
+              continue;
+            }
+
+            if (event.asStartElement().getName().getLocalPart().equals(CONTAINSOBJECTSCHECKER)) {
+              event = eventReader.nextEvent();
+              if (event.asCharacters().getData().equals(TRUECHECKER)) {
+                room.setHasObjects(true);
+              }
+              else {
+                room.setHasObjects(false);
+              }
+              continue;
+            }
+          }
+        if (event.isEndElement()) {
+          EndElement endElement = event.asEndElement();
+          if (endElement.getName().getLocalPart().equals("Room")) {
+            listOfSegmentRooms.add(room);
+          }
+        }
+        }
+    }
+    catch (IOException e) {
+      System.out.println(e);
+    }
+    catch (XMLStreamException e) {
+      System.out.println(e);
+    }
+    for (TestingSegment s : listOfSegmentRooms) {
+
+      System.out.println("North Wall: " + s.hasNorthWall);
+      System.out.println("South Wall: " + s.hasSouthWall);
+      System.out.println("East Wall: " + s.hasEastWall);
+      System.out.println("West Wall: " + s.hasWestWall);
+      System.out.println();
+    }
   }
 
   public static void main(String[] args) {
     Parser p = new Parser();
+    //p.loadMap(new File(testMapFileName));
     p.loadMap(new File(testMapFileName));
   }
 }
