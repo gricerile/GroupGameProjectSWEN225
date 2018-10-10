@@ -38,4 +38,9 @@ public class Player {
     return this.inventory;
   }
 
+  public String giveKey(Key k) {
+	  this.inventory.add(k);
+	  return "Key is the Inventory.";
+  }
+
 }
