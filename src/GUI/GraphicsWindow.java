@@ -47,7 +47,8 @@ public class GraphicsWindow extends JPanel implements MouseListener {
     // setMinimumSize(new Dimension(100, 100));
 
     // set border
-    setBorder(BorderFactory.createEtchedBorder());
+    //setBorder(BorderFactory.createEtchedBorder());
+    setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
     // popupMenu elements
     pickupItem = new JMenuItem("Pickup Item");
