@@ -25,8 +25,12 @@ public class Chest implements GameObject {
       Key k = this.key;
       this.key = null;
       return k;
-    } else {
+    } else if (this.open==false){
+    	System.out.println("The Chest is not open.");
       return null;
+    } else {
+    	System.out.println("Chest is empty");
+    	return null;
     }
   }
 
