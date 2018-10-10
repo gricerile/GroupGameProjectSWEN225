@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Graphics;
+
 public class FreeSpaceTile implements GameObject {
 
   @Override
@@ -13,5 +15,11 @@ public class FreeSpaceTile implements GameObject {
     // TODO Auto-generated method stub
     return "FreeTile";
   }
+
+@Override
+public void draw(Graphics g, int windowWidth, int windowHeight) {
+	// TODO Auto-generated method stub
+
+}
 
 }

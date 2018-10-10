@@ -28,87 +28,69 @@ public class Renderer{
 
   private Main m;
   private main.Segment[][] board;
+  public enum Item{EMPTY, DOOR, CHEST};
   private int sz = 20;
 
   private int SEG_WIDTH = 20;
   private int SEG_HEIGHT = 20;
 
-  private int xx;
-  private int xy;
-  private int yx;
-  private int yy;
-
   private Image image;
   public int isox;
   public int isoy;
 
-  public int tileHeight;
+//  public Polygon isoTile;
 
- /**
- * constructor that takes in the main class.
- * @param main from the main class that sets up the segment board.
- */
+
   public Renderer(Main main) {
-	  this.m = main;
+      this.m = main;
 	  this.board = m.getSegments();	// initialise the board with the 2D array of segs stored in the main class
 	  //this.board = new Segment[10][10];
+
 	  Texture t = new Texture();
 	  this.image = t.onLoad("/tx/grass.png");
-//	  for(int i = board.length-1; i >= 0 ; --i)
-//		  for(int j = board[0].length-1; j >= 0; j--)
-//			  if(board[i][j] == null)
-//				  board[i][j].setImage(this.image);
-//	  			  System.out.println("the image is added");
-
   }
 
-  public void drawMove(moveDirection direction) {
-	  if(direction == moveDirection.downLeft) {
-		  this.xx += 20;
-		  this.xy += 20;
-	  }
-  }
 
-  public void drawPlayer(Graphics g, int x, int y) {
-	  for(int i = board.length-1; i >= 0 ; --i) {
-		  for(int j = board[0].length-1; j >= 0; j--) {
-			  g.drawOval(x, y, 20, 20);
-		  }
-	  }
-  }
+
 
   public void draw(Graphics g, int windowWidth, int windowHeight) {
+//	  isoTile = new Polygon();
+//	  isoTile.getPoints().addAll(new Double[] {
+//		0.0, 0.0,
+//		20.0, 20.0,
+//		0.0, 20.0,
+//		0.0, 0.0
+//	  });
+	  //toIso();
 
 
-	  // board[0][0].setImage(image);
 
-	  // draw the board
-	  for(int i = board.length-1; i >= 0 ; --i) {
-		  for(int j = board[0].length-1; j >= 0; j--) {
-			  System.out.println(i + "and : " + j );
-			  if(board[i][j] == null) {
-				  System.out.println("its empty");
-			  }
 
-			  // g.drawImage(board[i][j].setImage(this.image), (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
 
-			  // Image floor = board[i][j].getImage();
-			  // g.drawRect(SEG_WIDTH/2*i+SEG_HEIGHT/2*j, SEG_WIDTH/2*i+SEG_HEIGHT/2*j, sz, sz);
-			  // g.drawRect((windowWidth/2) -i*SEG_WIDTH,(windowHeight/2) -  j*SEG_HEIGHT, sz, sz);
-			  g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
-		  }
-	  }
+//	  AffineTransform at = AffineTransform.getShearInstance(0.5, -0.5);
+//	  Graphics2D g3d = (Graphics2D) g;
+//	  g3d.transform(at);
 
 	  for(int i = board.length; i > 0 ; --i) {
 		  for(int j = board[0].length-1; j >= 0; j--) {
-			  // draw walls
-			  if(checkWall()) {
-				  // render a wall tile
-			  }
+
+
+			  //g.drawRect(SEG_WIDTH/2*i+SEG_HEIGHT/2*j, SEG_WIDTH/2*i+SEG_HEIGHT/2*j, sz, sz);
+			  g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
+			  // g.drawRect((windowWidth/2) -i*SEG_WIDTH,(windowHeight/2) -  j*SEG_HEIGHT, sz, sz);
+			  //g.drawImage(img, (windowWidth/2) - ((i-j) *segWidth/2), (windowHeight/2) - ((i + j)*segHeight/2), null);
+
 		  }
 	  }
 
-	  drawPlayer(g,m.getX(),m.getY());
+
+
+      	// there is a wall fill the rectangle to indicate that it is a wall
+//      	if(checkWall()) {
+//      		g.fillRect(10, 10, 10, 10);
+//      	}
+
+
   }
 
 
@@ -126,12 +108,15 @@ public class Renderer{
 	  return false;
   }
 
+
+
+
   // turning regular 2d array into isometric
   // isoX = cartX - cartY;
   // isoY = (cartX + cartY) / 2
 	private int isoX(int x, int y) {
 		// convert x into isometric x
-		int segWidth = image.getWidth(null);
+		  int segWidth = image.getWidth(null);
 
 		int isoX;
 		isoX = (int) ((x * segWidth / 2) - (y * segWidth / 2));
@@ -153,15 +138,7 @@ public class Renderer{
 
 		  }
 	  }
-	}
-
-	public int findXCoord(Image image) {
-		return image.getWidth(null)/2;
-	}
-
-	public int findYCoord(Image image) {
-		return image.getHeight(null)/2;
-	}
+  }
 
   /*each square in a 2d grid is an segment object
    * get each segment and use coords to use in polygons to draw the new isometric square
