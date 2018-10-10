@@ -4,12 +4,10 @@ import main.Key;
 
 public class Door implements GameObject {
   // fields
-  private Key key;
   private int ID; // code name for door and key association, unique for each door and key
   private boolean unlocked;
 
-  public Door(Key k, int s, boolean unlocked) {
-    this.key = k;
+  public Door( int s, boolean unlocked) {
     this.ID = s;
     this.unlocked = unlocked;
   }
@@ -23,7 +21,7 @@ public class Door implements GameObject {
   }
 
   public String unlock(Key k) {
-    if (this.key.equals(k)) {
+    if (k.equals(this.ID)) {
       if (this.unlocked == false) {
         this.unlocked = true;
         return "The door is now unlocked.";
