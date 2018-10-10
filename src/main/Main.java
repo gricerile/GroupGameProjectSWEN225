@@ -1,26 +1,19 @@
 package main;
 
-
-import java.awt.Image;
 import java.io.File;
 
 import GUI.GUI;
 import parser.Parser;
 import renderer.Renderer;
-import renderer.Texture;
 import GUI.GUI.moveDirection;
 
 public class Main {
-	private Segment[][] segmentsBoard = new Segment[5][5]; // the size can change but for testing the size is 2 segments
+	private Segment[][] segmentsBoard = new Segment[3][3]; // the size can change but for testing the size is 2 segments
 	private Player player;
 	private GUI g;
 	private Parser p;
-	private Texture texture = new Texture();
-	private Renderer renderer;
-	private Image image;
 
-	public int x;
-	public int y;
+	private Renderer renderer;
 
 	public static void main(String[] args) {
 		Main m = new Main();
@@ -30,10 +23,12 @@ public class Main {
 		this.p = new Parser();
 		this.g = new GUI(this);
 		p.loadMap(new File("ParsingTester.xml"));
-		// this.image = texture.onLoad("/tx/grass.png");
+		this.segmentsBoard = this.makeTestSegment();
+		this.player = this.makeTestPlayer();
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
-		this.renderer = new Renderer(this);
+		// this.renderer = new Renderer(this);
+		// test1();
 	}
 
 	public Segment[][] getSegments() {
@@ -60,58 +55,81 @@ public class Main {
 	}
 
 	public boolean canMove(moveDirection direction) {
-		if(this.player==null||this.player.getSegment()==null) {
+		if (this.player == null || this.player.getSegment() == null) {
 			return false;
 		}
 		Segment next = getNextSegment(direction);
 		if (next != null) {
-			if (next.getObject().getType().equals("FreeTile")||next.getObject().getType().equals("Door Unlocked")) {
+			if (next.getObject().getType().equals("FreeTile") || next.getObject().getType().equals("Door Unlocked")) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public int getX() {
-		return this.x;
-	}
+	public Segment getNextSegment(moveDirection direction) {// this only works for 3 by 3 double array
+		int xs = this.player.getSegment().getX();
+		int ys = this.player.getSegment().getY();
 
-	public int getY() {
-		return this.y;
-	}
-
-	public Segment getNextSegment(moveDirection direction) {//this only works for 3 by 3 double array
-		int xs=0;
-		int ys=0;
-		for(int x = 0; x < 3; x++) {
-			for(int y = 0; y < 3; y++) {
-				if(this.segmentsBoard[x][y].equals(this.player.getSegment())){
-					xs=x;
-					ys=y;
-					break;
-				}
+		if (direction == moveDirection.upLeft) {
+			if ((ys + 1) < this.segmentsBoard.length) {
+				return this.segmentsBoard[xs][ys + 1];
 			}
-		}
-		if(direction==moveDirection.downLeft) {
-			if((ys-1)>=0) {
-				this.x += 20;
-				this.y += 20;
-				return this.segmentsBoard[xs][ys-1];
+		} else if (direction == moveDirection.upRight) {
+			if ((xs + 1) < this.segmentsBoard.length) {
+				return this.segmentsBoard[xs + 1][ys];
 			}
-		} else if (direction==moveDirection.upRight) {
-			if((xs+1)<3) {
-				return this.segmentsBoard[xs+1][ys];
+		} else if (direction == moveDirection.downLeft) {
+			if ((xs - 1) >= 0) {
+				return this.segmentsBoard[xs][ys - 1];
 			}
-		} else if (direction==moveDirection.downLeft) {
-			if((ys+1)<3) {
-				return this.segmentsBoard[xs][ys+1];
-			}
-		} else if (direction==moveDirection.downLeft) {
-			if((xs-1)>=0) {
-				return this.segmentsBoard[xs-1][ys];
+		} else if (direction == moveDirection.downRight) {
+			if ((ys - 1) >= 0) {
+				return this.segmentsBoard[xs - 1][ys];
 			}
 		}
 		return null;
+	}
+
+	public void playerAttempUnlock() {
+
+	}
+
+	public void takeFromChest() {
+		Key k = null;
+		if (getNextSegment(moveDirection.upLeft) != null
+				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("Chest")) {
+			k = getNextSegment(moveDirection.upLeft).takeFromChest();
+		} else if (getNextSegment(moveDirection.upRight) != null
+				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("Chest")) {
+			k = getNextSegment(moveDirection.upRight).takeFromChest();
+		} else if (getNextSegment(moveDirection.downLeft) != null
+				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("Chest")) {
+			k = getNextSegment(moveDirection.downLeft).takeFromChest();
+		} else if (getNextSegment(moveDirection.downRight) != null
+				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("Chest")) {
+			k = getNextSegment(moveDirection.downRight).takeFromChest();
+		}
+		if (k != null) {
+			this.player.giveKey(k);
+			System.out.println("Player has recieved Key with ID of: "+k.getID());
+		}
+	}
+
+	public void openChest() {
+		if (getNextSegment(moveDirection.upLeft) != null
+				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("Chest")) {
+			System.out.println(getNextSegment(moveDirection.upLeft).opensChest());
+		} else if (getNextSegment(moveDirection.upRight) != null
+				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("Chest")) {
+			System.out.println(getNextSegment(moveDirection.upRight).opensChest());
+		} else if (getNextSegment(moveDirection.downLeft) != null
+				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("Chest")) {
+			System.out.println(getNextSegment(moveDirection.downLeft).opensChest());
+		} else if (getNextSegment(moveDirection.downRight) != null
+				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("Chest")) {
+			System.out.println(getNextSegment(moveDirection.downRight).opensChest());
+		}
 	}
 
 	public void clickedScreen(int x, int y) {
@@ -119,11 +137,13 @@ public class Main {
 	}
 
 	public void saveGame() {
-		//this.p.saveGame(this.segmentsBoard,this.player);
+		// this.p.saveGame(this.segmentsBoard,this.player);
+		test1();
 	}
 
 	public void loadGame() {
-		//this.p.loadMap(FileChooser());//or victor can choose the file himself in the parser
+		// this.p.loadMap(FileChooser());//or victor can choose the file himself in the
+		// parser
 	}
 
 	public void quitGame() {
@@ -132,6 +152,34 @@ public class Main {
 
 	public void reDraw() {
 		this.g.getFrame().getGraphicsWindow().redraw();
+	}
+
+	public Segment[][] makeTestSegment() {
+		Segment[][] segmentsTest = new Segment[3][3];
+		segmentsTest[0][0] = new Segment(new FreeSpaceTile(), 0, 0);
+		segmentsTest[1][0] = new Segment(new Wall(), 1, 0);
+		segmentsTest[2][0] = new Segment(new Wall(), 2, 0);
+		segmentsTest[0][1] = new Segment(new FreeSpaceTile(), 0, 1);
+		segmentsTest[1][1] = new Segment(new Door(101, false), 1, 1);
+		segmentsTest[2][1] = new Segment(new FreeSpaceTile(), 2, 1);
+		segmentsTest[0][2] = new Segment(new Chest(new Key(101, "Key opens door 101", "Key ID 101")), 0, 2);
+		segmentsTest[1][2] = new Segment(new Wall(), 1, 2);
+		segmentsTest[2][2] = new Segment(new FreeSpaceTile(), 2, 2);
+		return segmentsTest;
+	}
+
+	public Player makeTestPlayer() {
+		Player p = new Player(this.segmentsBoard[0][0], 1);
+		return p;
+	}
+
+	public void test1() {
+		System.out.println(this.player.getSegment().getX() + " " + this.player.getSegment().getY());
+		movePlayer(moveDirection.upLeft);
+		System.out.println(this.player.getSegment().getX() + " " + this.player.getSegment().getY());
+		openChest();
+		takeFromChest();
+		playerAttempUnlock();
 	}
 
 }

@@ -14,7 +14,13 @@ public class Door implements GameObject {
     this.unlocked = unlocked;
   }
 
-  public int ID() {
+  public Door(int i, boolean b) {
+	// TODO Auto-generated constructor stub
+	  this.ID = i;
+	  this.unlocked = b;
+}
+
+public int ID() {
     return this.ID;
   }
 

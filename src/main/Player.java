@@ -37,4 +37,10 @@ public class Player {
   public ArrayList<GameItem> getInventory() {
     return this.inventory;
   }
+
+  public String giveKey(Key k) {
+	  this.inventory.add(k);
+	  return "Key is the Inventory.";
+  }
+
 }
