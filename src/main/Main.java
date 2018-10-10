@@ -49,7 +49,9 @@ public class Main {
 
 	public void movePlayer(moveDirection direction) {
 		if (canMove(direction)) {
-			player.move(getNextSegment(direction));
+			this.player.getSegment().setHasPlayer(false);
+			this.player.move(getNextSegment(direction));
+			this.player.getSegment().setHasPlayer(true);
 			//this.renderer.drawMove(direction);
 		}
 		reDraw();
@@ -82,11 +84,11 @@ public class Main {
 			}
 		} else if (direction == moveDirection.downLeft) {
 			if ((xs - 1) >= 0) {
-				return this.segmentsBoard[xs - 1][ys];
+				return this.segmentsBoard[xs-1][ys];
 			}
 		} else if (direction == moveDirection.downRight) {
 			if ((ys - 1) >= 0) {
-				return this.segmentsBoard[xs][ys - 1];
+				return this.segmentsBoard[xs][ys-1];
 			}
 		}
 		return null;
