@@ -50,19 +50,13 @@ public class Renderer{
 
   }
 
-  public void drawWalls(int windowWidth, int windowHeight) {
-
-  }
-
-
-
   public void draw(Graphics g, int windowWidth, int windowHeight) {
 
 	  for(int i = board.length-1; i >= 0 ; --i) {
 		  for(int j = board[0].length-1; j >= 0; j--) {
 			  Texture t = new Texture();
-			  this.image = t.onLoad("grass");
-			  g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j)+64, null);
+			  this.image = t.onLoad("grass64");
+			  g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j)+32, null);
 		  }
 	  }
 
@@ -70,16 +64,21 @@ public class Renderer{
 		  for(int j = board[0].length-1; j >= 0; j--) {
 			Texture t = new Texture();
 			if(board[i][j].getObject().getType().equals("Wall")) {
-				this.image = t.onLoad("wall");
+				this.image = t.onLoad("wall64");
 				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
 			}else if(board[i][j].getObject().getType().equals("Chest")) {
-				this.image = t.onLoad("closedChest");
+				this.image = t.onLoad("closedChest64");
+				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
+			}else if(board[i][j].getObject().getType().equals("Door Locked")){
+				this.image = t.onLoad("door64");
 				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
 			}
-//			else if(board[i][j].getObject().getType().equals("Door Locked")){
-//				this.image = t.onLoad("door");
-//				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
-//			}
+			else if(board[i][j].hasPlayer()) {// else if check for the player
+				this.image = t.onLoad("dirt");
+				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
+			}
+
+			// else just draw a empty tile (dead space)
 		  }
 	  }
   }
@@ -116,7 +115,7 @@ public class Renderer{
 
 	private int isoY(int x, int y) {
 		// convert y into isometric y
-		int segHeight = image.getHeight(null)-64;
+		int segHeight = image.getHeight(null)-32;
 		int isoY;
 		isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
 
