@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Graphics;
+
 import main.Key;
 
 public class Door implements GameObject {
@@ -54,5 +56,11 @@ public int ID() {
     }
     return "Door Locked";
   }
+
+@Override
+public void draw(Graphics g, int windowWidth, int windowHeight) {
+	// TODO Auto-generated method stub
+
+}
 
 }

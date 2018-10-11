@@ -27,7 +27,8 @@ public class Main {
 		this.player = this.makeTestPlayer();
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
-		// this.renderer = new Renderer(this);
+		this.renderer = new Renderer(this);
+		// this.makeTestSegment();
 		// test1();
 	}
 
