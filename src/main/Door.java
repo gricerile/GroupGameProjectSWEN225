@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Graphics;
+
 import main.Key;
 
 public class Door implements GameObject {
@@ -12,7 +14,13 @@ public class Door implements GameObject {
     this.unlocked = unlocked;
   }
 
-  public int ID() {
+  public Door(int i, boolean b) {
+	// TODO Auto-generated constructor stub
+	  this.ID = i;
+	  this.unlocked = b;
+}
+
+public int ID() {
     return this.ID;
   }
 
@@ -46,5 +54,11 @@ public class Door implements GameObject {
     }
     return "Door Locked";
   }
+
+@Override
+public void draw(Graphics g, int windowWidth, int windowHeight) {
+	// TODO Auto-generated method stub
+
+}
 
 }

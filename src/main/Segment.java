@@ -63,4 +63,3 @@ public class Segment {
 		return null;
 	}
 }
-

@@ -23,6 +23,7 @@ import GUI.GUI.moveDirection;
 import GUI.GameFrame;
 import main.Main;
 import main.Segment;
+import main.Wall;
 
 public class Renderer{
 
@@ -43,54 +44,44 @@ public class Renderer{
 
   public Renderer(Main main) {
       this.m = main;
-	  this.board = m.getSegments();	// initialise the board with the 2D array of segs stored in the main class
-	  //this.board = new Segment[10][10];
+	  // this.board = m.getSegments();	// initialise the board with the 2D array of segs stored in the main class
+	  this.board = main.makeTestSegment();
 
-	  Texture t = new Texture();
-	  this.image = t.onLoad("/tx/grass.png");
+
+  }
+
+  public void drawWalls(int windowWidth, int windowHeight) {
+
   }
 
 
 
-
   public void draw(Graphics g, int windowWidth, int windowHeight) {
-//	  isoTile = new Polygon();
-//	  isoTile.getPoints().addAll(new Double[] {
-//		0.0, 0.0,
-//		20.0, 20.0,
-//		0.0, 20.0,
-//		0.0, 0.0
-//	  });
-	  //toIso();
 
-
-
-
-
-//	  AffineTransform at = AffineTransform.getShearInstance(0.5, -0.5);
-//	  Graphics2D g3d = (Graphics2D) g;
-//	  g3d.transform(at);
-
-	  for(int i = board.length; i > 0 ; --i) {
+	  for(int i = board.length-1; i >= 0 ; --i) {
 		  for(int j = board[0].length-1; j >= 0; j--) {
-
-
-			  //g.drawRect(SEG_WIDTH/2*i+SEG_HEIGHT/2*j, SEG_WIDTH/2*i+SEG_HEIGHT/2*j, sz, sz);
-			  g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
-			  // g.drawRect((windowWidth/2) -i*SEG_WIDTH,(windowHeight/2) -  j*SEG_HEIGHT, sz, sz);
-			  //g.drawImage(img, (windowWidth/2) - ((i-j) *segWidth/2), (windowHeight/2) - ((i + j)*segHeight/2), null);
-
+			  Texture t = new Texture();
+			  this.image = t.onLoad("grass");
+			  g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j)+64, null);
 		  }
 	  }
 
-
-
-      	// there is a wall fill the rectangle to indicate that it is a wall
-//      	if(checkWall()) {
-//      		g.fillRect(10, 10, 10, 10);
-//      	}
-
-
+	  for(int i = board.length-1; i >= 0 ; --i) {
+		  for(int j = board[0].length-1; j >= 0; j--) {
+			Texture t = new Texture();
+			if(board[i][j].getObject().getType().equals("Wall")) {
+				this.image = t.onLoad("wall");
+				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
+			}else if(board[i][j].getObject().getType().equals("Chest")) {
+				this.image = t.onLoad("closedChest");
+				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
+			}
+//			else if(board[i][j].getObject().getType().equals("Door Locked")){
+//				this.image = t.onLoad("door");
+//				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
+//			}
+		  }
+	  }
   }
 
 
@@ -125,7 +116,7 @@ public class Renderer{
 
 	private int isoY(int x, int y) {
 		// convert y into isometric y
-		int segHeight = image.getHeight(null)-15;
+		int segHeight = image.getHeight(null)-64;
 		int isoY;
 		isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
 

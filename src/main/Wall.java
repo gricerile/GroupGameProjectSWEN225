@@ -1,7 +1,12 @@
 package main;
 
+import java.awt.Graphics;
+
+import renderer.Texture;
+
 public class Wall implements GameObject {
 
+  private Texture wall = new Texture();
   @Override
   public String getStatus() {
     // TODO Auto-generated method stub
@@ -13,5 +18,11 @@ public class Wall implements GameObject {
     // TODO Auto-generated method stub
     return "Wall";
   }
+
+@Override
+public void draw(Graphics g, int windowWidth, int windowHeight) {
+	// TODO Auto-generated method stub
+	g.drawImage(wall.onLoad("dirt"), windowWidth, windowHeight, null);
+}
 
 }

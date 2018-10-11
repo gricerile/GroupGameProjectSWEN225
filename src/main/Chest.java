@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Graphics;
+
 public class Chest implements GameObject {
   // fields
   private boolean open;
@@ -50,5 +52,11 @@ public class Chest implements GameObject {
     // TODO Auto-generated method stub
     return "Chest";
   }
+
+@Override
+public void draw(Graphics g, int windowWidth, int windowHeight) {
+	// TODO Auto-generated method stub
+
+}
 
 }
