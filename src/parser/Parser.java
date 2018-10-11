@@ -12,8 +12,11 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.*;
 
+import main.*;
+
 public class Parser {
-  public static final String testMapFileName = "ParsingTester.xml";
+  public static final String testMapFileName = "Testing Map.xml";
+  public static final String dungeonMapName = "Dungeon Map.xml";
 
   public static final String TRUECHECKER = "true";
   public static final String FALSECHECKER = "false";
@@ -26,6 +29,7 @@ public class Parser {
   public static final String CONTAINSOBJECTSCHECKER = "hasObjects";
 
   private ArrayList<TestingSegment> listOfSegmentRooms = new ArrayList<>();
+  private Segment[][] segments = new Segment[3][3];
 
   /*
   public void loadMap(File mapFile) {
@@ -148,13 +152,17 @@ public class Parser {
     }
   }*/
 
-  public void loadMap(File mapFile) {
+  public Segment[][] loadMap(File mapFile) {
     try {
       XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
       InputStream in = new FileInputStream(mapFile);
       XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
-      TestingSegment room = null;
+        GameObject gameObjectType = null;
+        int x = 0;
+        int y = 0;
+        boolean hasPlayer = false;
+        int id = 0;
       while (eventReader.hasNext()) {
         XMLEvent event = eventReader.nextEvent();
 
@@ -162,73 +170,60 @@ public class Parser {
         if (event.isStartElement()) {
           StartElement startElement = event.asStartElement();
           //If we have found a room, we start the room parsing.
-          if (startElement.getName().getLocalPart().equals("Room")) {
-            room = new TestingSegment();
-
+          if (startElement.getName().getLocalPart().equals("NewSegment")) {
+              gameObjectType = null;
+              x = 0;
+              y = 0;
+              hasPlayer = false;
+              id = 0;
           }
-
-            if (event.asStartElement().getName().getLocalPart().equals(NORTHWALLCHECKER)) {
+            if (event.asStartElement().getName().getLocalPart().equals("GameObject")) {
               event = eventReader.nextEvent();
 
-              if (event.asCharacters().getData().equals(TRUECHECKER)) {
-                room.setHasNorthWall(true);
-                //System.out.println(":)");
+              if (event.asCharacters().getData().equals("FreeSpaceTile")) {
+                  gameObjectType = new FreeSpaceTile();
               }
-              else {
-                room.setHasNorthWall(false);
+              else if (event.asCharacters().getData().equals("Wall")) {
+                  gameObjectType = new Wall();
+              }
+              else if (event.asCharacters().getData().equals("Door")) {
+                  gameObjectType = new Door(101, false);
+              }
+              else if (event.asCharacters().getData().equals("Chest")) {
+                  gameObjectType = new Chest(new Key(101, "Key opens door 101", "Key ID 101"));
               }
               continue;
             }
 
-            if (event.asStartElement().getName().getLocalPart().equals(SOUTHWALLCHECKER)) {
+            if (event.asStartElement().getName().getLocalPart().equals("CoordinateX")) {
               event = eventReader.nextEvent();
-
-              if (event.asCharacters().getData().equals(TRUECHECKER)) {
-                room.setHasSouthWall(true);
-              }
-              else {
-                room.setHasSouthWall(false);
-              }
+              x = Integer.parseInt(event.asCharacters().getData());
               continue;
             }
 
-            if (event.asStartElement().getName().getLocalPart().equals(EASTWALLCHECKER)) {
+            if (event.asStartElement().getName().getLocalPart().equals("CoordinateY")) {
               event = eventReader.nextEvent();
-              if (event.asCharacters().getData().equals(TRUECHECKER)) {
-                room.setHasEastWall(true);
-              }
-              else {
-                room.setHasEastWall(false);
-              }
+              y = Integer.parseInt(event.asCharacters().getData());
               continue;
             }
 
-            if (event.asStartElement().getName().getLocalPart().equals(WESTWALLCHECKER)) {
+            if (event.asStartElement().getName().getLocalPart().equals("hasPlayer")) {
               event = eventReader.nextEvent();
               if (event.asCharacters().getData().equals(TRUECHECKER)) {
-                room.setHasWestWall(true);
+                hasPlayer = true;
               }
               else {
-                room.setHasWestWall(false);
-              }
-              continue;
-            }
-
-            if (event.asStartElement().getName().getLocalPart().equals(CONTAINSOBJECTSCHECKER)) {
-              event = eventReader.nextEvent();
-              if (event.asCharacters().getData().equals(TRUECHECKER)) {
-                room.setHasObjects(true);
-              }
-              else {
-                room.setHasObjects(false);
+                hasPlayer = false;
               }
               continue;
             }
           }
         if (event.isEndElement()) {
           EndElement endElement = event.asEndElement();
-          if (endElement.getName().getLocalPart().equals("Room")) {
-            listOfSegmentRooms.add(room);
+          if (endElement.getName().getLocalPart().equals("NewSegment")) {
+            Segment segment = new Segment(gameObjectType,x,y);
+            segment.setHasPlayer(hasPlayer);
+            segments[x][y] = segment;
           }
         }
         }
@@ -239,14 +234,7 @@ public class Parser {
     catch (XMLStreamException e) {
       System.out.println(e);
     }
-    for (TestingSegment s : listOfSegmentRooms) {
-
-      System.out.println("North Wall: " + s.hasNorthWall);
-      System.out.println("South Wall: " + s.hasSouthWall);
-      System.out.println("East Wall: " + s.hasEastWall);
-      System.out.println("West Wall: " + s.hasWestWall);
-      System.out.println();
-    }
+    return segments;
   }
 
   public static void main(String[] args) {

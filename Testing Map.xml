@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Segments>
+    <NewSegment>
+    <GameObject>FreeSpaceTile</GameObject>
+    <CoordinateX>0</CoordinateX>
+    <CoordinateY>0</CoordinateY>
+    <hasPlayer>true</hasPlayer>
+    </NewSegment>
+
+    <NewSegment>
+    <GameObject>Wall</GameObject>
+    <CoordinateX>1</CoordinateX>
+    <CoordinateY>0</CoordinateY>
+    <hasPlayer>false</hasPlayer>
+    </NewSegment>
+
+    <NewSegment>
+    <GameObject>Wall</GameObject>
+    <CoordinateX>2</CoordinateX>
+    <CoordinateY>0</CoordinateY>
+    <hasPlayer>false</hasPlayer>
+    </NewSegment>
+
+    <NewSegment>
+    <GameObject>FreeSpaceTile</GameObject>
+    <CoordinateX>0</CoordinateX>
+    <CoordinateY>1</CoordinateY>
+    <hasPlayer>false</hasPlayer>
+    </NewSegment>
+
+    <NewSegment>
+    <GameObject>Door</GameObject>
+    <CoordinateX>1</CoordinateX>
+    <CoordinateY>1</CoordinateY>
+    <hasPlayer>false</hasPlayer>
+    </NewSegment>
+
+    <NewSegment>
+    <GameObject>FreeSpaceTile</GameObject>
+    <CoordinateX>2</CoordinateX>
+    <CoordinateY>1</CoordinateY>
+    <hasPlayer>false</hasPlayer>
+    </NewSegment>
+
+    <NewSegment>
+    <GameObject>Chest</GameObject>
+    <CoordinateX>0</CoordinateX>
+    <CoordinateY>2</CoordinateY>
+    <hasPlayer>false</hasPlayer>
+    </NewSegment>
+
+    <NewSegment>
+    <GameObject>Wall</GameObject>
+    <CoordinateX>1</CoordinateX>
+    <CoordinateY>2</CoordinateY>
+    <hasPlayer>false</hasPlayer>
+    </NewSegment>
+
+    <NewSegment>
+    <GameObject>FreeSpaceTile</GameObject>
+    <CoordinateX>2</CoordinateX>
+    <CoordinateY>2</CoordinateY>
+    <hasPlayer>false</hasPlayer>
+    </NewSegment>
+</Segments>

@@ -22,7 +22,7 @@ public class Main {
 	public Main() {
 		this.p = new Parser();
 		this.g = new GUI(this);
-		p.loadMap(new File("ParsingTester.xml"));
+		p.loadMap(new File(Parser.testMapFileName));
 		this.segmentsBoard = this.makeTestSegment();
 		this.player = this.makeTestPlayer();
 		// this.segmentsBpoard=p.getSegments(); will be created
@@ -200,7 +200,8 @@ public class Main {
 		segmentsTest[0][2] = new Segment(new Chest(new Key(101, "Key opens door 101", "Key ID 101")), 0, 2);
 		segmentsTest[1][2] = new Segment(new Wall(), 1, 2);
 		segmentsTest[2][2] = new Segment(new FreeSpaceTile(), 2, 2);
-		return segmentsTest;
+		//return segmentsTest;
+		return p.loadMap(new File(Parser.testMapFileName));
 	}
 
 	public Player makeTestPlayer() {
