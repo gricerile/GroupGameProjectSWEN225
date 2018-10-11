@@ -9,13 +9,6 @@ import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
-import javafx.scene.shape.*;
-
-//import javafx.application.Application;
-//import javafx.scene.Group;
-//import javafx.scene.Scene;
-//import javafx.scene.shape.Polygon;
-//import javafx.stage.Stage;
 import javax.swing.ImageIcon;
 
 import GUI.GUI;
@@ -29,58 +22,69 @@ public class Renderer{
 
   private Main m;
   private main.Segment[][] board;
-  public enum Item{EMPTY, DOOR, CHEST};
-  private int sz = 20;
-
-  private int SEG_WIDTH = 20;
-  private int SEG_HEIGHT = 20;
-
   private Image image;
   public int isox;
   public int isoy;
 
-//  public Polygon isoTile;
-
-
+  /**
+   * Renderer constructor that takes in the main.
+   * @param main from the main class that sets the board up.
+   */
   public Renderer(Main main) {
-      this.m = main;
-	  // this.board = m.getSegments();	// initialise the board with the 2D array of segs stored in the main class
-	  this.board = main.makeTestSegment();
+    this.m = main;
+    // this.board = m.getSegments();
+    // initialise the board with the 2D array of segs stored in the main class
+    this.board = main.makeTestSegment();
 
 
   }
 
+  /**
+   * Draw method that should draw the map and the player based on the segment type
+   * that is stored in the 2d array setup from the main.
+   * @param g graphics.
+   * @param windowWidth graphics frame width.
+   * @param windowHeight graphics frame height.
+   */
   public void draw(Graphics g, int windowWidth, int windowHeight) {
 
-	  for(int i = board.length-1; i >= 0 ; --i) {
-		  for(int j = board[0].length-1; j >= 0; j--) {
-			  Texture t = new Texture();
-			  this.image = t.onLoad("grass64");
-			  g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j)+32, null);
-		  }
-	  }
+    for (int i = board.length - 1; i >= 0; --i) {
+      for (int j = board[0].length - 1; j >= 0; j--) {
+        Texture t = new Texture();
+        this.image = t.onLoad("grass64");
+        g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+            (windowHeight / 2) - isoY(i, j) + 32, null);
+      }
+    }
 
-	  for(int i = board.length-1; i >= 0 ; --i) {
-		  for(int j = board[0].length-1; j >= 0; j--) {
-			Texture t = new Texture();
-			if(board[i][j].getObject().getType().equals("Wall")) {
-				this.image = t.onLoad("wall64");
-				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
-			}else if(board[i][j].getObject().getType().equals("Chest")) {
-				this.image = t.onLoad("closedChest64");
-				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
-			}else if(board[i][j].getObject().getType().equals("Door Locked")){
-				this.image = t.onLoad("door64");
-				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
-			}
-			else if(board[i][j].hasPlayer()) {// else if check for the player
-				this.image = t.onLoad("dirt");
-				g.drawImage(image, (windowWidth/2) - isoX(i, j),  (windowHeight/2) - isoY(i, j), null);
-			}
+    for (int i = board.length - 1; i >= 0; --i) {
+      for (int j = board[0].length - 1; j >= 0; j--) {
+        Texture t = new Texture();
+        if (board[i][j].getObject().getType().equals("Wall")) {
+          this.image = t.onLoad("wall64");
+          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+              (windowHeight / 2) - isoY(i, j), null);
 
-			// else just draw a empty tile (dead space)
-		  }
-	  }
+        } else if (board[i][j].getObject().getType().equals("Chest")) {
+          this.image = t.onLoad("closedChest64");
+          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+              (windowHeight / 2) - isoY(i, j), null);
+
+        } else if (board[i][j].getObject().getType().equals("Door Locked")) {
+          this.image = t.onLoad("door64");
+          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+              (windowHeight / 2) - isoY(i, j), null);
+
+        } else if (board[i][j].hasPlayer()) { // else if check for the player
+          this.image = t.onLoad("player64");
+          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+              (windowHeight / 2) - isoY(i, j), null);
+
+        }
+
+        // else just draw a empty tile (dead space)
+      }
+    }
   }
 
 
@@ -98,36 +102,26 @@ public class Renderer{
 	  return false;
   }
 
+  /**
+   * Method to convert cartisian to isometric, helps render out the images in a diamond shape.
+	 * turning regular 2d array into isometric.
+	 * @param x coord from loop.
+	 * @param y coord from loop.
+	 * @return new isometric coord.
+	 */
+  private int isoX(int x, int y) {
+    int segWidth = image.getWidth(null);
+    int isoX;
+    isoX = (int) ((x * segWidth / 2) - (y * segWidth / 2));
+    return isoX;
+  }
 
-
-
-  // turning regular 2d array into isometric
-  // isoX = cartX - cartY;
-  // isoY = (cartX + cartY) / 2
-	private int isoX(int x, int y) {
-		// convert x into isometric x
-		  int segWidth = image.getWidth(null);
-
-		int isoX;
-		isoX = (int) ((x * segWidth / 2) - (y * segWidth / 2));
-		return isoX;
-	}
-
-	private int isoY(int x, int y) {
-		// convert y into isometric y
-		int segHeight = image.getHeight(null)-32;
-		int isoY;
-		isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
-
-		return isoY;
-	}
-
-	public void convert(Segment[][] board) {
-	  for(int i = 0; i < board.length; i++) {
-		  for(int j = 0; j < board[i].length; j++) {
-
-		  }
-	  }
+  private int isoY(int x, int y) {
+    // convert y into isometric y
+    int segHeight = image.getHeight(null)-32;
+    int isoY;
+    isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
+    return isoY;
   }
 
   /*each square in a 2d grid is an segment object
