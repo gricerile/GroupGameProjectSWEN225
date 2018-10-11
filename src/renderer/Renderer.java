@@ -76,9 +76,10 @@ public class Renderer{
               (windowHeight / 2) - isoY(i, j), null);
 
         } else if (board[i][j].hasPlayer()) { // else if check for the player
-          this.image = t.onLoad("dirt");
+          this.image = t.onLoad("player64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j), null);
+
         }
 
         // else just draw a empty tile (dead space)
@@ -101,36 +102,26 @@ public class Renderer{
 	  return false;
   }
 
+  /**
+   * Method to convert cartisian to isometric, helps render out the images in a diamond shape.
+	 * turning regular 2d array into isometric.
+	 * @param x coord from loop.
+	 * @param y coord from loop.
+	 * @return new isometric coord.
+	 */
+  private int isoX(int x, int y) {
+    int segWidth = image.getWidth(null);
+    int isoX;
+    isoX = (int) ((x * segWidth / 2) - (y * segWidth / 2));
+    return isoX;
+  }
 
-
-
-  // turning regular 2d array into isometric
-  // isoX = cartX - cartY;
-  // isoY = (cartX + cartY) / 2
-	private int isoX(int x, int y) {
-		// convert x into isometric x
-		  int segWidth = image.getWidth(null);
-
-		int isoX;
-		isoX = (int) ((x * segWidth / 2) - (y * segWidth / 2));
-		return isoX;
-	}
-
-	private int isoY(int x, int y) {
-		// convert y into isometric y
-		int segHeight = image.getHeight(null)-32;
-		int isoY;
-		isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
-
-		return isoY;
-	}
-
-	public void convert(Segment[][] board) {
-	  for(int i = 0; i < board.length; i++) {
-		  for(int j = 0; j < board[i].length; j++) {
-
-		  }
-	  }
+  private int isoY(int x, int y) {
+    // convert y into isometric y
+    int segHeight = image.getHeight(null)-32;
+    int isoY;
+    isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
+    return isoY;
   }
 
   /*each square in a 2d grid is an segment object
