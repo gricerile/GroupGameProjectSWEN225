@@ -222,6 +222,7 @@ public class Parser {
           EndElement endElement = event.asEndElement();
           if (endElement.getName().getLocalPart().equals("NewSegment")) {
             Segment segment = new Segment(gameObjectType,x,y);
+            segment.setHasPlayer(hasPlayer);
             segments[x][y] = segment;
           }
         }
