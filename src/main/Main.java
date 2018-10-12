@@ -51,9 +51,17 @@ public class Main {
 	public void movePlayer(moveDirection direction) {
 		if (canMove(direction)) {
 			this.player.getSegment().setHasPlayer(false);
+			for(int i=0;i<this.segmentsBoard.length;i++) {
+        for(int j=0;j<this.segmentsBoard.length;j++) {
+           if(this.player.getSegment().equals(this.segmentsBoard[i][j])) {
+              this.segmentsBoard[i][j].setHasPlayer(false);
+            }
+        }
+      }
 			this.player.move(getNextSegment(direction));
 			this.player.getSegment().setHasPlayer(true);
 			//this.renderer.drawMove(direction);
+			
 		}
 		reDraw();
 	}
