@@ -19,7 +19,6 @@ public class Parser {
   public static final String TRUECHECKER = "true";
   public static final String FALSECHECKER = "false";
 
-  private ArrayList<TestingSegment> listOfSegmentRooms = new ArrayList<>();
   private Segment[][] segments = new Segment[3][3];
 
   /**
@@ -67,7 +66,7 @@ public class Parser {
             gameObjectType = new Wall();
           }
           //Doors also require additional information to be parsed.
-          else if (event.asCharacters().getData().equals("Door")) {
+          else if (event.asCharacters().getData().equals("Door Locked")) {
             door = parseDoor(eventReader);
             gameObjectType = door;
           }
@@ -218,6 +217,13 @@ public class Parser {
     return null;
   }
 
+  public void addTabs(XMLEventWriter eventWriter, int num) throws XMLStreamException{
+    XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+    for (int i = 0; i < num; i++) {
+      eventWriter.add(eventFactory.createDTD("\t"));
+    }
+  }
+
   /**
    * Method to used to parse the segments into a
    * two dimensional array of Segments.
@@ -253,7 +259,22 @@ public class Parser {
         eventWriter.add(newSegmentStartElement);
         eventWriter.add(end);
         if (segments[i][j].getObject().getType().equals("Door Locked")) {
+          createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
 
+          addTabs(eventWriter, 2);
+          eventWriter.add(eventFactory.createStartElement("","","newDoor"));
+          eventWriter.add(end);
+          addTabs(eventWriter, 1);
+          createNode(eventWriter, "ID", "" + ((Door) segments[i][j].getObject()).ID());
+          addTabs(eventWriter, 1);
+          createNode(eventWriter, "Unlocked", "" + ((Door) segments[i][j].getObject()).getUnlocked());
+          addTabs(eventWriter, 2);
+          eventWriter.add(eventFactory.createEndElement("","","newDoor"));
+          eventWriter.add(end);
+
+          createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+          createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+          createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
         }
         else if (segments[i][j].getObject().getType().equals("Door Unlocked")) {
 
@@ -285,6 +306,20 @@ public class Parser {
     eventWriter.close();
   }
 
+  /**
+   * Helper method to help write lines of information to the eventWriter.
+   *
+   * @param eventWriter
+   *          The XMLEventWriter we write to.
+   *
+   * @param name
+   *          The tag name of the line.
+   *
+   * @param content
+   *          The information to store in the line.
+   *
+   * @return
+   */
   private void createNode(XMLEventWriter eventWriter, String name, String content)
           throws XMLStreamException{
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();

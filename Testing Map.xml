@@ -29,7 +29,7 @@
     </NewSegment>
 
     <NewSegment>
-        <GameObject>Door</GameObject>
+        <GameObject>Door Locked</GameObject>
         <newDoor>
             <ID>101</ID>
             <Unlocked>false</Unlocked>

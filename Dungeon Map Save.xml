@@ -25,6 +25,14 @@
 	</NewSegment>
 
 	<NewSegment>
+		<GameObject>Door Locked</GameObject>
+		<newDoor>
+			<ID>101</ID>
+			<Unlocked>false</Unlocked>
+		</newDoor>
+		<CoordinateX>1</CoordinateX>
+		<CoordinateY>1</CoordinateY>
+		<hasPlayer>false</hasPlayer>
 	</NewSegment>
 
 	<NewSegment>
