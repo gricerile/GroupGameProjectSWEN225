@@ -53,10 +53,10 @@
             <Description>Key opens door 101</Description>
             <Name>Key ID 101</Name>
         </Key>
+        <chestClosed>true</chestClosed>
         <CoordinateX>0</CoordinateX>
         <CoordinateY>2</CoordinateY>
         <hasPlayer>false</hasPlayer>
-
     </NewSegment>
 
     <NewSegment>

@@ -13,6 +13,16 @@ public class Key extends GameItem {
     return this.ID;
   }
 
+  public String getDescription() {
+    return super.getDescription();
+  }
+
+  public String getName() {
+    return super.getName();
+  }
+
+
+
   public boolean equals(int doorID) {
     if (this.ID == doorID) {
       return true;

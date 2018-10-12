@@ -12,6 +12,10 @@ public class Chest implements GameObject {
     this.open = false;
   }
 
+  public Key getKey() {
+    return this.key;
+  }
+
   public String openAndClose() {
     if (this.open == true) {
       this.open = false;

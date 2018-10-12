@@ -261,6 +261,7 @@ public class Parser {
         if (segments[i][j].getObject().getType().equals("Door Locked")) {
           createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
 
+          //Write the extra information required of a door.
           addTabs(eventWriter, 2);
           eventWriter.add(eventFactory.createStartElement("","","newDoor"));
           eventWriter.add(end);
@@ -286,7 +287,28 @@ public class Parser {
 
         }
         else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
+          createNode(eventWriter, "GameObject", "Chest");
 
+          //Write the extra information required of a closed chest.
+          addTabs(eventWriter, 2);
+          eventWriter.add(eventFactory.createStartElement("","","Key"));
+          eventWriter.add(end);
+          addTabs(eventWriter, 1);
+          createNode(eventWriter, "ID", "" + ((Chest) segments[i][j].getObject()).getKey().getID());
+          addTabs(eventWriter, 1);
+          createNode(eventWriter, "Description",
+                  "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
+          addTabs(eventWriter, 1);
+          createNode(eventWriter, "Name",
+                  "" + ((Chest) segments[i][j].getObject()).getKey().getName());
+          addTabs(eventWriter, 2);
+          eventWriter.add(eventFactory.createEndElement("","","Key"));
+          eventWriter.add(end);
+          createNode(eventWriter, "chestClosed", "true");
+
+          createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+          createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+          createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
         }
         else {
           createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
