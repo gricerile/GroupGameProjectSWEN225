@@ -154,7 +154,7 @@ public class Main {
 			k = getNextSegment(moveDirection.downRight).takeFromChest();
 		}
 		if (k != null) {
-			System.out.println(this.player.giveKey(k));
+			System.out.println(this.player.giveKey(k,this));
 			System.out.println("Player has recieved Key with ID of: " + k.getID());
 		} else if (k==null) {
 			System.out.println("You have got nothing from the Chest.");
