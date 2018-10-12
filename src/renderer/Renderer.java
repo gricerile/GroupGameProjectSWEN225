@@ -65,8 +65,13 @@ public class Renderer{
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j), null);
 
-        } else if (board[i][j].getObject().getType().equals("Chest")) {
+        } else if (board[i][j].getObject().getType().equals("YellowChest")) {
           this.image = t.onLoad("closedChest64");
+          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+              (windowHeight / 2) - isoY(i, j), null);
+
+        } else if (board[i][j].getObject().getType().equals("RedChest")) {
+          this.image = t.onLoad("openedChest64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j), null);
 
