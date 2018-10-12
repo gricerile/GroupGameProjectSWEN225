@@ -127,6 +127,7 @@ public class Main {
 				Key k = (Key) g;
 				d.unlock(k);
 				if (d.getUnlocked()) {
+					reDraw();
 					return ("Door (ID: " + d.ID() + ") is unlocked");
 				}
 			}
@@ -155,6 +156,7 @@ public class Main {
 		} else if (k==null) {
 			System.out.println("You have got nothing from the Chest.");
 		}
+		reDraw();
 	}
 
 	public void openChest() {
@@ -173,6 +175,7 @@ public class Main {
 		} else {
 			System.out.println("There is no Chest nearby.");
 		}
+		reDraw();
 	}
 
 	public void clickedScreen(int x, int y) {

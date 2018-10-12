@@ -220,6 +220,18 @@ public class Parser {
     return null;
   }
 
+  /**
+   * Method to used to parse the segments into a
+   * two dimensional array of Segments.
+   *
+   * @param segments
+   *          The source array storing the segment information.
+   *
+   */
+  public void saveMap(Segment[][] segments) {
+
+  }
+
   public static void main(String[] args) {
     Parser p = new Parser();
     //p.loadMap(new File(testMapFileName));
