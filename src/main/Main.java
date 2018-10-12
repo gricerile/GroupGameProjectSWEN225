@@ -61,7 +61,7 @@ public class Main {
 			this.player.move(getNextSegment(direction));
 			this.player.getSegment().setHasPlayer(true);
 			//this.renderer.drawMove(direction);
-			
+
 		}
 		reDraw();
 	}
@@ -137,16 +137,16 @@ public class Main {
 	public void takeFromChest() {
 		Key k = null;
 		if (getNextSegment(moveDirection.upLeft) != null
-				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("Chest")) {
+				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("RedChest")) {
 			k = getNextSegment(moveDirection.upLeft).takeFromChest();
 		} else if (getNextSegment(moveDirection.upRight) != null
-				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("Chest")) {
+				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("RedChest")) {
 			k = getNextSegment(moveDirection.upRight).takeFromChest();
 		} else if (getNextSegment(moveDirection.downLeft) != null
-				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("Chest")) {
+				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("RedChest")) {
 			k = getNextSegment(moveDirection.downLeft).takeFromChest();
 		} else if (getNextSegment(moveDirection.downRight) != null
-				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("Chest")) {
+				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("RedChest")) {
 			k = getNextSegment(moveDirection.downRight).takeFromChest();
 		}
 		if (k != null) {
@@ -159,16 +159,16 @@ public class Main {
 
 	public void openChest() {
 		if (getNextSegment(moveDirection.upLeft) != null
-				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("Chest")) {
+				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("YellowChest")) {
 			System.out.println(getNextSegment(moveDirection.upLeft).opensChest());
 		} else if (getNextSegment(moveDirection.upRight) != null
-				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("Chest")) {
+				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("YellowChest")) {
 			System.out.println(getNextSegment(moveDirection.upRight).opensChest());
 		} else if (getNextSegment(moveDirection.downLeft) != null
-				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("Chest")) {
+				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("YellowChest")) {
 			System.out.println(getNextSegment(moveDirection.downLeft).opensChest());
 		} else if (getNextSegment(moveDirection.downRight) != null
-				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("Chest")) {
+				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("YellowChest")) {
 			System.out.println(getNextSegment(moveDirection.downRight).opensChest());
 		} else {
 			System.out.println("There is no Chest nearby.");
@@ -222,8 +222,10 @@ public class Main {
 		System.out.println("Player Starts at: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
 		movePlayer(moveDirection.upLeft);
 		System.out.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
+    System.out.println(this.segmentsBoard[0][2].getObject().getType());
 		openChest();
-		takeFromChest();
+		//takeFromChest();
+		System.out.println(this.segmentsBoard[0][2].getObject().getType());
 		takeFromChest();
 		System.out.println(playerAttempUnlock());
 		movePlayer(moveDirection.upRight);
