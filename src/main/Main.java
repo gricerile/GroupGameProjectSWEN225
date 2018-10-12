@@ -1,11 +1,14 @@
 package main;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import GUI.GUI;
 import parser.Parser;
 import renderer.Renderer;
 import GUI.GUI.moveDirection;
+
+import javax.xml.stream.XMLStreamException;
 
 public class Main {
 	private Segment[][] segmentsBoard = new Segment[3][3]; // the size can change but for testing the size is 2 segments
@@ -183,13 +186,17 @@ public class Main {
 	}
 
 	public void saveGame() {
-		// this.p.saveGame(this.segmentsBoard,this.player);
-		test1();
+		try {
+			p.saveMap(segmentsBoard);
+		}
+		catch (FileNotFoundException e) {}
+		catch (XMLStreamException e) {}
+
 	}
 
 	public void loadGame() {
-		// this.p.loadMap(FileChooser());//or victor can choose the file himself in the
-		// parser
+		this.p.loadMap(new File(Parser.dungeonSaveName));
+		reDraw();
 	}
 
 	public void quitGame() {

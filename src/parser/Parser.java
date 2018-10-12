@@ -6,10 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.xml.*;
-import javax.xml.stream.XMLEventFactory;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.*;
 import javax.xml.stream.events.*;
 
 import main.*;
@@ -17,6 +14,7 @@ import main.*;
 public class Parser {
   public static final String testMapFileName = "Testing Map.xml";
   public static final String dungeonMapName = "Dungeon Map.xml";
+  public static final String dungeonSaveName = "Dungeon Map Save.xml";
 
   public static final String TRUECHECKER = "true";
   public static final String FALSECHECKER = "false";
@@ -62,7 +60,7 @@ public class Parser {
         if (event.asStartElement().getName().getLocalPart().equals("GameObject")) {
           event = eventReader.nextEvent();
           //Parse the appropriate GameObject based on the present tile
-          if (event.asCharacters().getData().equals("FreeSpaceTile")) {
+          if (event.asCharacters().getData().equals("FreeTile")) {
             gameObjectType = new FreeSpaceTile();
           }
           else if (event.asCharacters().getData().equals("Wall")) {
@@ -228,8 +226,82 @@ public class Parser {
    *          The source array storing the segment information.
    *
    */
-  public void saveMap(Segment[][] segments) {
+  public void saveMap(Segment[][] segments) throws FileNotFoundException, XMLStreamException{
+    XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+    XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(dungeonSaveName));
+    XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+    XMLEvent end = eventFactory.createDTD("\n");
+    XMLEvent tab = eventFactory.createDTD("\t");
 
+    StartDocument startDocument = eventFactory.createStartDocument();
+    eventWriter.add(startDocument);
+    eventWriter.add(end);
+
+    //Create the opening Segments tag
+    StartElement segmentsStartElement = eventFactory.createStartElement("","","Segments");
+    eventWriter.add(segmentsStartElement);
+    eventWriter.add(end);
+
+    StartElement newSegmentStartElement = eventFactory.createStartElement("","","NewSegment");
+
+
+
+    //Start writing segments.
+    for (int i = 0; i < segments.length; i++) {
+      for (int j = 0; j < segments[i].length; j++) {
+        eventWriter.add(tab);
+        eventWriter.add(newSegmentStartElement);
+        eventWriter.add(end);
+        if (segments[i][j].getObject().getType().equals("Door Locked")) {
+
+        }
+        else if (segments[i][j].getObject().getType().equals("Door Unlocked")) {
+
+        }
+        else if (segments[i][j].getObject().getStatus().equals("The chest is open and there is something inside.")) {
+
+        }
+        else if (segments[i][j].getObject().getStatus().equals("The chest is open and it is empty.")) {
+
+        }
+        else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
+
+        }
+        else {
+          createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
+          createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+          createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+          createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
+        }
+
+        eventWriter.add(tab);
+        eventWriter.add(eventFactory.createEndElement("","","NewSegment"));
+        eventWriter.add(end);
+        eventWriter.add(end);
+      }
+    }
+    eventWriter.add(eventFactory.createEndElement("","","Segments"));
+    eventWriter.add(eventFactory.createEndDocument());
+    eventWriter.close();
+  }
+
+  private void createNode(XMLEventWriter eventWriter, String name, String content)
+          throws XMLStreamException{
+    XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+    XMLEvent end = eventFactory.createDTD("\n");
+    XMLEvent tab = eventFactory.createDTD("\t");
+
+    StartElement startElement = eventFactory.createStartElement("","",name);
+    eventWriter.add(tab);
+    eventWriter.add(tab);
+    eventWriter.add(startElement);
+
+    Characters characters = eventFactory.createCharacters(content);
+    eventWriter.add(characters);
+
+    EndElement endElement = eventFactory.createEndElement("","",name);
+    eventWriter.add(endElement);
+    eventWriter.add(end);
   }
 
   public static void main(String[] args) {
