@@ -113,13 +113,13 @@ public class NavigationPanel extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == upLeft) {
-      frame.getGui().getMain().movePlayer(moveDirection.upLeft);
-    } else if (e.getSource() == upRight) {
       frame.getGui().getMain().movePlayer(moveDirection.upRight);
+    } else if (e.getSource() == upRight) {
+      frame.getGui().getMain().movePlayer(moveDirection.upLeft);
     } else if (e.getSource() == downLeft) {
-      frame.getGui().getMain().movePlayer(moveDirection.downLeft);
-    } else if (e.getSource() == downRight) {
       frame.getGui().getMain().movePlayer(moveDirection.downRight);
+    } else if (e.getSource() == downRight) {
+      frame.getGui().getMain().movePlayer(moveDirection.downLeft);
     }
   }
 }
