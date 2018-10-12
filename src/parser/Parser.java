@@ -162,7 +162,8 @@ public class Parser {
         int x = 0;
         int y = 0;
         boolean hasPlayer = false;
-        int id = 0;
+        Key key = null;
+        Door door = null;
       while (eventReader.hasNext()) {
         XMLEvent event = eventReader.nextEvent();
 
@@ -175,7 +176,8 @@ public class Parser {
               x = 0;
               y = 0;
               hasPlayer = false;
-              id = 0;
+              key = null;
+              door = null;
           }
             if (event.asStartElement().getName().getLocalPart().equals("GameObject")) {
               event = eventReader.nextEvent();
@@ -187,10 +189,13 @@ public class Parser {
                   gameObjectType = new Wall();
               }
               else if (event.asCharacters().getData().equals("Door")) {
-                  gameObjectType = new Door(101, false);
+                door = parseDoor(eventReader);
+                gameObjectType = door;
+                //gameObjectType = new Door(101, false);
               }
               else if (event.asCharacters().getData().equals("Chest")) {
-                  gameObjectType = new Chest(new Key(101, "Key opens door 101", "Key ID 101"));
+                key = parseKey(eventReader);
+                gameObjectType = new Chest(key);
               }
               continue;
             }
@@ -235,6 +240,89 @@ public class Parser {
       System.out.println(e);
     }
     return segments;
+  }
+
+  public Key parseKey(XMLEventReader eventReader) {
+    int id = 0;
+    String description = "";
+    String name = "";
+    try {
+      while (eventReader.hasNext()) {
+        XMLEvent event = eventReader.nextEvent();
+        if (event.isStartElement()) {
+          StartElement startElement = event.asStartElement();
+
+          if (startElement.getName().getLocalPart().equals("ID")) {
+            event = eventReader.nextEvent();
+            id = Integer.parseInt(event.asCharacters().getData());
+            continue;
+          }
+
+          if (startElement.getName().getLocalPart().equals("Description")) {
+            event = eventReader.nextEvent();
+            description = event.asCharacters().getData();
+            continue;
+          }
+
+          if (startElement.getName().getLocalPart().equals("Name")) {
+            event = eventReader.nextEvent();
+            name = event.asCharacters().getData();
+            continue;
+          }
+        }
+        if (event.isEndElement()) {
+          EndElement endElement = event.asEndElement();
+          if (endElement.getName().getLocalPart().equals("Key")) {
+            Key key = new Key(id,description,name);
+            return key;
+          }
+        }
+      }
+    }
+    catch (XMLStreamException e) {
+
+    }
+    return null;
+  }
+
+  public Door parseDoor(XMLEventReader eventReader) {
+    int id = 0;
+    boolean unlocked  = false;
+    try {
+      while (eventReader.hasNext()) {
+        XMLEvent event = eventReader.nextEvent();
+        if (event.isStartElement()) {
+          StartElement startElement = event.asStartElement();
+
+          if (startElement.getName().getLocalPart().equals("ID")) {
+            event = eventReader.nextEvent();
+            id = Integer.parseInt(event.asCharacters().getData());
+            continue;
+          }
+
+          if (startElement.getName().getLocalPart().equals("Unlocked")) {
+            event = eventReader.nextEvent();
+            if (event.asCharacters().getData().equals(TRUECHECKER)) {
+              unlocked = true;
+            }
+            else {
+              unlocked = false;
+            }
+            continue;
+          }
+        }
+        if (event.isEndElement()) {
+          EndElement endElement = event.asEndElement();
+          if (endElement.getName().getLocalPart().equals("newDoor")) {
+            return new Door(id,unlocked);
+          }
+        }
+      }
+    }
+    catch (XMLStreamException e) {
+
+    }
+    return null;
   }
 
   public static void main(String[] args) {
