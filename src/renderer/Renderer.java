@@ -42,6 +42,9 @@ public class Renderer{
   /**
    * Draw method that should draw the map and the player based on the segment type
    * that is stored in the 2d array setup from the main.
+   * first layer is rendered as grass, that is where the player walks,
+   * second layer is all the obstacles / objects in the game, such as walls, doors, chests etc.
+   *
    * @param g graphics.
    * @param windowWidth graphics frame width.
    * @param windowHeight graphics frame height.
@@ -52,13 +55,13 @@ public class Renderer{
       for (int j = board[0].length - 1; j >= 0; j--) {
         Texture t = new Texture();
         if(board[i][j].getObject().getType().equals("WinTile")) {
-          this.image = t.onLoad("player64");
+          this.image = t.onLoad("winTile64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-              (windowHeight / 2) - isoY(i, j) + image.getWidth(null)/2, null);
+              (windowHeight / 2) - isoY(i, j) + image.getWidth(null) / 2, null);
         } else {
           this.image = t.onLoad("grass64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-            (windowHeight / 2) - isoY(i, j) + image.getWidth(null)/2, null);
+              (windowHeight / 2) - isoY(i, j) + image.getWidth(null) / 2, null);
         }
       }
     }
@@ -130,7 +133,7 @@ public class Renderer{
   private int isoY(int x, int y) {
     // convert y into isometric y
 //    int segHeight = image.getHeight(null)-32;
-    int segHeight = image.getHeight(null)/2;
+    int segHeight = image.getHeight(null) / 2;
     int isoY;
     isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
     return isoY;
