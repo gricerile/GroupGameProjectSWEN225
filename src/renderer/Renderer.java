@@ -53,7 +53,7 @@ public class Renderer{
         Texture t = new Texture();
         this.image = t.onLoad("grass64");
         g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-            (windowHeight / 2) - isoY(i, j) + 32, null);
+            (windowHeight / 2) - isoY(i, j) + image.getWidth(null)/2, null);
       }
     }
 
@@ -123,7 +123,8 @@ public class Renderer{
 
   private int isoY(int x, int y) {
     // convert y into isometric y
-    int segHeight = image.getHeight(null)-32;
+//    int segHeight = image.getHeight(null)-32;
+    int segHeight = image.getHeight(null)/2;
     int isoY;
     isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
     return isoY;
