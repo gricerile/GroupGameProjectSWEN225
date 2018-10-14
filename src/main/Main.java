@@ -25,7 +25,7 @@ public class Main {
 	public Main() {
 		this.p = new Parser();
 		this.g = new GUI(this);
-		//p.loadMap(new File(Parser.testMapFileName));
+		p.loadMap(new File(Parser.testMapFileName));
 		this.segmentsBoard = this.makeTestSegment();
 		this.player = this.makeTestPlayer();
 		// this.segmentsBpoard=p.getSegments(); will be created
@@ -68,7 +68,7 @@ public class Main {
 		}
 		reDraw();
 		if(checkWin()) {
-			System.out.println("Player has Won!");
+			this.g.getFrame().getEventOutputPanel().setTextOutput("Player has Won!");
 		}
 	}
 
@@ -122,21 +122,23 @@ public class Main {
 		return null;
 	}
 
-	public String playerAttempUnlock() {
+	public void playerAttempUnlock() {
 		if (getNextSegment(moveDirection.upLeft) != null
 				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("Door Locked")) {
-			return unlock(getNextSegment(moveDirection.upLeft));
+			this.g.getFrame().getEventOutputPanel().setTextOutput(unlock(getNextSegment(moveDirection.upLeft)));
 		} else if (getNextSegment(moveDirection.upRight) != null
 				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("Door Locked")) {
-			return unlock(getNextSegment(moveDirection.upRight));
+			this.g.getFrame().getEventOutputPanel().setTextOutput(unlock(getNextSegment(moveDirection.upRight)));
 		} else if (getNextSegment(moveDirection.downLeft) != null
 				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("Door Locked")) {
-			return unlock(getNextSegment(moveDirection.downLeft));
+			this.g.getFrame().getEventOutputPanel().setTextOutput(unlock(getNextSegment(moveDirection.downLeft)));
 		} else if (getNextSegment(moveDirection.downRight) != null
 				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("Door Locked")) {
-			return unlock(getNextSegment(moveDirection.downRight));
+			this.g.getFrame().getEventOutputPanel().setTextOutput(unlock(getNextSegment(moveDirection.downRight)));
 		}
-		return "There is no door adjacent to the Player.";
+		else{
+			this.g.getFrame().getEventOutputPanel().setTextOutput("There is no door adjacent to the Player.");
+		}
 	}
 
 	public String unlock(Segment s) {
@@ -170,10 +172,10 @@ public class Main {
 			k = getNextSegment(moveDirection.downRight).takeFromChest();
 		}
 		if (k != null) {
-			System.out.println(this.player.giveKey(k,this));
-			System.out.println("Player has recieved Key with ID of: " + k.getID());
+			this.g.getFrame().getEventOutputPanel().setTextOutput(this.player.giveKey(k,this));
+			//System.out.println("Player has recieved Key with ID of: " + k.getID());
 		} else if (k==null) {
-			System.out.println("You have got nothing from the Chest.");
+			this.g.getFrame().getEventOutputPanel().setTextOutput("You have got nothing from the Chest.");
 		}
 		reDraw();
 	}
@@ -181,18 +183,19 @@ public class Main {
 	public void openChest() {
 		if (getNextSegment(moveDirection.upLeft) != null
 				&& getNextSegment(moveDirection.upLeft).getObject().getType().equals("YellowChest")) {
-			System.out.println(getNextSegment(moveDirection.upLeft).opensChest());
+			this.g.getFrame().getEventOutputPanel().setTextOutput(getNextSegment(moveDirection.upLeft).opensChest());
 		} else if (getNextSegment(moveDirection.upRight) != null
 				&& getNextSegment(moveDirection.upRight).getObject().getType().equals("YellowChest")) {
-			System.out.println(getNextSegment(moveDirection.upRight).opensChest());
+			this.g.getFrame().getEventOutputPanel().setTextOutput(getNextSegment(moveDirection.upRight).opensChest());
 		} else if (getNextSegment(moveDirection.downLeft) != null
 				&& getNextSegment(moveDirection.downLeft).getObject().getType().equals("YellowChest")) {
-			System.out.println(getNextSegment(moveDirection.downLeft).opensChest());
+			this.g.getFrame().getEventOutputPanel().setTextOutput(getNextSegment(moveDirection.downLeft).opensChest());
 		} else if (getNextSegment(moveDirection.downRight) != null
 				&& getNextSegment(moveDirection.downRight).getObject().getType().equals("YellowChest")) {
-			System.out.println(getNextSegment(moveDirection.downRight).opensChest());
+			this.g.getFrame().getEventOutputPanel().setTextOutput(getNextSegment(moveDirection.downRight).opensChest());
 		} else {
-			System.out.println("There is no Chest nearby.");
+			this.g.getFrame().getEventOutputPanel().setTextOutput("There is no yellow chest to open nearby.");
+			//System.out.println("There is no Chest nearby.");
 		}
 		reDraw();
 	}
@@ -216,8 +219,8 @@ public class Main {
 	}
 
 	public void quitGame() {
-		test1();
-		//System.exit(0);
+		//test1();
+		System.exit(0);
 	}
 
 	public void reDraw() {
@@ -235,12 +238,12 @@ public class Main {
 		segmentsTest[0][2] = new Segment(new Chest(new Key(101, "Key opens door 101", "Key ID 101")), 0, 2);
 		segmentsTest[1][2] = new Segment(new Wall(), 1, 2);
 		segmentsTest[2][2] = new Segment(new WinTile(), 2, 2);
-		return segmentsTest;
-		//return p.loadMap(new File(Parser.testMapFileName));
+		//return segmentsTest;
+		return p.loadMap(new File(Parser.testMapFileName));
 	}
 
 	public Player makeTestPlayer() {
-		Player p = new Player(this.segmentsBoard[0][0], 1);
+		Player p = new Player(this.segmentsBoard[0][0]);
 		return p;
 	}
 
@@ -251,10 +254,10 @@ public class Main {
 		System.out.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
     System.out.println(this.segmentsBoard[0][2].getObject().getType());
 		openChest();
-		//takeFromChest();
+		takeFromChest();
 		System.out.println(this.segmentsBoard[0][2].getObject().getType());
 		takeFromChest();
-		System.out.println(playerAttempUnlock());
+		playerAttempUnlock();
 		movePlayer(moveDirection.upRight);
 		System.out.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
 		movePlayer(moveDirection.upRight);
