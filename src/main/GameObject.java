@@ -7,5 +7,4 @@ public interface GameObject {
 
   public String getType();
 
-  public void draw(Graphics g, int windowWidth, int windowHeight);
 }

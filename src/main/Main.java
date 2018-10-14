@@ -75,7 +75,7 @@ public class Main {
 		}
 		Segment next = getNextSegment(direction);
 		if (next != null) {
-			if (next.getObject().getType().equals("FreeTile") || next.getObject().getType().equals("Door Unlocked")) {
+			if (next.getObject().getType().equals("FreeTile") || next.getObject().getType().equals("Door Unlocked") || next.getObject().getType().equals("WinTile")) {
 				return true;
 			}
 		}
@@ -217,7 +217,7 @@ public class Main {
 		segmentsTest[2][1] = new Segment(new FreeSpaceTile(), 2, 1);
 		segmentsTest[0][2] = new Segment(new Chest(new Key(101, "Key opens door 101", "Key ID 101")), 0, 2);
 		segmentsTest[1][2] = new Segment(new Wall(), 1, 2);
-		segmentsTest[2][2] = new Segment(new FreeSpaceTile(), 2, 2);
+		segmentsTest[2][2] = new Segment(new WinTile(), 2, 2);
 		//return segmentsTest;
 		return p.loadMap(new File(Parser.testMapFileName));
 	}

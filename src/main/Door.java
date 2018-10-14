@@ -49,10 +49,4 @@ public int ID() {
     return "Door Locked";
   }
 
-@Override
-public void draw(Graphics g, int windowWidth, int windowHeight) {
-	// TODO Auto-generated method stub
-
-}
-
 }
