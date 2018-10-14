@@ -34,7 +34,7 @@ public class Renderer{
     this.m = main;
     // this.board = m.getSegments();
     // initialise the board with the 2D array of segs stored in the main class
-    this.board = main.makeTestSegment();
+    this.board = m.makeTestSegment();
 
 
   }
@@ -50,79 +50,67 @@ public class Renderer{
    * @param windowHeight graphics frame height.
    */
   public void draw(Graphics g, int windowWidth, int windowHeight) {
-
+    // render the first layer of the game (ground / win tile)
     for (int i = board.length - 1; i >= 0; --i) {
       for (int j = board[0].length - 1; j >= 0; j--) {
         Texture t = new Texture();
-        if(board[i][j].getObject().getType().equals("WinTile")) {
+        // render the win tile that the player needs to land on
+        if (board[i][j].getObject().getType().equals("WinTile")) {
           this.image = t.onLoad("winTile64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j) + image.getWidth(null) / 2, null);
         } else {
+          // otherwise render the ground tiles (free tiles)
           this.image = t.onLoad("grass64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j) + image.getWidth(null) / 2, null);
         }
       }
     }
+    // end of rendering for the first layer of the map
 
+    // being rendering of the objects, walls, chest, doors
     for (int i = board.length - 1; i >= 0; --i) {
       for (int j = board[0].length - 1; j >= 0; j--) {
         Texture t = new Texture();
+        // check to render the wall
         if (board[i][j].getObject().getType().equals("Wall")) {
           this.image = t.onLoad("wall64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j), null);
-
+        // check to render the chest (closed)
         } else if (board[i][j].getObject().getType().equals("YellowChest")) {
           this.image = t.onLoad("closedChest64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j), null);
-
+        // check to render the chest (opened)
         } else if (board[i][j].getObject().getType().equals("RedChest")) {
           this.image = t.onLoad("openedChest64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j), null);
-
+        // check to render the door
         } else if (board[i][j].getObject().getType().equals("Door Locked")) {
           this.image = t.onLoad("door64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j), null);
-
+        // check to render the player
         } else if (board[i][j].hasPlayer()) { // else if check for the player
           this.image = t.onLoad("player64");
           g.drawImage(image, (windowWidth / 2) - isoX(i, j),
               (windowHeight / 2) - isoY(i, j), null);
-
         }
-
-        // else just draw a empty tile (dead space)
+        // end of rendering the second layer
       }
     }
   }
 
-
-  public boolean checkWall() {
-	  for(int i = 0; i < board.length; i++) {
-		  for(int j = 0; j < board[i].length; j++) {
-			  if(board[i][j] == null) {
-				  return false;
-			  }
-			  if(board[i][j].getObject().getType().equals("Wall")) {
-				  return true;
-			  }
-		  }
-	  }
-	  return false;
-  }
-
   /**
    * Method to convert cartisian to isometric, helps render out the images in a diamond shape.
-	 * turning regular 2d array into isometric.
-	 * @param x coord from loop.
-	 * @param y coord from loop.
-	 * @return new isometric coord.
-	 */
+   * turning regular 2d array into isometric.
+   * @param x coord from loop.
+   * @param y coord from loop.
+   * @return new isometric X coord.
+   */
   private int isoX(int x, int y) {
     int segWidth = image.getWidth(null);
     int isoX;
@@ -130,9 +118,16 @@ public class Renderer{
     return isoX;
   }
 
+  /**
+   * Method to convert cartisian to isometric, helps render out the images in a diamond shape.
+   * turning regular 2d array into isometric.
+   * @param x coord from loop.
+   * @param y coord from loop.
+   * @return new isometric Y coord.
+   */
   private int isoY(int x, int y) {
     // convert y into isometric y
-//    int segHeight = image.getHeight(null)-32;
+    // int segHeight = image.getHeight(null)-32;
     int segHeight = image.getHeight(null) / 2;
     int isoY;
     isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
