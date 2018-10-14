@@ -51,9 +51,15 @@ public class Renderer{
     for (int i = board.length - 1; i >= 0; --i) {
       for (int j = board[0].length - 1; j >= 0; j--) {
         Texture t = new Texture();
-        this.image = t.onLoad("grass64");
-        g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+        if(board[i][j].getObject().getType().equals("WinTile")) {
+          this.image = t.onLoad("player64");
+          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+              (windowHeight / 2) - isoY(i, j) + image.getWidth(null)/2, null);
+        } else {
+          this.image = t.onLoad("grass64");
+          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
             (windowHeight / 2) - isoY(i, j) + image.getWidth(null)/2, null);
+        }
       }
     }
 
