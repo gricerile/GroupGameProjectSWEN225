@@ -25,7 +25,7 @@ public class Main {
 	public Main() {
 		this.p = new Parser();
 		this.g = new GUI(this);
-		p.loadMap(new File(Parser.testMapFileName));
+		//p.loadMap(new File(Parser.testMapFileName));
 		this.segmentsBoard = this.makeTestSegment();
 		this.player = this.makeTestPlayer();
 		// this.segmentsBpoard=p.getSegments(); will be created
@@ -67,6 +67,22 @@ public class Main {
 
 		}
 		reDraw();
+		if(checkWin()) {
+			System.out.println("Player has Won!");
+		}
+	}
+
+	public boolean checkWin() {
+		for(int i=0;i<this.segmentsBoard.length;i++) {
+	        for(int j=0;j<this.segmentsBoard.length;j++) {
+	           if(this.player.getSegment().equals(this.segmentsBoard[i][j])) {
+	              if(this.segmentsBoard[i][j].getObject().getType().equals("WinTile")) {
+	            	  return true;
+	              }
+	            }
+	        }
+	      }
+		return false;
 	}
 
 	public boolean canMove(moveDirection direction) {
@@ -200,7 +216,8 @@ public class Main {
 	}
 
 	public void quitGame() {
-		System.exit(0);
+		test1();
+		//System.exit(0);
 	}
 
 	public void reDraw() {
@@ -218,8 +235,8 @@ public class Main {
 		segmentsTest[0][2] = new Segment(new Chest(new Key(101, "Key opens door 101", "Key ID 101")), 0, 2);
 		segmentsTest[1][2] = new Segment(new Wall(), 1, 2);
 		segmentsTest[2][2] = new Segment(new WinTile(), 2, 2);
-		//return segmentsTest;
-		return p.loadMap(new File(Parser.testMapFileName));
+		return segmentsTest;
+		//return p.loadMap(new File(Parser.testMapFileName));
 	}
 
 	public Player makeTestPlayer() {
