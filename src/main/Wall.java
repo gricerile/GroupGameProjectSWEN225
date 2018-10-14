@@ -19,10 +19,4 @@ public class Wall implements GameObject {
     return "Wall";
   }
 
-@Override
-public void draw(Graphics g, int windowWidth, int windowHeight) {
-	// TODO Auto-generated method stub
-	g.drawImage(wall.onLoad("dirt"), windowWidth, windowHeight, null);
-}
-
 }

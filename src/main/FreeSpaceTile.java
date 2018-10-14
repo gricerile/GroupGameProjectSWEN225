@@ -16,11 +16,4 @@ public class FreeSpaceTile implements GameObject {
     return "FreeTile";
   }
 
-@Override
-public void draw(Graphics g, int windowWidth, int windowHeight) {
-	// TODO Auto-generated method stub
-	
-
-}
-
 }
