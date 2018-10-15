@@ -4,11 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,9 +15,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import main.Door;
 import main.GameItem;
-import main.Key;
 
 @SuppressWarnings("serial")
 public class InventoryPanel extends JPanel {
@@ -34,7 +29,6 @@ public class InventoryPanel extends JPanel {
 	DefaultListModel<GameItem> listModel;
 
 	JSplitPane splitPane;
-
 	JPanel rightPanel;
 	JTextArea itemDescriptions;
 
@@ -43,12 +37,8 @@ public class InventoryPanel extends JPanel {
 	 * players inventory, and when an item is clicked on the text box displays a
 	 * Description of that item.
 	 *
-	 * @param frame
-	 *            instance of GameFrame which this class is contained in, encase
-	 *            class needs to reference back.
 	 */
 	public InventoryPanel() {
-		//this.setBackground(new Color(51, 153, 255));
 
 		// set dimensions
 		Dimension dimension = getPreferredSize();
@@ -57,17 +47,13 @@ public class InventoryPanel extends JPanel {
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
 		setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
 
-		// set border
-		// setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
-		// panelName));
-		//setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
 		//////////////////////////// Add Elements///////////////////////////////////
 
 		// JList (left section of JSplitPane)
 
 		listOfItems = new JList<>();
-		listOfItems.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0),"Inventory"));
+		listOfItems.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0), "Inventory"));
 		listModel = new DefaultListModel<>();
 
 		listOfItems.setModel(listModel);
@@ -77,24 +63,13 @@ public class InventoryPanel extends JPanel {
 
 		scrollPane = new JScrollPane(listOfItems);
 
-		// JPanel containing Jlabel and JTextArea (right section of JSplitPane)
+		// JTextArea (right section of JSplitPane)
 
 		itemDescriptions = new JTextArea();
 		itemDescriptions.setLineWrap(true);
 		itemDescriptions.setEditable(false);
-		itemDescriptions.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0),"Description"));
-
-
-
-
-		// JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png",
-		// 50, 50));
-
-		// rightPanel = new JPanel();
-		// rightPanel.setLayout(new BorderLayout());
-
-		// rightPanel.add(image, BorderLayout.WEST);
-		// rightPanel.add(itemDescriptions, BorderLayout.CENTER);
+		itemDescriptions.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0), "Description"));
 
 		// JSPlitPane
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, itemDescriptions);
@@ -120,7 +95,6 @@ public class InventoryPanel extends JPanel {
 
 				GameItem object = listOfItems.getSelectedValue();
 				itemDescriptions.setText(object.getDescription());
-				// image.setIcon(ob.getImage());
 
 			}
 		});

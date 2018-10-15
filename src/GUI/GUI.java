@@ -10,11 +10,12 @@ import main.Main;
 
 public class GUI {
 
+	private Main main;
+
 	private String gameName = "Team 25 Game";
 	private int frameWidth = 750;
 	private int frameHeight = 750;
 
-	private Main main;
 	private GameFrame frame;
 
 	public enum moveDirection {
@@ -47,10 +48,9 @@ public class GUI {
 	/**
 	 * initialises the GameFrame (JFrame) for the GUI.
 	 */
-	public void initialise() {
+	private void initialise() {
 
 		frame = new GameFrame(gameName, this);
-
 		frame.setSize(frameWidth, frameHeight);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

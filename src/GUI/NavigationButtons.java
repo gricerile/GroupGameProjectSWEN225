@@ -4,61 +4,42 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import GUI.GUI.moveDirection;
 
+@SuppressWarnings("serial")
 public class NavigationButtons extends JPanel implements ActionListener {
 
 	private GUI gui;
 
-
-	private int dimensionHeight = 100;
-
 	private int buttonWidth = 30;
 	private int buttonHeight = 30;
-
-	private String panelName = "Navigation";
 
 	private JButton upLeft;
 	private JButton upRight;
 	private JButton downLeft;
 	private JButton downRight;
 
-
 	/**
-	 * Navigation panel contains navigation buttons for the player to navigate the
+	 * NavigationButton contains navigation buttons for the player to navigate the
 	 * map.
 	 *
-	 * @param frame
-	 *            instance of GameFrame which the instance of this class is
-	 *            contained in to reference back.
+	 * @param gui
+	 *            instance of GUI to reference back to when calling methods from
+	 *            actionListeners.
 	 */
 	public NavigationButtons(GUI gui) {
 		this.gui = gui;
-		//this.setBackground(new Color(51, 153, 255));
-
-		// set dimensions
-		//Dimension dimension = getPreferredSize();
-		//dimension.height = dimensionHeight;
-		//setPreferredSize(dimension);
-		//setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
 
 		// set button dimensions
 		Dimension buttonSize = new Dimension();
 		buttonSize.setSize(buttonWidth, buttonHeight);
-
 
 		// add elements
 		upLeft = new JButton(GUI.resizeImage("arrowImages/arrowUpLeft.png", this.buttonWidth, this.buttonHeight));
@@ -70,14 +51,13 @@ public class NavigationButtons extends JPanel implements ActionListener {
 		downRight = new JButton(GUI.resizeImage("arrowImages/arrowDownRight.png", this.buttonWidth, this.buttonHeight));
 		downRight.setMargin(new Insets(0, 0, 0, 0));
 
-		////////////////////////
-		upLeft.setBackground(Color.BLACK);
-		upRight.setBackground(Color.BLACK);
-		downLeft.setBackground(Color.BLACK);
-		downRight.setBackground(Color.BLACK);
-		//////////////////////////////////////
-		// actionlistners
+		// set backround color of navigation buttons to fill in empty padding
+		upLeft.setBackground(Color.WHITE);
+		upRight.setBackground(Color.WHITE);
+		downLeft.setBackground(Color.WHITE);
+		downRight.setBackground(Color.WHITE);
 
+		// action listeners
 		upLeft.addActionListener(this);
 		upRight.addActionListener(this);
 		downLeft.addActionListener(this);
@@ -105,7 +85,6 @@ public class NavigationButtons extends JPanel implements ActionListener {
 		grid.gridx = 1;
 		grid.gridy = 1;
 		add(downRight, grid);
-
 
 	}
 

@@ -18,12 +18,10 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 
 	private GUI gui;
 
-
 	private int dimensionHeight = 600;
 	private int dimensionWidth = 600;
 
 	private JPopupMenu popUp;
-
 	private JMenuItem takeFromChest;
 	private JMenuItem unlockDoor;
 	private JMenuItem openChest;
@@ -32,24 +30,20 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 	 * GraphicsWindow is the JPanel which the game graphics will be painted on.
 	 * GraphicsWindow also implements mouseListener to track click events.
 	 *
-	 * @param frame
-	 *            instance of GameFrame which this class is contained in, encase
-	 *            class needs to reference back.
+	 * @param gui
+	 *            instance of GUI to reference back to when calling draw method in
+	 *            renderer class.
 	 */
 	public GraphicsWindow(GUI gui) {
 		this.gui = gui;
-		this.popUp = new JPopupMenu();
 
 		// set dimensions
 		Dimension dimension = getPreferredSize();
 		dimension.width = dimensionWidth;
 		dimension.height = dimensionHeight;
 		setPreferredSize(dimension);
-		// setMaximumSize(dimension);
-		// setMinimumSize(new Dimension(100, 100));
 
 		// set border
-		// setBorder(BorderFactory.createEtchedBorder());
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
 		// popupMenu elements
@@ -57,16 +51,18 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 		takeFromChest = new JMenuItem("Take items From Chest");
 		openChest = new JMenuItem("Open Chest");
 
-		//button action listener
+		// button action listener
 		unlockDoor.addActionListener(this);
 		takeFromChest.addActionListener(this);
 		openChest.addActionListener(this);
 
+		// add popup elements to popup menu
+		this.popUp = new JPopupMenu();
 		this.popUp.add(openChest);
 		this.popUp.add(takeFromChest);
 		this.popUp.add(unlockDoor);
 
-		// add mouseListeners
+		// add mouseListener
 		addMouseListener(this);
 
 	}
@@ -82,15 +78,11 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setBackground(Color.WHITE);
-		//setBackground(new Color(179, 236, 255));
 
 		if (this.gui.getMain().getRenderer() == null) {
-
 			g.setColor(Color.BLACK);
 			g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
-
 		} else {
-
 			this.gui.getMain().getRenderer().draw(g, getWidth(), getHeight());
 		}
 
@@ -102,12 +94,10 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 	public void mouseReleased(MouseEvent e) {
 
 		if (e.getButton() == 1) {
-			gui.getMain().clickedScreen(e.getX(), e.getY());
+			// currently has no functionality
 		} else if (e.getButton() == 3) {
-			// getType of tile clicked on and show different pop ups depending
 			this.popUp.show(this, e.getX(), e.getY());
 		}
-
 	}
 
 	@Override
@@ -128,11 +118,11 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == unlockDoor) {
+		if (e.getSource() == unlockDoor) {
 			this.gui.getMain().playerAttempUnlock();
-		} else if(e.getSource() == takeFromChest) {
+		} else if (e.getSource() == takeFromChest) {
 			this.gui.getMain().takeFromChest();
-		} else if(e.getSource() == openChest) {
+		} else if (e.getSource() == openChest) {
 			this.gui.getMain().openChest();
 		}
 	}
