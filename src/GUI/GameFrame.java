@@ -45,10 +45,10 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
     this.gui = gui;
 
     // components
-    graphicsWindow = new GraphicsWindow(this);
-    eventOutputPanel = new EventOutputPanel(this);
-    inventoryPanel = new InventoryPanel(this);
-    navigationPanel = new NavigationPanel(this);
+    graphicsWindow = new GraphicsWindow(this.gui);
+    eventOutputPanel = new EventOutputPanel();
+    inventoryPanel = new InventoryPanel();
+    navigationPanel = new NavigationPanel(this.gui);
 
     // menu
 
@@ -86,16 +86,6 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
 
     setFocusable(true);
     this.pack();
-  }
-
-  /**
-   * returns the instance of GUI which contains this classes instance, used by
-   * JPanel classes to reference back through to the GUI.
-   *
-   * @return instance of GUI
-   */
-  public GUI getGui() {
-    return gui;
   }
 
   public GraphicsWindow getGraphicsWindow() {

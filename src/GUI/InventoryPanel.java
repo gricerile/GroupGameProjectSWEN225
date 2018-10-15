@@ -28,9 +28,6 @@ public class InventoryPanel extends JPanel {
 	private int dimensionHeight = 120;
 	private int splitPaneWidth = 600;
 	private int splitPaneHeight = 80;
-	private String panelName = "Inventory";
-
-	private GameFrame frame;
 
 	JScrollPane scrollPane;
 	JList<GameItem> listOfItems;
@@ -50,8 +47,7 @@ public class InventoryPanel extends JPanel {
 	 *            instance of GameFrame which this class is contained in, encase
 	 *            class needs to reference back.
 	 */
-	public InventoryPanel(GameFrame frame) {
-		this.frame = frame;
+	public InventoryPanel() {
 		//this.setBackground(new Color(51, 153, 255));
 
 		// set dimensions
@@ -71,7 +67,7 @@ public class InventoryPanel extends JPanel {
 		// JList (left section of JSplitPane)
 
 		listOfItems = new JList<>();
-		listOfItems.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0),"Items"));
+		listOfItems.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0),"Inventory"));
 		listModel = new DefaultListModel<>();
 
 		listOfItems.setModel(listModel);
@@ -86,10 +82,10 @@ public class InventoryPanel extends JPanel {
 		itemDescriptions = new JTextArea();
 		itemDescriptions.setLineWrap(true);
 		itemDescriptions.setEditable(false);
-		itemDescriptions.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0),panelName));
-		
-		
-		
+		itemDescriptions.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0),"Description"));
+
+
+
 
 		// JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png",
 		// 50, 50));

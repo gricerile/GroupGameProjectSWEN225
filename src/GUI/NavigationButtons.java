@@ -21,6 +21,9 @@ import GUI.GUI.moveDirection;
 
 public class NavigationButtons extends JPanel implements ActionListener {
 
+	private GUI gui;
+
+
 	private int dimensionHeight = 100;
 
 	private int buttonWidth = 30;
@@ -34,8 +37,6 @@ public class NavigationButtons extends JPanel implements ActionListener {
 	private JButton downRight;
 
 
-	private GameFrame frame;
-
 	/**
 	 * Navigation panel contains navigation buttons for the player to navigate the
 	 * map.
@@ -44,8 +45,8 @@ public class NavigationButtons extends JPanel implements ActionListener {
 	 *            instance of GameFrame which the instance of this class is
 	 *            contained in to reference back.
 	 */
-	public NavigationButtons(GameFrame frame) {
-		this.frame = frame;
+	public NavigationButtons(GUI gui) {
+		this.gui = gui;
 		//this.setBackground(new Color(51, 153, 255));
 
 		// set dimensions
@@ -111,13 +112,13 @@ public class NavigationButtons extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == upLeft) {
-			frame.getGui().getMain().movePlayer(moveDirection.upRight);
+			this.gui.getMain().movePlayer(moveDirection.upRight);
 		} else if (e.getSource() == upRight) {
-			frame.getGui().getMain().movePlayer(moveDirection.upLeft);
+			this.gui.getMain().movePlayer(moveDirection.upLeft);
 		} else if (e.getSource() == downLeft) {
-			frame.getGui().getMain().movePlayer(moveDirection.downRight);
+			this.gui.getMain().movePlayer(moveDirection.downRight);
 		} else if (e.getSource() == downRight) {
-			frame.getGui().getMain().movePlayer(moveDirection.downLeft);
+			this.gui.getMain().movePlayer(moveDirection.downLeft);
 		}
 	}
 }

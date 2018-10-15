@@ -21,6 +21,8 @@ import GUI.GUI.moveDirection;
 
 public class GameButtons extends JPanel implements ActionListener {
 
+	private GUI gui;
+
 	private int dimensionHeight = 100;
 
 	private int buttonWidth = 119;
@@ -28,10 +30,7 @@ public class GameButtons extends JPanel implements ActionListener {
 
 	private JButton openChest;
 	private JButton lootChest;
-	private JButton UnlockDoor;
-
-
-	private GameFrame frame;
+	private JButton unlockDoor;
 
 	/**
 	 * Navigation panel contains navigation buttons for the player to navigate the
@@ -41,8 +40,8 @@ public class GameButtons extends JPanel implements ActionListener {
 	 *            instance of GameFrame which the instance of this class is
 	 *            contained in to reference back.
 	 */
-	public GameButtons(GameFrame frame) {
-		this.frame = frame;
+	public GameButtons(GUI gui) {
+		this.gui = gui;
 		//this.setBackground(new Color(51, 153, 255));
 
 		// set dimensions
@@ -59,17 +58,17 @@ public class GameButtons extends JPanel implements ActionListener {
 		// add elements
 		openChest = new JButton("Open Chest");
 		lootChest = new JButton("Loot Chest");
-		UnlockDoor = new JButton("Unlock Door");
-		
+		unlockDoor = new JButton("Unlock Door");
+
 		openChest.setPreferredSize(buttonSize);
 		lootChest.setPreferredSize(buttonSize);
-		UnlockDoor.setPreferredSize(buttonSize);
+		unlockDoor.setPreferredSize(buttonSize);
 
 		// actionlistners
 
 		lootChest.addActionListener(this);
 		openChest.addActionListener(this);
-		UnlockDoor.addActionListener(this);
+		unlockDoor.addActionListener(this);
 
 		// set layout
 		setLayout(new GridBagLayout());
@@ -84,15 +83,21 @@ public class GameButtons extends JPanel implements ActionListener {
 		grid.gridx = 0;
 		grid.gridy = 1;
 		add(openChest, grid);
-		
+
 		grid.gridx = 0;
 		grid.gridy = 2;
-		add(UnlockDoor, grid);
+		add(unlockDoor, grid);
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource() == unlockDoor) {
+			this.gui.getMain().playerAttempUnlock();
+		} else if(e.getSource() == lootChest) {
+			this.gui.getMain().takeFromChest();
+		} else if(e.getSource() == openChest) {
+			this.gui.getMain().openChest();
+		}
 	}
 }

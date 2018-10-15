@@ -25,9 +25,9 @@ import GUI.GUI.moveDirection;
 @SuppressWarnings("serial")
 public class NavigationPanel extends JPanel {
 
-	private int dimensionHeight = 100;
+	private GUI gui;
 
-	private GameFrame frame;
+	private int dimensionHeight = 100;
 
 	NavigationButtons navButtons;
 	GameButtons gameButtons;
@@ -40,8 +40,8 @@ public class NavigationPanel extends JPanel {
 	 *            instance of GameFrame which the instance of this class is
 	 *            contained in to reference back.
 	 */
-	public NavigationPanel(GameFrame frame) {
-		this.frame = frame;
+	public NavigationPanel(GUI gui) {
+		this.gui = gui;
 		//this.setBackground(new Color(51, 153, 255));
 
 		// set dimensions
@@ -56,8 +56,8 @@ public class NavigationPanel extends JPanel {
 		//setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
 		// add elements
-		navButtons = new NavigationButtons(this.frame);
-		gameButtons = new GameButtons(this.frame);
+		navButtons = new NavigationButtons(this.gui);
+		gameButtons = new GameButtons(this.gui);
 
 
 		// set layout

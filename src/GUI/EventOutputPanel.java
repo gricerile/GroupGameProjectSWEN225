@@ -1,25 +1,18 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
-@SuppressWarnings("serial")
+
 public class EventOutputPanel extends JPanel {
 
   JLabel textArea;
 
   private int dimensionHeight = 50;
-  private String panelName = "Event Output";
 
-  private GameFrame frame;
 
   /**
    * EventOutputPanel contains a textbox where all game related events are to be
@@ -29,9 +22,7 @@ public class EventOutputPanel extends JPanel {
    *          instance of GameFrame which this class is contained in, encase class
    *          needs to reference back.
    */
-  public EventOutputPanel(GameFrame frame) {
-    this.frame = frame;
-    //this.setBackground(new Color(51, 153, 255));
+  public EventOutputPanel() {
 
     // set dimensions
     Dimension dimension = getPreferredSize();
