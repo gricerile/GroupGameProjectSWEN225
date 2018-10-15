@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 
 	private GUI gui;
 
+	private boolean hasWon;
 	private int dimensionHeight = 600;
 	private int dimensionWidth = 600;
 
@@ -82,6 +84,18 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 		if (this.gui.getMain().getRenderer() == null) {
 			g.setColor(Color.BLACK);
 			g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
+		} else if(this.hasWon) {
+			this.gui.getMain().getRenderer().draw(g, getWidth(), getHeight());
+			
+			String s = "Congratulations You Have Won!";
+			Font text = new Font("Dialog", Font.PLAIN, 25);
+			
+			g.setFont(text);
+			g.drawString(s, (getWidth()/2), (getHeight()/2));
+			
+			
+			
+			
 		} else {
 			this.gui.getMain().getRenderer().draw(g, getWidth(), getHeight());
 		}
@@ -95,6 +109,7 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 
 		if (e.getButton() == 1) {
 			// currently has no functionality
+			this.gui.getMain().clickedScreen(1, 1);
 		} else if (e.getButton() == 3) {
 			this.popUp.show(this, e.getX(), e.getY());
 		}
@@ -125,5 +140,9 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 		} else if (e.getSource() == openChest) {
 			this.gui.getMain().openChest();
 		}
+	}
+
+	public void setHasWon(boolean hasWon) {
+		this.hasWon = hasWon;
 	}
 }
