@@ -81,6 +81,7 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setBackground(Color.WHITE);
+		//setBackground(new Color(179, 236, 255));
 
 		if (this.frame.getGui().getMain().getRenderer() == null) {
 

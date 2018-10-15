@@ -52,7 +52,7 @@ public class InventoryPanel extends JPanel {
 	 */
 	public InventoryPanel(GameFrame frame) {
 		this.frame = frame;
-		this.setBackground(new Color(51, 153, 255));
+		//this.setBackground(new Color(51, 153, 255));
 
 		// set dimensions
 		Dimension dimension = getPreferredSize();
@@ -64,13 +64,14 @@ public class InventoryPanel extends JPanel {
 		// set border
 		// setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
 		// panelName));
-		setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		//setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
 		//////////////////////////// Add Elements///////////////////////////////////
 
 		// JList (left section of JSplitPane)
 
 		listOfItems = new JList<>();
+		listOfItems.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0),"Items"));
 		listModel = new DefaultListModel<>();
 
 		listOfItems.setModel(listModel);
@@ -85,6 +86,10 @@ public class InventoryPanel extends JPanel {
 		itemDescriptions = new JTextArea();
 		itemDescriptions.setLineWrap(true);
 		itemDescriptions.setEditable(false);
+		itemDescriptions.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0),panelName));
+		
+		
+		
 
 		// JLabel image = new JLabel(GUI.resizeImage("arrowImages/arrowDownLeft.png",
 		// 50, 50));

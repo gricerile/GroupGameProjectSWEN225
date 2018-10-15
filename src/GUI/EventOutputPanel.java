@@ -31,7 +31,7 @@ public class EventOutputPanel extends JPanel {
    */
   public EventOutputPanel(GameFrame frame) {
     this.frame = frame;
-    this.setBackground(new Color(51, 153, 255));
+    //this.setBackground(new Color(51, 153, 255));
 
     // set dimensions
     Dimension dimension = getPreferredSize();
@@ -42,7 +42,7 @@ public class EventOutputPanel extends JPanel {
 
     // set border
     //setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), panelName));
-    setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+    //setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
     // add elements
     textArea = new JLabel();

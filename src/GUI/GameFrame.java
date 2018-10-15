@@ -85,6 +85,7 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
     addKeyListener(this);
 
     setFocusable(true);
+    this.pack();
   }
 
   /**
