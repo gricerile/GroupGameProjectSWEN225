@@ -3,16 +3,11 @@ package GUI;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
-import GUI.GUI.moveDirection;
 
 /**
  * GameFrame extends JFrame and contains JPanel components for the GUI.
@@ -21,7 +16,7 @@ import GUI.GUI.moveDirection;
  *
  */
 @SuppressWarnings("serial")
-public class GameFrame extends JFrame implements KeyListener, ActionListener {
+public class GameFrame extends JFrame implements ActionListener {
 
   private GUI gui;
 
@@ -90,9 +85,6 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
     // set layout
     setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
-    // add keyListener
-    addKeyListener(this);
-
     setFocusable(true);
     this.pack();
   }
@@ -133,30 +125,7 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
     return this.navigationPanel;
   }
 
-  ///////// KeyListener///////////////
-
-  @Override
-  public void keyTyped(KeyEvent e) {
-  }
-
-  @Override
-  public void keyPressed(KeyEvent e) {
-
-    if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // left
-      gui.getMain().movePlayer(moveDirection.downLeft);
-    } else if (e.getKeyCode() == 37 || e.getKeyCode() == 65) { // right
-      gui.getMain().movePlayer(moveDirection.upRight);
-    } else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) { // up
-      gui.getMain().movePlayer(moveDirection.upLeft);
-    } else if (e.getKeyCode() == 40 || e.getKeyCode() == 83) { // down
-      gui.getMain().movePlayer(moveDirection.downRight);
-    }
-
-  }
-
-  @Override
-  public void keyReleased(KeyEvent e) {
-  }
+  ///////// ActionListener///////////////
 
   @Override
   public void actionPerformed(ActionEvent e) {

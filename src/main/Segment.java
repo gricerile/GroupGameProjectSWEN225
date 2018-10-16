@@ -91,7 +91,7 @@ public class Segment {
    *
    * @return boolean of comparison.
    */
-  public boolean equals(Segment s) {
+  public boolean equalsSeg(Segment s) {
     if (this.getX() == s.getX() && this.getY() == s.getY()) {
       return true;
     } else {

@@ -24,7 +24,7 @@ import renderer.Texture;
  * @author gricerile
  *
  */
-public class TestMain {
+public class Tests {
 
 	@Test
 	/**
@@ -175,7 +175,7 @@ public class TestMain {
 		assertTrue("image is not null", image != null);
 	}
 
-	@Testm.getPlayer().getSegment().getY())
+	@Test
 	/**
 	 * check if the image path is correct.
 	 */

@@ -48,15 +48,6 @@ public class EventOutputPanel extends JPanel {
   }
 
   /**
-   * getter method to get the current contents of the JLabel.
-   *
-   * @return String contents of JPanel
-   */
-  public String getTextOutput() {
-    return textArea.getText();
-  }
-
-  /**
    * sets the string value of the JLabel contained within EventOutputPanel.
    *
    * @param textOutput
