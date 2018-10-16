@@ -11,17 +11,17 @@
 		<GameObject>FreeTile</GameObject>
 		<CoordinateX>0</CoordinateX>
 		<CoordinateY>1</CoordinateY>
-		<hasPlayer>true</hasPlayer>
+		<hasPlayer>false</hasPlayer>
 	</NewSegment>
 
 	<NewSegment>
-		<GameObject>Chest</GameObject>
+		<GameObject>Open Chest</GameObject>
 		<Key>
 			<ID>101</ID>
 			<Description>Key opens door 101</Description>
 			<Name>Key ID 101</Name>
 		</Key>
-		<chestClosed>true</chestClosed>
+		<chestClosed>false</chestClosed>
 		<CoordinateX>0</CoordinateX>
 		<CoordinateY>2</CoordinateY>
 		<hasPlayer>false</hasPlayer>
@@ -35,10 +35,10 @@
 	</NewSegment>
 
 	<NewSegment>
-		<GameObject>Door Locked</GameObject>
+		<GameObject>Door Unlocked</GameObject>
 		<newDoor>
 			<ID>101</ID>
-			<Unlocked>false</Unlocked>
+			<Unlocked>true</Unlocked>
 		</newDoor>
 		<CoordinateX>1</CoordinateX>
 		<CoordinateY>1</CoordinateY>
@@ -63,7 +63,7 @@
 		<GameObject>FreeTile</GameObject>
 		<CoordinateX>2</CoordinateX>
 		<CoordinateY>1</CoordinateY>
-		<hasPlayer>false</hasPlayer>
+		<hasPlayer>true</hasPlayer>
 	</NewSegment>
 
 	<NewSegment>
