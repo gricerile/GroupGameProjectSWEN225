@@ -82,6 +82,7 @@ public class Parser {
   }
 
   public void parseInventory(Player player, File inventoryFile) {
+    m.getGUI().getFrame().getInventoryPanel().clearInventory();
     try {
       XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
