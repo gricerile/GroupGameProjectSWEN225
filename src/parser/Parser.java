@@ -21,7 +21,7 @@ public class Parser {
   public static final String TRUECHECKER = "true";
   public static final String FALSECHECKER = "false";
 
-  private Segment[][] segments = new Segment[10][10];
+  private Segment[][] segments = new Segment[30][30];
   private Player player = null;
 
 

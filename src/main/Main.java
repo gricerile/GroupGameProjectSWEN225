@@ -56,9 +56,11 @@ public class Main {
 			this.player.getSegment().setHasPlayer(false);
 			for(int i=0;i<this.segmentsBoard.length;i++) {
         for(int j=0;j<this.segmentsBoard.length;j++) {
-           if(this.player.getSegment().equals(this.segmentsBoard[i][j])) {
-              this.segmentsBoard[i][j].setHasPlayer(false);
-            }
+			if (segmentsBoard[i][j] != null) {
+				if (this.player.getSegment().equals(this.segmentsBoard[i][j])) {
+					this.segmentsBoard[i][j].setHasPlayer(false);
+				}
+			}
         }
       }
 			this.player.move(getNextSegment(direction));
@@ -75,11 +77,13 @@ public class Main {
 	public boolean checkWin() {
 		for(int i=0;i<this.segmentsBoard.length;i++) {
 	        for(int j=0;j<this.segmentsBoard.length;j++) {
-	           if(this.player.getSegment().equals(this.segmentsBoard[i][j])) {
-	              if(this.segmentsBoard[i][j].getObject().getType().equals("WinTile")) {
-	            	  return true;
-	              }
-	            }
+				if (segmentsBoard[i][j] != null) {
+					if (this.player.getSegment().equals(this.segmentsBoard[i][j])) {
+						if (this.segmentsBoard[i][j].getObject().getType().equals("WinTile")) {
+							return true;
+						}
+					}
+				}
 	        }
 	      }
 		return false;

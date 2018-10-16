@@ -53,17 +53,19 @@ public class Renderer{
     // render the first layer of the game (ground / win tile)
     for (int i = board.length - 1; i >= 0; --i) {
       for (int j = board[0].length - 1; j >= 0; j--) {
-        Texture t = new Texture();
-        // render the win tile that the player needs to land on
-        if (board[i][j].getObject().getType().equals("WinTile")) {
-          this.image = t.onLoad("winTile64");
-          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-              (windowHeight / 2) - isoY(i, j) + image.getWidth(null) / 2, null);
-        } else {
-          // otherwise render the ground tiles (free tiles)
-          this.image = t.onLoad("grass64");
-          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-              (windowHeight / 2) - isoY(i, j) + image.getWidth(null) / 2, null);
+        if (board[i][j] != null) {
+          Texture t = new Texture();
+          // render the win tile that the player needs to land on
+          if (board[i][j].getObject().getType().equals("WinTile")) {
+            this.image = t.onLoad("winTile64");
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                    (windowHeight / 2) - isoY(i, j) + image.getWidth(null) / 2, null);
+          } else {
+            // otherwise render the ground tiles (free tiles)
+            this.image = t.onLoad("grass64");
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                    (windowHeight / 2) - isoY(i, j) + image.getWidth(null) / 2, null);
+          }
         }
       }
     }
@@ -72,34 +74,36 @@ public class Renderer{
     // being rendering of the objects, walls, chest, doors
     for (int i = board.length - 1; i >= 0; --i) {
       for (int j = board[0].length - 1; j >= 0; j--) {
-        Texture t = new Texture();
-        // check to render the wall
-        if (board[i][j].getObject().getType().equals("Wall")) {
-          this.image = t.onLoad("wall64");
-          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-              (windowHeight / 2) - isoY(i, j), null);
-        // check to render the chest (closed)
-        } else if (board[i][j].getObject().getType().equals("YellowChest")) {
-          this.image = t.onLoad("closedChest64");
-          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-              (windowHeight / 2) - isoY(i, j), null);
-        // check to render the chest (opened)
-        } else if (board[i][j].getObject().getType().equals("RedChest")) {
-          this.image = t.onLoad("openedChest64");
-          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-              (windowHeight / 2) - isoY(i, j), null);
-        // check to render the door
-        } else if (board[i][j].getObject().getType().equals("Door Locked")) {
-          this.image = t.onLoad("door64");
-          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-              (windowHeight / 2) - isoY(i, j), null);
-        // check to render the player
-        } else if (board[i][j].hasPlayer()) { // else if check for the player
-          this.image = t.onLoad("player64");
-          g.drawImage(image, (windowWidth / 2) - isoX(i, j),
-              (windowHeight / 2) - isoY(i, j), null);
+        if (board[i][j] != null) {
+          Texture t = new Texture();
+          // check to render the wall
+          if (board[i][j].getObject().getType().equals("Wall")) {
+            this.image = t.onLoad("wall64");
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                    (windowHeight / 2) - isoY(i, j), null);
+            // check to render the chest (closed)
+          } else if (board[i][j].getObject().getType().equals("YellowChest")) {
+            this.image = t.onLoad("closedChest64");
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                    (windowHeight / 2) - isoY(i, j), null);
+            // check to render the chest (opened)
+          } else if (board[i][j].getObject().getType().equals("RedChest")) {
+            this.image = t.onLoad("openedChest64");
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                    (windowHeight / 2) - isoY(i, j), null);
+            // check to render the door
+          } else if (board[i][j].getObject().getType().equals("Door Locked")) {
+            this.image = t.onLoad("door64");
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                    (windowHeight / 2) - isoY(i, j), null);
+            // check to render the player
+          } else if (board[i][j].hasPlayer()) { // else if check for the player
+            this.image = t.onLoad("player64");
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                    (windowHeight / 2) - isoY(i, j), null);
+          }
+          // end of rendering the second layer
         }
-        // end of rendering the second layer
       }
     }
   }
