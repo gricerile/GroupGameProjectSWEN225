@@ -38,8 +38,8 @@ public class TestingSegment {
   }
 
   public void setDoorLocation(String doorLocation) {
-    if (!doorLocation.equals("north") && !doorLocation.equals("south") && !doorLocation.equals("east")
-        && !doorLocation.equals("west")) {
+    if (!doorLocation.equals("north") && !doorLocation.equals("south")
+        && !doorLocation.equals("east") && !doorLocation.equals("west")) {
       System.out.println("Error, invalid direction specified.");
       return;
     }

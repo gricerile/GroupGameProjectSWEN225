@@ -9,16 +9,20 @@ public class Texture {
 
   private String path = "/tx/"; // path to image
   private String imageName = "";
-  public Texture() {}
+
+  public Texture() {
+  }
 
   public Texture(String newPath) {
     this.path = newPath;
   }
 
   /**
-   * already considers the path from tx folder and file type .png,
-   * image is loaded through typing the name of the image.
-   * @param imgName is the name of the file.
+   * already considers the path from tx folder and file type .png, image is loaded
+   * through typing the name of the image.
+   * 
+   * @param imgName
+   *          is the name of the file.
    * @return null if there is no image.
    */
   public synchronized BufferedImage onLoad(String imgName) {

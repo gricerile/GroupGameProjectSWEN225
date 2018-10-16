@@ -1,6 +1,5 @@
 package parser;
 
-
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -30,19 +29,16 @@ public class Parser {
   private Segment[][] segments = new Segment[30][30];
   private Player player = null;
 
-
   public Parser(Main m) {
     this.m = m;
   }
 
   /**
-   * Method used to parse the player data
-   * into the main class
+   * Method used to parse the player data into the main class
    *
    * @param playerFile
    *          The source file storing the player information.
-   * @return
-   *          The player object.
+   * @return The player object.
    */
   public Player loadPlayer(File playerFile, File inventoryFile) {
     player = null;
@@ -71,11 +67,9 @@ public class Parser {
       }
       player = new Player(segments[x][y]);
       parseInventory(player, inventoryFile);
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       System.out.println(e);
-    }
-    catch (XMLStreamException e) {
+    } catch (XMLStreamException e) {
       System.out.println(e);
     }
     return player;
@@ -97,7 +91,7 @@ public class Parser {
           }
           key = parseKey(eventReader);
           if (key != null) {
-            player.giveKey(key,m);
+            player.giveKey(key, m);
           }
         }
         if (event.isEndElement()) {
@@ -105,11 +99,9 @@ public class Parser {
           }
         }
       }
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       System.out.println(e);
-    }
-    catch (XMLStreamException e) {
+    } catch (XMLStreamException e) {
       System.out.println(e);
     }
   }
@@ -120,17 +112,15 @@ public class Parser {
         segments[i][j] = null;
       }
     }
-    
+
   }
 
   /**
-   * Method used to parse the segments into a
-   * two dimensional array of Segments.
+   * Method used to parse the segments into a two dimensional array of Segments.
    *
    * @param mapFile
    *          The source file storing the segment information.
-   * @return
-   *          The 2d array of segments storing map information.
+   * @return The 2d array of segments storing map information.
    */
   public Segment[][] loadMap(File mapFile) {
     resetSegments();
@@ -139,7 +129,8 @@ public class Parser {
 
       InputStream in = new FileInputStream(mapFile);
       XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
-      //Create variables to store the information of the segments before creating them.
+      // Create variables to store the information of the segments before creating
+      // them.
       GameObject gameObjectType = null;
       int x = 0;
       int y = 0;
@@ -147,55 +138,51 @@ public class Parser {
       Key key = null;
       Door door = null;
       while (eventReader.hasNext()) {
-      XMLEvent event = eventReader.nextEvent();
-      if (event.isStartElement()) {
-        StartElement startElement = event.asStartElement();
-        //If we have found a segment, we start the segment parsing.
-        if (startElement.getName().getLocalPart().equals("NewSegment")) {
-          gameObjectType = null;
-          x = 0;
-          y = 0;
-          hasPlayer = false;
-          key = null;
-          door = null;
-        }
-        if (event.asStartElement().getName().getLocalPart().equals("GameObject")) {
-          event = eventReader.nextEvent();
-          //Parse the appropriate GameObject based on the present tile
-          if (event.asCharacters().getData().equals("FreeTile")) {
-            gameObjectType = new FreeSpaceTile();
+        XMLEvent event = eventReader.nextEvent();
+        if (event.isStartElement()) {
+          StartElement startElement = event.asStartElement();
+          // If we have found a segment, we start the segment parsing.
+          if (startElement.getName().getLocalPart().equals("NewSegment")) {
+            gameObjectType = null;
+            x = 0;
+            y = 0;
+            hasPlayer = false;
+            key = null;
+            door = null;
           }
-          else if (event.asCharacters().getData().equals("Wall")) {
-            gameObjectType = new Wall();
+          if (event.asStartElement().getName().getLocalPart().equals("GameObject")) {
+            event = eventReader.nextEvent();
+            // Parse the appropriate GameObject based on the present tile
+            if (event.asCharacters().getData().equals("FreeTile")) {
+              gameObjectType = new FreeSpaceTile();
+            } else if (event.asCharacters().getData().equals("Wall")) {
+              gameObjectType = new Wall();
+            } else if (event.asCharacters().getData().equals("WinTile")) {
+              gameObjectType = new WinTile();
+            }
+            // Doors also require additional information to be parsed.
+            else if (event.asCharacters().getData().equals("Door Locked")
+                || event.asCharacters().getData().equals("Door Unlocked")) {
+              door = parseDoor(eventReader);
+              gameObjectType = door;
+            }
+            // Chests also require a key object to be created and stored within the chest.
+            else if (event.asCharacters().getData().equals("Chest")) {
+              key = parseKey(eventReader);
+              gameObjectType = new Chest(key);
+            } else if (event.asCharacters().getData().equals("Open Chest")) {
+              key = parseKey(eventReader);
+              Chest chest = new Chest(key);
+              chest.openAndClose();
+              gameObjectType = chest;
+            } else if (event.asCharacters().getData().equals("Empty Chest")) {
+              Chest chest = new Chest(null);
+              chest.openAndClose();
+              gameObjectType = chest;
+            }
+            continue;
           }
-          else if (event.asCharacters().getData().equals("WinTile")) {
-            gameObjectType = new WinTile();
-          }
-          //Doors also require additional information to be parsed.
-          else if (event.asCharacters().getData().equals("Door Locked")
-                  || event.asCharacters().getData().equals("Door Unlocked")) {
-            door = parseDoor(eventReader);
-            gameObjectType = door;
-          }
-          //Chests also require a key object to be created and stored within the chest.
-          else if (event.asCharacters().getData().equals("Chest")) {
-            key = parseKey(eventReader);
-            gameObjectType = new Chest(key);
-          }
-          else if (event.asCharacters().getData().equals("Open Chest")) {
-            key = parseKey(eventReader);
-            Chest chest = new Chest(key);
-            chest.openAndClose();
-            gameObjectType = chest;
-          }
-          else if (event.asCharacters().getData().equals("Empty Chest")) {
-            Chest chest = new Chest(null);
-            chest.openAndClose();
-            gameObjectType = chest;
-          }
-          continue;
-          }
-          //After parsing the Tile type, parse the coordinates.
+          // After parsing the Tile type, parse the coordinates.
           if (event.asStartElement().getName().getLocalPart().equals("CoordinateX")) {
             event = eventReader.nextEvent();
             x = Integer.parseInt(event.asCharacters().getData());
@@ -206,33 +193,31 @@ public class Parser {
             y = Integer.parseInt(event.asCharacters().getData());
             continue;
           }
-          //Parse the information declaring if the tile contains the player or not.
+          // Parse the information declaring if the tile contains the player or not.
           if (event.asStartElement().getName().getLocalPart().equals("hasPlayer")) {
             event = eventReader.nextEvent();
             if (event.asCharacters().getData().equals(TRUECHECKER)) {
               hasPlayer = true;
-            }
-            else {
+            } else {
               hasPlayer = false;
             }
             continue;
           }
         }
-        //Finally, after collecting all the appropriate information, create and store the segment.
+        // Finally, after collecting all the appropriate information, create and store
+        // the segment.
         if (event.isEndElement()) {
           EndElement endElement = event.asEndElement();
           if (endElement.getName().getLocalPart().equals("NewSegment")) {
-            Segment segment = new Segment(gameObjectType,x,y);
+            Segment segment = new Segment(gameObjectType, x, y);
             segment.setHasPlayer(hasPlayer);
             segments[x][y] = segment;
           }
         }
       }
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       System.out.println(e);
-    }
-    catch (XMLStreamException e) {
+    } catch (XMLStreamException e) {
       System.out.println(e);
     }
     return segments;
@@ -276,13 +261,12 @@ public class Parser {
         if (event.isEndElement()) {
           EndElement endElement = event.asEndElement();
           if (endElement.getName().getLocalPart().equals("Key")) {
-            Key key = new Key(id,description,name);
+            Key key = new Key(id, description, name);
             return key;
           }
         }
       }
-    }
-    catch (XMLStreamException e) {
+    } catch (XMLStreamException e) {
 
     }
     return null;
@@ -297,7 +281,7 @@ public class Parser {
    */
   public Door parseDoor(XMLEventReader eventReader) {
     int id = 0;
-    boolean unlocked  = false;
+    boolean unlocked = false;
     try {
       while (eventReader.hasNext()) {
         XMLEvent event = eventReader.nextEvent();
@@ -314,8 +298,7 @@ public class Parser {
             event = eventReader.nextEvent();
             if (event.asCharacters().getData().equals(TRUECHECKER)) {
               unlocked = true;
-            }
-            else {
+            } else {
               unlocked = false;
             }
             continue;
@@ -324,28 +307,27 @@ public class Parser {
         if (event.isEndElement()) {
           EndElement endElement = event.asEndElement();
           if (endElement.getName().getLocalPart().equals("newDoor")) {
-            return new Door(id,unlocked);
+            return new Door(id, unlocked);
           }
         }
       }
-    }
-    catch (XMLStreamException e) {
+    } catch (XMLStreamException e) {
 
     }
     return null;
   }
 
-  public void addTabs(XMLEventWriter eventWriter, int num) throws XMLStreamException{
+  public void addTabs(XMLEventWriter eventWriter, int num) throws XMLStreamException {
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();
     for (int i = 0; i < num; i++) {
       eventWriter.add(eventFactory.createDTD("\t"));
     }
   }
 
-  public void savePlayer(Player player) throws FileNotFoundException, XMLStreamException{
+  public void savePlayer(Player player) throws FileNotFoundException, XMLStreamException {
     XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-    XMLEventWriter eventWriter =
-            outputFactory.createXMLEventWriter(new FileOutputStream(playerSaveLocationName));
+    XMLEventWriter eventWriter = outputFactory
+        .createXMLEventWriter(new FileOutputStream(playerSaveLocationName));
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();
     XMLEvent end = eventFactory.createDTD("\n");
 
@@ -353,21 +335,21 @@ public class Parser {
     eventWriter.add(startDocument);
     eventWriter.add(end);
 
-    StartElement segmentsStartElement = eventFactory.createStartElement("","","Player");
+    StartElement segmentsStartElement = eventFactory.createStartElement("", "", "Player");
     eventWriter.add(segmentsStartElement);
     eventWriter.add(end);
 
     createNode(eventWriter, "CoordinateX", "" + player.getSegment().getX());
     createNode(eventWriter, "CoordinateY", "" + player.getSegment().getY());
 
-    eventWriter.add(eventFactory.createEndElement("","","Player"));
+    eventWriter.add(eventFactory.createEndElement("", "", "Player"));
     saveInventory(player);
   }
 
-  public void saveInventory(Player player) throws FileNotFoundException, XMLStreamException{
+  public void saveInventory(Player player) throws FileNotFoundException, XMLStreamException {
     XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-    XMLEventWriter eventWriter =
-            outputFactory.createXMLEventWriter(new FileOutputStream(inventorySaveDataName));
+    XMLEventWriter eventWriter = outputFactory
+        .createXMLEventWriter(new FileOutputStream(inventorySaveDataName));
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();
     XMLEvent end = eventFactory.createDTD("\n");
 
@@ -375,7 +357,7 @@ public class Parser {
     eventWriter.add(startDocument);
     eventWriter.add(end);
 
-    StartElement segmentsStartElement = eventFactory.createStartElement("","","Inventory");
+    StartElement segmentsStartElement = eventFactory.createStartElement("", "", "Inventory");
     eventWriter.add(segmentsStartElement);
     eventWriter.add(end);
 
@@ -386,10 +368,8 @@ public class Parser {
         eventWriter.add(eventFactory.createStartElement("", "", "Key"));
         eventWriter.add(end);
         createNode(eventWriter, "ID", "" + key.getID());
-        createNode(eventWriter, "Description",
-                "" + key.getDescription());
-        createNode(eventWriter, "Name",
-                "" + key.getName());
+        createNode(eventWriter, "Description", "" + key.getDescription());
+        createNode(eventWriter, "Name", "" + key.getName());
         addTabs(eventWriter, 1);
         eventWriter.add(eventFactory.createEndElement("", "", "Key"));
         eventWriter.add(end);
@@ -397,21 +377,20 @@ public class Parser {
       }
     }
 
-    eventWriter.add(eventFactory.createEndElement("","","Inventory"));
+    eventWriter.add(eventFactory.createEndElement("", "", "Inventory"));
   }
 
   /**
-   * Method used to parse the segments into a
-   * two dimensional array of Segments.
+   * Method used to parse the segments into a two dimensional array of Segments.
    *
    * @param segments
    *          The source array storing the segment information.
    *
    */
-  public void saveMap(Segment[][] segments) throws FileNotFoundException, XMLStreamException{
+  public void saveMap(Segment[][] segments) throws FileNotFoundException, XMLStreamException {
     XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-    XMLEventWriter eventWriter =
-            outputFactory.createXMLEventWriter(new FileOutputStream(dungeonSaveName));
+    XMLEventWriter eventWriter = outputFactory
+        .createXMLEventWriter(new FileOutputStream(dungeonSaveName));
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();
     XMLEvent end = eventFactory.createDTD("\n");
     XMLEvent tab = eventFactory.createDTD("\t");
@@ -420,14 +399,14 @@ public class Parser {
     eventWriter.add(startDocument);
     eventWriter.add(end);
 
-    //Create the opening Segments tag
-    StartElement segmentsStartElement = eventFactory.createStartElement("","","Segments");
+    // Create the opening Segments tag
+    StartElement segmentsStartElement = eventFactory.createStartElement("", "", "Segments");
     eventWriter.add(segmentsStartElement);
     eventWriter.add(end);
 
-    StartElement newSegmentStartElement = eventFactory.createStartElement("","","NewSegment");
+    StartElement newSegmentStartElement = eventFactory.createStartElement("", "", "NewSegment");
 
-    //Start writing segments.
+    // Start writing segments.
     for (int i = 0; i < segments.length; i++) {
       for (int j = 0; j < segments[i].length; j++) {
         if (segments[i][j] != null) {
@@ -435,17 +414,18 @@ public class Parser {
           eventWriter.add(newSegmentStartElement);
           eventWriter.add(end);
           if (segments[i][j].getObject().getType().equals("Door Locked")
-                  || segments[i][j].getObject().getType().equals("Door Unlocked")) {
+              || segments[i][j].getObject().getType().equals("Door Unlocked")) {
             createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
 
-            //Write the extra information required of a door.
+            // Write the extra information required of a door.
             addTabs(eventWriter, 2);
             eventWriter.add(eventFactory.createStartElement("", "", "newDoor"));
             eventWriter.add(end);
             addTabs(eventWriter, 1);
             createNode(eventWriter, "ID", "" + ((Door) segments[i][j].getObject()).ID());
             addTabs(eventWriter, 1);
-            createNode(eventWriter, "Unlocked", "" + ((Door) segments[i][j].getObject()).getUnlocked());
+            createNode(eventWriter, "Unlocked",
+                "" + ((Door) segments[i][j].getObject()).getUnlocked());
             addTabs(eventWriter, 2);
             eventWriter.add(eventFactory.createEndElement("", "", "newDoor"));
             eventWriter.add(end);
@@ -453,22 +433,23 @@ public class Parser {
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
             createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-          }
-          else if (segments[i][j].getObject().getStatus().equals("The chest is open and there is something inside.")) {
+          } else if (segments[i][j].getObject().getStatus()
+              .equals("The chest is open and there is something inside.")) {
             createNode(eventWriter, "GameObject", "Open Chest");
 
-            //Write the extra information required of a closed chest.
+            // Write the extra information required of a closed chest.
             addTabs(eventWriter, 2);
             eventWriter.add(eventFactory.createStartElement("", "", "Key"));
             eventWriter.add(end);
             addTabs(eventWriter, 1);
-            createNode(eventWriter, "ID", "" + ((Chest) segments[i][j].getObject()).getKey().getID());
+            createNode(eventWriter, "ID",
+                "" + ((Chest) segments[i][j].getObject()).getKey().getID());
             addTabs(eventWriter, 1);
             createNode(eventWriter, "Description",
-                    "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
+                "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
             addTabs(eventWriter, 1);
             createNode(eventWriter, "Name",
-                    "" + ((Chest) segments[i][j].getObject()).getKey().getName());
+                "" + ((Chest) segments[i][j].getObject()).getKey().getName());
             addTabs(eventWriter, 2);
             eventWriter.add(eventFactory.createEndElement("", "", "Key"));
             eventWriter.add(end);
@@ -477,29 +458,29 @@ public class Parser {
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
             createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-          }
-          else if (segments[i][j].getObject().getStatus().equals("The chest is open and it is empty.")) {
+          } else if (segments[i][j].getObject().getStatus()
+              .equals("The chest is open and it is empty.")) {
             createNode(eventWriter, "GameObject", "Empty Chest");
 
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
             createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-          }
-          else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
+          } else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
             createNode(eventWriter, "GameObject", "Chest");
 
-            //Write the extra information required of a closed chest.
+            // Write the extra information required of a closed chest.
             addTabs(eventWriter, 2);
             eventWriter.add(eventFactory.createStartElement("", "", "Key"));
             eventWriter.add(end);
             addTabs(eventWriter, 1);
-            createNode(eventWriter, "ID", "" + ((Chest) segments[i][j].getObject()).getKey().getID());
+            createNode(eventWriter, "ID",
+                "" + ((Chest) segments[i][j].getObject()).getKey().getID());
             addTabs(eventWriter, 1);
             createNode(eventWriter, "Description",
-                    "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
+                "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
             addTabs(eventWriter, 1);
             createNode(eventWriter, "Name",
-                    "" + ((Chest) segments[i][j].getObject()).getKey().getName());
+                "" + ((Chest) segments[i][j].getObject()).getKey().getName());
             addTabs(eventWriter, 2);
             eventWriter.add(eventFactory.createEndElement("", "", "Key"));
             eventWriter.add(end);
@@ -508,8 +489,7 @@ public class Parser {
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
             createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-          }
-          else {
+          } else {
             createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
@@ -523,7 +503,7 @@ public class Parser {
         }
       }
     }
-    eventWriter.add(eventFactory.createEndElement("","","Segments"));
+    eventWriter.add(eventFactory.createEndElement("", "", "Segments"));
     eventWriter.add(eventFactory.createEndDocument());
     eventWriter.close();
   }
@@ -543,12 +523,12 @@ public class Parser {
    * @return
    */
   private void createNode(XMLEventWriter eventWriter, String name, String content)
-          throws XMLStreamException{
+      throws XMLStreamException {
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();
     XMLEvent end = eventFactory.createDTD("\n");
     XMLEvent tab = eventFactory.createDTD("\t");
 
-    StartElement startElement = eventFactory.createStartElement("","",name);
+    StartElement startElement = eventFactory.createStartElement("", "", name);
     eventWriter.add(tab);
     eventWriter.add(tab);
     eventWriter.add(startElement);
@@ -556,14 +536,14 @@ public class Parser {
     Characters characters = eventFactory.createCharacters(content);
     eventWriter.add(characters);
 
-    EndElement endElement = eventFactory.createEndElement("","",name);
+    EndElement endElement = eventFactory.createEndElement("", "", name);
     eventWriter.add(endElement);
     eventWriter.add(end);
   }
 
   public static void main(String[] args) {
     Parser p = new Parser(new Main());
-    //p.loadMap(new File(testMapFileName));
+    // p.loadMap(new File(testMapFileName));
     p.loadMap(new File(testMapFileName));
   }
 }

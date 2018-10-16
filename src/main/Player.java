@@ -10,7 +10,8 @@ public class Player {
   /**
    * Constructor of Player.
    *
-   * @param segment the player will spawn on.
+   * @param segment
+   *          the player will spawn on.
    */
   public Player(Segment s) {
     this.segment = s;
@@ -28,7 +29,8 @@ public class Player {
   /**
    * sets segment field to new segment.
    *
-   * @param new segment
+   * @param new
+   *          segment
    */
   public void move(Segment s) {
     this.segment = s;
@@ -46,9 +48,11 @@ public class Player {
   /**
    * Gives only new keys into the inventory.
    *
-   *@param new key
+   * @param new
+   *          key
    *
-   *@param main to alter inventory event panel.
+   * @param main
+   *          to alter inventory event panel.
    *
    * @return String of events that happened when attempting to add key.
    */

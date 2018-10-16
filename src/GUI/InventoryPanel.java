@@ -17,98 +17,110 @@ import javax.swing.event.ListSelectionListener;
 
 import main.GameItem;
 
+/**
+ * InventoryPanel stores a list and a text box within a splitPane. The list
+ * lists each item in the players inventory, and when an item is clicked on the
+ * text box displays a Description of that item.
+ *
+ * @author millerdani1
+ *
+ */
 @SuppressWarnings("serial")
 public class InventoryPanel extends JPanel {
 
-	private int dimensionHeight = 120;
-	private int splitPaneWidth = 600;
-	private int splitPaneHeight = 80;
+  private int dimensionHeight = 120;
+  private int splitPaneWidth = 600;
+  private int splitPaneHeight = 80;
 
-	JScrollPane scrollPane;
-	JList<GameItem> listOfItems;
-	DefaultListModel<GameItem> listModel;
+  JScrollPane scrollPane;
+  JList<GameItem> listOfItems;
+  DefaultListModel<GameItem> listModel;
 
-	JSplitPane splitPane;
-	JPanel rightPanel;
-	JTextArea itemDescriptions;
+  JSplitPane splitPane;
+  JTextArea itemDescriptions;
 
-	/**
-	 * InventoryPanel stores a list and a text box. The list lists each item in the
-	 * players inventory, and when an item is clicked on the text box displays a
-	 * Description of that item.
-	 *
-	 */
-	public InventoryPanel() {
+  /**
+   * Sets dimensions for InventoryPanel, adds and configures JList and JTextArea
+   * within JSplitPane. Sets up actionListener interaction between JList and
+   * JTextArea.
+   *
+   */
+  public InventoryPanel() {
 
-		// set dimensions
-		Dimension dimension = getPreferredSize();
-		dimension.height = dimensionHeight;
-		setPreferredSize(dimension);
-		setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
-		setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
+    // set dimensions
+    Dimension dimension = getPreferredSize();
+    dimension.height = dimensionHeight;
+    setPreferredSize(dimension);
+    setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
+    setMinimumSize(new Dimension(Integer.MIN_VALUE, dimensionHeight));
 
-		//////////////////////////// Add Elements///////////////////////////////////
+    //////////////////////////// Add Elements///////////////////////////////////
 
-		// JList (left section of JSplitPane)
+    // JList (left section of JSplitPane)
 
-		listOfItems = new JList<>();
-		listOfItems.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0), "Inventory"));
-		listModel = new DefaultListModel<>();
+    listOfItems = new JList<>();
+    listOfItems.setBorder(BorderFactory
+        .createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0), "Inventory"));
+    listModel = new DefaultListModel<>();
 
-		listOfItems.setModel(listModel);
-		listOfItems.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		listOfItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		listOfItems.setVisibleRowCount(-1);
+    listOfItems.setModel(listModel);
+    listOfItems.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+    listOfItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+    listOfItems.setVisibleRowCount(-1);
 
-		scrollPane = new JScrollPane(listOfItems);
+    scrollPane = new JScrollPane(listOfItems);
 
-		// JTextArea (right section of JSplitPane)
+    // JTextArea (right section of JSplitPane)
 
-		itemDescriptions = new JTextArea();
-		itemDescriptions.setLineWrap(true);
-		itemDescriptions.setEditable(false);
-		itemDescriptions.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0), "Description"));
+    itemDescriptions = new JTextArea();
+    itemDescriptions.setLineWrap(true);
+    itemDescriptions.setEditable(false);
+    itemDescriptions.setBorder(BorderFactory
+        .createTitledBorder(BorderFactory.createLineBorder(Color.WHITE, 0), "Description"));
 
-		// JSPlitPane
-		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, itemDescriptions);
-		splitPane.setOneTouchExpandable(true);
-		splitPane.setDividerLocation(splitPaneWidth / 2);
-		splitPane.setPreferredSize(new Dimension(splitPaneWidth, splitPaneHeight));
+    // JSPlitPane
+    splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, itemDescriptions);
+    splitPane.setOneTouchExpandable(true);
+    splitPane.setDividerLocation(splitPaneWidth / 2);
+    splitPane.setPreferredSize(new Dimension(splitPaneWidth, splitPaneHeight));
 
-		// set layout
-		setLayout(new GridBagLayout());
-		GridBagConstraints grid = new GridBagConstraints();
+    // set layout
+    setLayout(new GridBagLayout());
+    GridBagConstraints grid = new GridBagConstraints();
 
-		// set components
+    // set components
 
-		grid.gridx = 0;
-		grid.gridy = 0;
-		add(splitPane, grid);
+    grid.gridx = 0;
+    grid.gridy = 0;
+    add(splitPane, grid);
 
-		// add listener
-		listOfItems.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+    // add listener
+    listOfItems.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
 
-				GameItem object = listOfItems.getSelectedValue();
-				itemDescriptions.setText(object.getDescription());
+        GameItem object = listOfItems.getSelectedValue();
+        itemDescriptions.setText(object.getDescription());
 
-			}
-		});
-	}
+      }
+    });
+  }
 
-	public void addItemToInventory(GameItem item) {
-		listModel.addElement(item);
-	}
+  /**
+   * called to add item to inventory.
+   *
+   * @param item
+   *          GameItem to be added to inventory
+   */
+  public void addItemToInventory(GameItem item) {
+    listModel.addElement(item);
+  }
 
-	public void clearInventory() {
-		this.listModel.clear();
-	}
-
-	public DefaultListModel<GameItem> getItems() {
-		return this.listModel;
-	}
+  /**
+   * clears inventory of all GameItems.
+   */
+  public void clearInventory() {
+    this.listModel.clear();
+  }
 }
