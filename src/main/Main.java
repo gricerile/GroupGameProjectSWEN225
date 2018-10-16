@@ -213,6 +213,7 @@ public class Main {
 	public void saveGame() {
 		try {
 			p.saveMap(segmentsBoard);
+			p.savePlayer(player);
 		}
 		catch (FileNotFoundException e) {}
 		catch (XMLStreamException e) {}
