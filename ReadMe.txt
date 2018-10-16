@@ -19,6 +19,9 @@ InventoryStartData.xml
 InventorySaveData.xml
 Dungeon Map Save.xml
 
+The arrow images should also be placed inside a folder named "arrowImages"
+located in the project folder, but not the src folder.
+
 -------------------
 Game Rules:
 
