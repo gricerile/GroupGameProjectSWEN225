@@ -23,13 +23,14 @@ public class Main {
 	}
 
 	public Main() {
-		this.p = new Parser();
+		this.p = new Parser(this);
 		this.g = new GUI(this);
 		p.loadMap(new File(Parser.testMapFileName));
 		this.segmentsBoard = this.makeTestSegment();
 		//this.segmentsBoard = this.makeBoard();
 		//this.player = new Player(segmentsBoard[0][0]);
-		this.player = this.p.loadPlayer(new File(Parser.playerLocationName));
+		this.player = this.p.loadPlayer(new File(Parser.playerLocationName),
+				new File(Parser.inventoryStartDataName));
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
 		this.renderer = new Renderer(this);
@@ -222,7 +223,8 @@ public class Main {
 
 	public void loadGame() {
 		segmentsBoard = this.p.loadMap(new File(Parser.dungeonSaveName));
-		player = this.p.loadPlayer(new File(Parser.playerSaveLocationName));
+		player = this.p.loadPlayer(new File(Parser.playerSaveLocationName),
+				new File(Parser.inventorySaveDataName));
 		reDraw();
 	}
 

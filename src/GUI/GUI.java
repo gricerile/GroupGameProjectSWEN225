@@ -32,13 +32,15 @@ public class GUI {
 
 	public GUI(Main main) {
 		this.main = main;
+		initialise();
+		/*
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
 				initialise();
 			}
-		});
+		});*/
 	}
 
 	public void redraw() {
