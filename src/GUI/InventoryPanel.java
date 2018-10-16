@@ -104,6 +104,10 @@ public class InventoryPanel extends JPanel {
 		listModel.addElement(item);
 	}
 
+	public void clearInventory() {
+		this.listModel.clear();
+	}
+
 	public DefaultListModel<GameItem> getItems() {
 		return this.listModel;
 	}
