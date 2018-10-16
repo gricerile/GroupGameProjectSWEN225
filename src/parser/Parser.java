@@ -7,6 +7,8 @@ import javax.xml.stream.events.*;
 
 import main.*;
 
+
+//@Author Victor Ong (ongvict), vogog2@gmail.com
 public class Parser {
   public static final String smallMapName = "smallmap.xml";
   public static final String mediumMapName = "mediummap.xml";
