@@ -28,27 +28,31 @@ public class Renderer {
 
   /**
    * Renderer constructor that takes in the main.
-   * @param main from the main class that sets the board up.
+   * 
+   * @param main
+   *          from the main class that sets the board up.
    */
   public Renderer(Main main) {
     this.m = main;
     this.board = m.getSegments();
     // initialise the board with the 2D array of segs stored in the main class
-    //this.board = m.makeTestSegment();
-    //this.board = m.makeBoard();
-
+    // this.board = m.makeTestSegment();
+    // this.board = m.makeBoard();
 
   }
 
   /**
    * Draw method that should draw the map and the player based on the segment type
-   * that is stored in the 2d array setup from the main.
-   * first layer is rendered as grass, that is where the player walks,
-   * second layer is all the obstacles / objects in the game, such as walls, doors, chests etc.
+   * that is stored in the 2d array setup from the main. first layer is rendered
+   * as grass, that is where the player walks, second layer is all the obstacles /
+   * objects in the game, such as walls, doors, chests etc.
    *
-   * @param g graphics.
-   * @param windowWidth graphics frame width.
-   * @param windowHeight graphics frame height.
+   * @param g
+   *          graphics.
+   * @param windowWidth
+   *          graphics frame width.
+   * @param windowHeight
+   *          graphics frame height.
    */
   public void draw(Graphics g, int windowWidth, int windowHeight) {
     // render the first layer of the game (ground / win tile)
@@ -111,7 +115,8 @@ public class Renderer {
   }
 
   /**
-   * take in the height and width of a given image and then shift so it fixs the
+   *
+   * Take in the height and width of a given image and then shift so it fixes the
    * screen.
    * @param image that needs to be shifted.
    * @return image shift value.
@@ -136,10 +141,13 @@ public class Renderer {
   }
 
   /**
-   * Method to convert cartisian to isometric, helps render out the images in a diamond shape.
-   * turning regular 2d array into isometric.
-   * @param x coord from loop.
-   * @param y coord from loop.
+   * Method to convert cartisian to isometric, helps render out the images in a
+   * diamond shape. turning regular 2d array into isometric.
+   * 
+   * @param x
+   *          coord from loop.
+   * @param y
+   *          coord from loop.
    * @return new isometric Y coord.
    */
   private int isoY(int x, int y) {
@@ -151,10 +159,10 @@ public class Renderer {
     return isoY;
   }
 
-  /*each square in a 2d grid is an segment object
-   * get each segment and use coords to use in polygons to draw the new isometric square
+  /*
+   * each square in a 2d grid is an segment object get each segment and use coords
+   * to use in polygons to draw the new isometric square
    *
-   * */
-
+   */
 
 }

@@ -17,9 +17,11 @@ public class Door implements GameObject {
   /**
    * constructor of door.
    *
-   *@param id of door that is matched with key.
+   * @param id
+   *          of door that is matched with key.
    *
-   *@param boolean to determine if door locked or unlocked.
+   * @param boolean
+   *          to determine if door locked or unlocked.
    */
   public Door(int s, boolean unlocked) {
     this.ID = s;
@@ -29,7 +31,7 @@ public class Door implements GameObject {
   /**
    * gets door id.
    *
-   *@return id field.
+   * @return id field.
    */
   public int ID() {
     return this.ID;
@@ -38,19 +40,19 @@ public class Door implements GameObject {
   /**
    * gets unlocked boolean.
    *
-   *@return unlocked field.
+   * @return unlocked field.
    */
   public boolean getUnlocked() {
     return this.unlocked;
   }
 
   /**
-   * attempts to unlocked door with key.
-   * And changes unlocked boolean if a match.
+   * attempts to unlocked door with key. And changes unlocked boolean if a match.
    *
-   *@param key which player has.
+   * @param key
+   *          which player has.
    *
-   *@return String from the events that occur from unlock door attemp.
+   * @return String from the events that occur from unlock door attemp.
    */
   public String unlock(Key k) {
     if (k.equals(this.ID)) {
@@ -65,7 +67,7 @@ public class Door implements GameObject {
   /**
    * gets state.
    *
-   *@return String form of state.
+   * @return String form of state.
    */
   @Override
   public String getStatus() {
@@ -79,7 +81,7 @@ public class Door implements GameObject {
   /**
    * gets game object type.
    *
-   *@return game object type in string form.
+   * @return game object type in string form.
    */
   @Override
   public String getType() {

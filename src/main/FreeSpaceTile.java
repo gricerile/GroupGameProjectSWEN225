@@ -12,7 +12,7 @@ public class FreeSpaceTile implements GameObject {
   /**
    * gets state of game objects.
    *
-   *@return String form of game objects.
+   * @return String form of game objects.
    */
   @Override
   public String getStatus() {
@@ -23,7 +23,7 @@ public class FreeSpaceTile implements GameObject {
   /**
    * gets game object type.
    *
-   *@return String form of game object type.
+   * @return String form of game object type.
    */
   @Override
   public String getType() {

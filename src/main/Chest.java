@@ -15,7 +15,8 @@ public class Chest implements GameObject {
   /**
    * constructor for chest.
    *
-   *@param key assigned to chest.
+   * @param key
+   *          assigned to chest.
    */
   public Chest(Key k) {
     this.key = k;
@@ -25,7 +26,7 @@ public class Chest implements GameObject {
   /**
    * gets for key.
    *
-   *@return key field.
+   * @return key field.
    */
   public Key getKey() {
     return this.key;
@@ -34,7 +35,7 @@ public class Chest implements GameObject {
   /**
    * open and closes chest by altering open boolean.
    *
-   *@return String of the event that occurs if opened of closed.
+   * @return String of the event that occurs if opened of closed.
    */
   public String openAndClose() {
     if (this.open == true) {
@@ -49,7 +50,7 @@ public class Chest implements GameObject {
   /**
    * Like poll on a queue, returns and removes key from chest.
    *
-   *@return key from chest.
+   * @return key from chest.
    */
   public Key takeKey() {
     if (this.open == true && this.key != null) {
@@ -68,7 +69,7 @@ public class Chest implements GameObject {
   /**
    * gets state of chest.
    *
-   *@return A string of the current state.
+   * @return A string of the current state.
    */
   @Override
   public String getStatus() {
@@ -84,7 +85,7 @@ public class Chest implements GameObject {
   /**
    * gets game object type.
    *
-   *@return string form of gameobject type.
+   * @return string form of gameobject type.
    */
   @Override
   public String getType() {

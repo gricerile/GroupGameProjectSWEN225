@@ -12,7 +12,7 @@ public class WinTile implements GameObject {
   /**
    * gets game object type.
    *
-   *@return String form of game object type.
+   * @return String form of game object type.
    */
   @Override
   public String getStatus() {
@@ -23,7 +23,7 @@ public class WinTile implements GameObject {
   /**
    * gets game object type.
    *
-   *@return String form of game object type.
+   * @return String form of game object type.
    */
   @Override
   public String getType() {

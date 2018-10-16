@@ -15,6 +15,7 @@ import javax.xml.stream.XMLStreamException;
  * @author gricerile
  */
 public class Main {
+
 	private Segment[][] segmentsBoard = new Segment[3][3]; // the size can change but for testing
 	// the size is 2 segments
 	private Player player;
@@ -399,5 +400,4 @@ public class Main {
 		Player p = new Player(this.segmentsBoard[0][0]);
 		return p;
 	}
-
 }

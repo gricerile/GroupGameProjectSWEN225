@@ -8,12 +8,15 @@ package main;
 public abstract class GameItem {
   private String description;
   private String name;
+
   /**
-   *contructor of a game item.
+   * contructor of a game item.
    *
-   *@param string of description.
+   * @param string
+   *          of description.
    *
-   *@param string of name(type).
+   * @param string
+   *          of name(type).
    */
   public GameItem(String d, String n) {
     this.description = d;
@@ -23,7 +26,7 @@ public abstract class GameItem {
   /**
    * gets game item name.
    *
-   *@return game item name.
+   * @return game item name.
    */
   public String getName() {
     return this.name;
@@ -32,7 +35,7 @@ public abstract class GameItem {
   /**
    * gets game item description.
    *
-   *@return game item description.
+   * @return game item description.
    */
   public String getDescription() {
     return this.description;
@@ -41,7 +44,7 @@ public abstract class GameItem {
   /**
    * gets game item name.
    *
-   *@return game item name.
+   * @return game item name.
    */
   @Override
   public String toString() {

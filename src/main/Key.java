@@ -12,11 +12,14 @@ public class Key extends GameItem {
   /**
    * Constructor of Key.
    *
-   * @param id of key that matches with door.
+   * @param id
+   *          of key that matches with door.
    *
-   * @param description of game item.
+   * @param description
+   *          of game item.
    *
-   * @param name of game item.
+   * @param name
+   *          of game item.
    */
   public Key(int ID, String description, String name) {
     super(description, name);
@@ -26,7 +29,7 @@ public class Key extends GameItem {
   /**
    * gets key id.
    *
-   *@return key id field.
+   * @return key id field.
    */
   public int getID() {
     return this.ID;
@@ -35,15 +38,16 @@ public class Key extends GameItem {
   /**
    * gets game item description.
    *
-   *@return game item description.
+   * @return game item description.
    */
   public String getDescription() {
     return super.getDescription();
   }
+
   /**
    * gets game item name.
    *
-   *@return game item name.
+   * @return game item name.
    */
   public String getName() {
     return super.getName();
@@ -52,9 +56,10 @@ public class Key extends GameItem {
   /**
    * compares id of door to key to find match.
    *
-   *@param door's id.
+   * @param door's
+   *          id.
    *
-   *@return boolean of comparison.
+   * @return boolean of comparison.
    */
   public boolean equals(int doorID) {
     if (this.ID == doorID) {
@@ -67,7 +72,7 @@ public class Key extends GameItem {
   /**
    * gets state of key.
    *
-   *@return string form of state.
+   * @return string form of state.
    */
   public String getStatus() {
     return ("The Key unlocks/locks the door " + this.ID);
@@ -76,7 +81,7 @@ public class Key extends GameItem {
   /**
    * gets type of key.
    *
-   *@return string form of key.
+   * @return string form of key.
    */
   public String getType() {
     return "Key";

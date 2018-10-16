@@ -19,10 +19,11 @@ import parser.Parser;
 
 /**
  * test class for renderer package.
+ * 
  * @author chenkelv
  *
  */
-public class renderpackageTests{
+public class renderpackageTests {
 
   @Test
   /**
@@ -50,7 +51,7 @@ public class renderpackageTests{
    * check that the conversion between the coordinates are correct.
    */
   public void renderIsoY() {
-    
+
   }
 
   @Test

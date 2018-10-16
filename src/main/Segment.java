@@ -20,11 +20,14 @@ public class Segment {
   /**
    * Constructor of Segment
    *
-   * @param the game object type on the segment.
+   * @param the
+   *          game object type on the segment.
    *
-   * @param x position.
+   * @param x
+   *          position.
    *
-   * @param y position.
+   * @param y
+   *          position.
    */
   public Segment(GameObject object, int x, int y) {
     this.object = object;
@@ -46,7 +49,8 @@ public class Segment {
   /**
    * sets has player field.
    *
-   *@param boolean which determines is has player field is true or false.
+   * @param boolean
+   *          which determines is has player field is true or false.
    */
   public void setHasPlayer(boolean b) {
     this.hasPlayer = b;
@@ -55,7 +59,7 @@ public class Segment {
   /**
    * gets the game objects.
    *
-   *@return the game object on the segment.
+   * @return the game object on the segment.
    */
   public GameObject getObject() {
     return this.object;
@@ -64,7 +68,7 @@ public class Segment {
   /**
    * gets x coord.
    *
-   *@return x coord of segment.
+   * @return x coord of segment.
    */
   public int getX() {
     return this.x;
@@ -73,7 +77,7 @@ public class Segment {
   /**
    * gets y coord.
    *
-   *@return y coord of segment.
+   * @return y coord of segment.
    */
   public int getY() {
     return this.y;
@@ -82,9 +86,10 @@ public class Segment {
   /**
    * Method to compare two segments to check if they're the same.
    *
-   * @param segment that will be compared.
+   * @param segment
+   *          that will be compared.
    *
-   *@return boolean of comparison.
+   * @return boolean of comparison.
    */
   public boolean equals(Segment s) {
     if (this.getX() == s.getX() && this.getY() == s.getY()) {
@@ -95,9 +100,9 @@ public class Segment {
   }
 
   /**
-   *Opens chest on segment if there is a chest.
+   * Opens chest on segment if there is a chest.
    *
-   *@return String from the event of the opening or not of the chest.
+   * @return String from the event of the opening or not of the chest.
    */
   public String opensChest() {
     if (this.object instanceof Chest) {
@@ -110,7 +115,7 @@ public class Segment {
   /**
    * gets the key from a chest and returns it.
    *
-   *@return key from chest.
+   * @return key from chest.
    */
   public Key takeFromChest() {
     if (this.object instanceof Chest) {

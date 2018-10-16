@@ -5,49 +5,56 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
+/**
+ * NavigationPanel contains 2 JPanels containing buttons to navigate the map and
+ * interact with it.
+ *
+ * @author millerdani1
+ *
+ */
 @SuppressWarnings("serial")
 public class NavigationPanel extends JPanel {
 
-	private GUI gui;
+  private GUI gui;
 
-	private int dimensionHeight = 100;
+  private int dimensionHeight = 100;
 
-	NavigationButtons navButtons;
-	GameButtons gameButtons;
+  NavigationButtons navButtons;
+  GameButtons gameButtons;
 
-	/**
-	 * NavigationPanel contains 2 JPanels containing buttons to navigate the map and
-	 * interact with it
-	 *
-	 * @param gui
-	 *            instance of GUI to reference back to when buttons are pressed
-	 */
-	public NavigationPanel(GUI gui) {
-		this.gui = gui;
+  /**
+   * Initializes buttons, sets actionListeners for buttons and sets layout of
+   * JPanel.
+   *
+   * @param gui
+   *          instance of GUI to reference back to when buttons are pressed
+   */
+  public NavigationPanel(GUI gui) {
+    this.gui = gui;
 
-		// set dimensions
-		Dimension dimension = getPreferredSize();
-		dimension.height = dimensionHeight;
-		setPreferredSize(dimension);
-		setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
+    // set dimensions
+    Dimension dimension = getPreferredSize();
+    dimension.height = dimensionHeight;
+    setPreferredSize(dimension);
+    setMaximumSize(new Dimension(Integer.MAX_VALUE, dimensionHeight));
 
-		// add elements
-		navButtons = new NavigationButtons(this.gui);
-		gameButtons = new GameButtons(this.gui);
+    // add elements
+    navButtons = new NavigationButtons(this.gui);
+    gameButtons = new GameButtons(this.gui);
 
-		// set layout
-		setLayout(new GridBagLayout());
-		GridBagConstraints grid = new GridBagConstraints();
+    // set layout
+    setLayout(new GridBagLayout());
+    GridBagConstraints grid = new GridBagConstraints();
 
-		///// 1 column/////
-		grid.gridx = 0;
-		grid.gridy = 0;
-		grid.ipadx = 10;
-		add(navButtons, grid);
+    ///// 1 column/////
+    grid.gridx = 0;
+    grid.gridy = 0;
+    grid.ipadx = 10;
+    add(navButtons, grid);
 
-		///// 2 column/////
-		grid.gridx = 1;
-		grid.gridy = 0;
-		add(gameButtons, grid);
-	}
+    ///// 2 column/////
+    grid.gridx = 1;
+    grid.gridy = 0;
+    add(gameButtons, grid);
+  }
 }
