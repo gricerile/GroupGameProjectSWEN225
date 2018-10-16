@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Segments>
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>0</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>true</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>0</CoordinateX>
+		<CoordinateY>1</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>0</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>0</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>0</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>0</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Chest</GameObject>
+		<Key>
+			<ID>101</ID>
+			<Description>Key opens door 101</Description>
+			<Name>Key ID 101</Name>
+		</Key>
+		<chestClosed>true</chestClosed>
+		<CoordinateX>0</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>1</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>1</CoordinateX>
+		<CoordinateY>1</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>1</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>1</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>1</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>1</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>1</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>2</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>2</CoordinateX>
+		<CoordinateY>1</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>2</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>2</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>2</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>2</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>2</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>3</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>3</CoordinateX>
+		<CoordinateY>1</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>3</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>3</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>3</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>3</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>3</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>4</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>4</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>4</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>4</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>4</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>4</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>5</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>5</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>5</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>5</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>5</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>5</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>6</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>6</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>6</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>6</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>7</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>7</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>7</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>7</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>8</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>8</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>8</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>8</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>8</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>8</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>9</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>9</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>9</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>9</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>9</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>9</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>10</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>10</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>10</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>10</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>10</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>10</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>11</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>11</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>11</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>11</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>11</CoordinateX>
+		<CoordinateY>5</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Door Locked</GameObject>
+		<newDoor>
+			<ID>101</ID>
+			<Unlocked>false</Unlocked>
+		</newDoor>
+		<CoordinateX>11</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>12</CoordinateX>
+		<CoordinateY>0</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>12</CoordinateX>
+		<CoordinateY>1</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>12</CoordinateX>
+		<CoordinateY>2</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>Wall</GameObject>
+		<CoordinateX>12</CoordinateX>
+		<CoordinateY>3</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>FreeTile</GameObject>
+		<CoordinateX>12</CoordinateX>
+		<CoordinateY>4</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+	<NewSegment>
+		<GameObject>WinTile</GameObject>
+		<CoordinateX>12</CoordinateX>
+		<CoordinateY>6</CoordinateY>
+		<hasPlayer>false</hasPlayer>
+	</NewSegment>
+
+</Segments>

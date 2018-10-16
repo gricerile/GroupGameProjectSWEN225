@@ -2,6 +2,11 @@ package main;
 
 import java.awt.Graphics;
 
+/**
+ * Default empty object.
+ * @author gricerile
+ *
+ */
 public class FreeSpaceTile implements GameObject {
 
   /**

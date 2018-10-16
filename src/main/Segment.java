@@ -4,6 +4,11 @@ import java.awt.Image;
 
 import renderer.Texture;
 
+/**
+ *Basic building block of the game.
+ * @author gricerile
+ *
+ */
 public class Segment {
   // fields
   private GameObject object;

@@ -75,7 +75,6 @@ public class Renderer {
         }
       }
     }
-
     // end of rendering for the first layer of the map
 
     // being rendering of the objects, walls, chest, doors
@@ -87,28 +86,28 @@ public class Renderer {
           // check to render the wall
           if (board[i][j].getObject().getType().equals("Wall")) {
             this.image = t.onLoad("wall64");
-            g.drawImage(image, (windowWidth / 2) - isoX(i, j), (windowHeight / 2) - isoY(i, j)
-                + image.getHeight(null) * 4 - image.getHeight(null) / 2, null);
-            // check to render the chest (closed)
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
+          // check to render the chest (closed)
           } else if (board[i][j].getObject().getType().equals("YellowChest")) {
             this.image = t.onLoad("closedChest64");
-            g.drawImage(image, (windowWidth / 2) - isoX(i, j), (windowHeight / 2) - isoY(i, j)
-                + image.getHeight(null) * 4 - image.getHeight(null) / 2, null);
-            // check to render the chest (opened)
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
+          // check to render the chest (opened)
           } else if (board[i][j].getObject().getType().equals("RedChest")) {
             this.image = t.onLoad("openedChest64");
-            g.drawImage(image, (windowWidth / 2) - isoX(i, j), (windowHeight / 2) - isoY(i, j)
-                + image.getHeight(null) * 4 - image.getHeight(null) / 2, null);
-            // check to render the door
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
+          // check to render the door
           } else if (board[i][j].getObject().getType().equals("Door Locked")) {
             this.image = t.onLoad("door64");
-            g.drawImage(image, (windowWidth / 2) - isoX(i, j), (windowHeight / 2) - isoY(i, j)
-                + image.getHeight(null) * 4 - image.getHeight(null) / 2, null);
-            // check to render the player
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
+          // check to render the player
           } else if (board[i][j].hasPlayer()) { // else if check for the player
             this.image = t.onLoad("player64");
-            g.drawImage(image, (windowWidth / 2) - isoX(i, j), (windowHeight / 2) - isoY(i, j)
-                + image.getHeight(null) * 4 - image.getHeight(null) / 2, null);
+            g.drawImage(image, (windowWidth / 2) - isoX(i, j),
+                (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
           }
         }
       }
@@ -116,13 +115,22 @@ public class Renderer {
   }
 
   /**
-   * Method to convert cartisian to isometric, helps render out the images in a
-   * diamond shape. turning regular 2d array into isometric.
-   * 
-   * @param x
-   *          coord from loop.
-   * @param y
-   *          coord from loop.
+   *
+   * Take in the height and width of a given image and then shift so it fixes the
+   * screen.
+   * @param image that needs to be shifted.
+   * @return image shift value.
+   */
+  private int imageSizing(Image image) {
+    int num = image.getHeight(null) * 4 - image.getHeight(null) / 2;
+    return num;
+  }
+
+  /**
+   * Method to convert cartisian to isometric, helps render out the images in a diamond shape.
+   * turning regular 2d array into isometric.
+   * @param x coord from loop.
+   * @param y coord from loop.
    * @return new isometric X coord.
    */
   private int isoX(int x, int y) {

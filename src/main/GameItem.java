@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Abstract class for items in player's inventory.
+ * @author gricerile
+ *
+ */
 public abstract class GameItem {
   private String description;
   private String name;
