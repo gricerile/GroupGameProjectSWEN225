@@ -26,7 +26,7 @@ public class Parser {
 
 
   /**
-   * Method to used to parse the player data
+   * Method used to parse the player data
    * into the main class
    *
    * @param playerFile
@@ -79,7 +79,7 @@ public class Parser {
   }
 
   /**
-   * Method to used to parse the segments into a
+   * Method used to parse the segments into a
    * two dimensional array of Segments.
    *
    * @param mapFile
@@ -292,8 +292,29 @@ public class Parser {
     }
   }
 
+  public void savePlayer(Player player) throws FileNotFoundException, XMLStreamException{
+    XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+    XMLEventWriter eventWriter =
+            outputFactory.createXMLEventWriter(new FileOutputStream(playerSaveLocationName));
+    XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+    XMLEvent end = eventFactory.createDTD("\n");
+
+    StartDocument startDocument = eventFactory.createStartDocument();
+    eventWriter.add(startDocument);
+    eventWriter.add(end);
+
+    StartElement segmentsStartElement = eventFactory.createStartElement("","","Player");
+    eventWriter.add(segmentsStartElement);
+    eventWriter.add(end);
+
+    createNode(eventWriter, "CoordinateX", "" + player.getSegment().getX());
+    createNode(eventWriter, "CoordinateY", "" + player.getSegment().getY());
+
+    eventWriter.add(eventFactory.createEndElement("","","Player"));
+  }
+
   /**
-   * Method to used to parse the segments into a
+   * Method used to parse the segments into a
    * two dimensional array of Segments.
    *
    * @param segments
@@ -302,7 +323,8 @@ public class Parser {
    */
   public void saveMap(Segment[][] segments) throws FileNotFoundException, XMLStreamException{
     XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-    XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(dungeonSaveName));
+    XMLEventWriter eventWriter =
+            outputFactory.createXMLEventWriter(new FileOutputStream(dungeonSaveName));
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();
     XMLEvent end = eventFactory.createDTD("\n");
     XMLEvent tab = eventFactory.createDTD("\t");
@@ -317,8 +339,6 @@ public class Parser {
     eventWriter.add(end);
 
     StartElement newSegmentStartElement = eventFactory.createStartElement("","","NewSegment");
-
-
 
     //Start writing segments.
     for (int i = 0; i < segments.length; i++) {
@@ -346,7 +366,8 @@ public class Parser {
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
             createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-          } else if (segments[i][j].getObject().getStatus().equals("The chest is open and there is something inside.")) {
+          }
+          else if (segments[i][j].getObject().getStatus().equals("The chest is open and there is something inside.")) {
             createNode(eventWriter, "GameObject", "Open Chest");
 
             //Write the extra information required of a closed chest.
@@ -369,9 +390,11 @@ public class Parser {
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
             createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-          } else if (segments[i][j].getObject().getStatus().equals("The chest is open and it is empty.")) {
+          }
+          else if (segments[i][j].getObject().getStatus().equals("The chest is open and it is empty.")) {
 
-          } else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
+          }
+          else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
             createNode(eventWriter, "GameObject", "Chest");
 
             //Write the extra information required of a closed chest.
@@ -394,7 +417,8 @@ public class Parser {
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
             createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-          } else {
+          }
+          else {
             createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
             createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
             createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
