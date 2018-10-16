@@ -11,10 +11,6 @@ public class Texture {
   private String imageName = "";
   public Texture() {}
 
-  public Texture(String newPath) {
-    this.path = newPath;
-  }
-
   /**
    * already considers the path from tx folder and file type .png,
    * image is loaded through typing the name of the image.
