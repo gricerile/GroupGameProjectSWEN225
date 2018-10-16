@@ -69,6 +69,15 @@ public class Parser {
     return player;
   }
 
+  public void resetSegments() {
+    for (int i = 0; i < segments.length; i++) {
+      for (int j = 0; j < segments[i].length; j++) {
+        segments[i][j] = null;
+      }
+    }
+    
+  }
+
   /**
    * Method to used to parse the segments into a
    * two dimensional array of Segments.
@@ -79,6 +88,7 @@ public class Parser {
    *          The 2d array of segments storing map information.
    */
   public Segment[][] loadMap(File mapFile) {
+    resetSegments();
     try {
       XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
@@ -313,91 +323,89 @@ public class Parser {
     //Start writing segments.
     for (int i = 0; i < segments.length; i++) {
       for (int j = 0; j < segments[i].length; j++) {
-        eventWriter.add(tab);
-        eventWriter.add(newSegmentStartElement);
-        eventWriter.add(end);
-        if (segments[i][j].getObject().getType().equals("Door Locked")
-                || segments[i][j].getObject().getType().equals("Door Unlocked")) {
-          createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
-
-          //Write the extra information required of a door.
-          addTabs(eventWriter, 2);
-          eventWriter.add(eventFactory.createStartElement("","","newDoor"));
+        if (segments[i][j] != null) {
+          eventWriter.add(tab);
+          eventWriter.add(newSegmentStartElement);
           eventWriter.add(end);
-          addTabs(eventWriter, 1);
-          createNode(eventWriter, "ID", "" + ((Door) segments[i][j].getObject()).ID());
-          addTabs(eventWriter, 1);
-          createNode(eventWriter, "Unlocked", "" + ((Door) segments[i][j].getObject()).getUnlocked());
-          addTabs(eventWriter, 2);
-          eventWriter.add(eventFactory.createEndElement("","","newDoor"));
-          eventWriter.add(end);
+          if (segments[i][j].getObject().getType().equals("Door Locked")
+                  || segments[i][j].getObject().getType().equals("Door Unlocked")) {
+            createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
 
-          createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
-          createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
-          createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
+            //Write the extra information required of a door.
+            addTabs(eventWriter, 2);
+            eventWriter.add(eventFactory.createStartElement("", "", "newDoor"));
+            eventWriter.add(end);
+            addTabs(eventWriter, 1);
+            createNode(eventWriter, "ID", "" + ((Door) segments[i][j].getObject()).ID());
+            addTabs(eventWriter, 1);
+            createNode(eventWriter, "Unlocked", "" + ((Door) segments[i][j].getObject()).getUnlocked());
+            addTabs(eventWriter, 2);
+            eventWriter.add(eventFactory.createEndElement("", "", "newDoor"));
+            eventWriter.add(end);
+
+            createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+            createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+            createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
+          } else if (segments[i][j].getObject().getStatus().equals("The chest is open and there is something inside.")) {
+            createNode(eventWriter, "GameObject", "Open Chest");
+
+            //Write the extra information required of a closed chest.
+            addTabs(eventWriter, 2);
+            eventWriter.add(eventFactory.createStartElement("", "", "Key"));
+            eventWriter.add(end);
+            addTabs(eventWriter, 1);
+            createNode(eventWriter, "ID", "" + ((Chest) segments[i][j].getObject()).getKey().getID());
+            addTabs(eventWriter, 1);
+            createNode(eventWriter, "Description",
+                    "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
+            addTabs(eventWriter, 1);
+            createNode(eventWriter, "Name",
+                    "" + ((Chest) segments[i][j].getObject()).getKey().getName());
+            addTabs(eventWriter, 2);
+            eventWriter.add(eventFactory.createEndElement("", "", "Key"));
+            eventWriter.add(end);
+            createNode(eventWriter, "chestClosed", "false");
+
+            createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+            createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+            createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
+          } else if (segments[i][j].getObject().getStatus().equals("The chest is open and it is empty.")) {
+
+          } else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
+            createNode(eventWriter, "GameObject", "Chest");
+
+            //Write the extra information required of a closed chest.
+            addTabs(eventWriter, 2);
+            eventWriter.add(eventFactory.createStartElement("", "", "Key"));
+            eventWriter.add(end);
+            addTabs(eventWriter, 1);
+            createNode(eventWriter, "ID", "" + ((Chest) segments[i][j].getObject()).getKey().getID());
+            addTabs(eventWriter, 1);
+            createNode(eventWriter, "Description",
+                    "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
+            addTabs(eventWriter, 1);
+            createNode(eventWriter, "Name",
+                    "" + ((Chest) segments[i][j].getObject()).getKey().getName());
+            addTabs(eventWriter, 2);
+            eventWriter.add(eventFactory.createEndElement("", "", "Key"));
+            eventWriter.add(end);
+            createNode(eventWriter, "chestClosed", "true");
+
+            createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+            createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+            createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
+          } else {
+            createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
+            createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+            createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+            createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
+          }
+
+          eventWriter.add(tab);
+          eventWriter.add(eventFactory.createEndElement("", "", "NewSegment"));
+          eventWriter.add(end);
+          eventWriter.add(end);
         }
-        else if (segments[i][j].getObject().getStatus().equals("The chest is open and there is something inside.")) {
-          createNode(eventWriter, "GameObject", "Open Chest");
-
-          //Write the extra information required of a closed chest.
-          addTabs(eventWriter, 2);
-          eventWriter.add(eventFactory.createStartElement("","","Key"));
-          eventWriter.add(end);
-          addTabs(eventWriter, 1);
-          createNode(eventWriter, "ID", "" + ((Chest) segments[i][j].getObject()).getKey().getID());
-          addTabs(eventWriter, 1);
-          createNode(eventWriter, "Description",
-                  "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
-          addTabs(eventWriter, 1);
-          createNode(eventWriter, "Name",
-                  "" + ((Chest) segments[i][j].getObject()).getKey().getName());
-          addTabs(eventWriter, 2);
-          eventWriter.add(eventFactory.createEndElement("","","Key"));
-          eventWriter.add(end);
-          createNode(eventWriter, "chestClosed", "false");
-
-          createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
-          createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
-          createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-        }
-        else if (segments[i][j].getObject().getStatus().equals("The chest is open and it is empty.")) {
-
-        }
-        else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
-          createNode(eventWriter, "GameObject", "Chest");
-
-          //Write the extra information required of a closed chest.
-          addTabs(eventWriter, 2);
-          eventWriter.add(eventFactory.createStartElement("","","Key"));
-          eventWriter.add(end);
-          addTabs(eventWriter, 1);
-          createNode(eventWriter, "ID", "" + ((Chest) segments[i][j].getObject()).getKey().getID());
-          addTabs(eventWriter, 1);
-          createNode(eventWriter, "Description",
-                  "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
-          addTabs(eventWriter, 1);
-          createNode(eventWriter, "Name",
-                  "" + ((Chest) segments[i][j].getObject()).getKey().getName());
-          addTabs(eventWriter, 2);
-          eventWriter.add(eventFactory.createEndElement("","","Key"));
-          eventWriter.add(end);
-          createNode(eventWriter, "chestClosed", "true");
-
-          createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
-          createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
-          createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-        }
-        else {
-          createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
-          createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
-          createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
-          createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-        }
-
-        eventWriter.add(tab);
-        eventWriter.add(eventFactory.createEndElement("","","NewSegment"));
-        eventWriter.add(end);
-        eventWriter.add(end);
       }
     }
     eventWriter.add(eventFactory.createEndElement("","","Segments"));
