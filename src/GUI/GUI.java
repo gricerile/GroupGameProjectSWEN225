@@ -1,12 +1,15 @@
 package GUI;
 
 import java.awt.Image;
+import java.io.File;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import main.Main;
+import parser.Parser;
 
 public class GUI {
 
@@ -50,10 +53,14 @@ public class GUI {
 	 */
 	private void initialise() {
 
+		loadMap();
+
 		frame = new GameFrame(gameName, this);
 		frame.setSize(frameWidth, frameHeight);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+
 	}
 
 	public Main getMain() {
@@ -62,6 +69,20 @@ public class GUI {
 
 	public GameFrame getFrame() {
 		return this.frame;
+	}
+
+	public void loadMap() {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File("."));
+		fileChooser.setDialogTitle("Select Map file.");
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+		if (fileChooser.showOpenDialog(this.frame) == JFileChooser.APPROVE_OPTION) {
+			// this.main.loadSpecificSegmentGame(fileChooser.getSelectedFile());
+		} else {
+			loadMap();
+		}
 	}
 
 	/**
