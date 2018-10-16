@@ -4,6 +4,11 @@ import java.awt.Graphics;
 
 import main.Key;
 
+/**
+ * Door object on Segments that needs a key to unlock.
+ * @author gricerile
+ *
+ */
 public class Door implements GameObject {
   // fields
   private int ID; // code name for door and key association, unique for each door and key

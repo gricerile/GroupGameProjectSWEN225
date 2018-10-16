@@ -4,6 +4,11 @@ import java.awt.Graphics;
 
 import renderer.Texture;
 
+/**
+ * Default game object that won't let player on it.
+ * @author gricerile
+ *
+ */
 public class Wall implements GameObject {
 
   private Texture wall = new Texture();

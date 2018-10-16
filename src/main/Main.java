@@ -12,6 +12,7 @@ import javax.xml.stream.XMLStreamException;
 /**
  * The main is in charge of combining the game logic and renderer, GUI and
  * parser when needed.
+ * @author gricerile
  */
 public class Main {
 	private Segment[][] segmentsBoard = new Segment[3][3]; // the size can change but for testing
@@ -30,6 +31,11 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Main m = new Main();
+	}
+
+
+	public void setSegment(Segment[][] segments) {
+		this.segmentsBoard=segments;
 	}
 
 	/**
@@ -327,15 +333,14 @@ public class Main {
 	 *            file.
 	 */
 	public void loadSpecificMap(File file) {
-		if (!file.getName().equals(Parser.smallMapName) &&
-				!file.getName().equals(Parser.largeMapName) &&
-				!file.getName().equals(Parser.mediumMapName)) {
+		if (!file.getName().equals(Parser.smallMapName) && !file.getName().equals(Parser.largeMapName)
+				&& !file.getName().equals(Parser.mediumMapName)) {
+			System.out.println("Invalid file specified.");
 			this.g.getFrame().getEventOutputPanel().setTextOutput("Invalid Starting File Specified");
 		} else {
 			segmentsBoard = this.p.loadMap(file);
 			player = this.p.loadPlayer(new File(Parser.playerLocationName), new File(Parser.inventoryStartDataName));
 			this.g.getFrame().getEventOutputPanel().setTextOutput("");
-			winTile = findWinTile();
 			reDraw();
 		}
 	}
@@ -347,7 +352,6 @@ public class Main {
 	public void loadGame() {
 		segmentsBoard = this.p.loadMap(new File(Parser.dungeonSaveName));
 		player = this.p.loadPlayer(new File(Parser.playerSaveLocationName), new File(Parser.inventorySaveDataName));
-		winTile = findWinTile();
 		reDraw();
 	}
 
@@ -394,34 +398,6 @@ public class Main {
 	public Player makeTestPlayer() {
 		Player p = new Player(this.segmentsBoard[0][0]);
 		return p;
-	}
-
-	/**
-	 * Runs test on test segments and test player created and displays results.
-	 *
-	 */
-	public void test1() {
-		System.out.println("Test begining");
-		System.out.println(
-				"Player Starts at: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
-		movePlayer(moveDirection.upLeft);
-		System.out
-				.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
-		System.out.println(this.segmentsBoard[0][2].getObject().getType());
-		openChest();
-		takeFromChest();
-		System.out.println(this.segmentsBoard[0][2].getObject().getType());
-		takeFromChest();
-		playerAttempUnlock();
-		movePlayer(moveDirection.upRight);
-		System.out
-				.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
-		movePlayer(moveDirection.upRight);
-		System.out
-				.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
-		movePlayer(moveDirection.upLeft);
-		System.out
-				.println("Player moved to: " + this.player.getSegment().getX() + " " + this.player.getSegment().getY());
 	}
 
 }

@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * Key used to unlock doors, is stored in chests and player's inventory.
+ * @author gricerile
+ *
+ */
 public class Key extends GameItem {
   // fields
   private int ID;
