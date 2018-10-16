@@ -116,9 +116,9 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 
-		if (e.getKeyCode() == 37 || e.getKeyCode() == 65) { // left
+		if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // left
 			gui.getMain().movePlayer(moveDirection.downLeft);
-		} else if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // right
+		} else if (e.getKeyCode() == 37 || e.getKeyCode() == 65) { // right
 			gui.getMain().movePlayer(moveDirection.upRight);
 		} else if (e.getKeyCode() == 38 || e.getKeyCode() == 87) { // up
 			gui.getMain().movePlayer(moveDirection.upLeft);
