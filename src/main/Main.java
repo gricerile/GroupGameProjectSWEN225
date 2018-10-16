@@ -112,7 +112,8 @@ public class Main {
 		}
 		reDraw();
 		if (checkWin()) {
-			this.g.getFrame().getEventOutputPanel().setTextOutput("Player has Won!");
+			//this.g.getFrame().getEventOutputPanel().setTextOutput("Player has Won!");
+			this.g.getFrame().getGraphicsWindow().setHasWon(true);
 		}
 	}
 
@@ -334,6 +335,7 @@ public class Main {
 	 *            file.
 	 */
 	public void loadSpecificMap(File file) {
+	  this.g.getFrame().getGraphicsWindow().setHasWon(false);
 		if (!file.getName().equals(Parser.smallMapName) && !file.getName().equals(Parser.largeMapName)
 				&& !file.getName().equals(Parser.mediumMapName)) {
 			System.out.println("Invalid file specified.");
@@ -351,6 +353,7 @@ public class Main {
 	 *
 	 */
 	public void loadGame() {
+	   this.g.getFrame().getGraphicsWindow().setHasWon(false);
 		segmentsBoard = this.p.loadMap(new File(Parser.dungeonSaveName));
 		player = this.p.loadPlayer(new File(Parser.playerSaveLocationName), new File(Parser.inventorySaveDataName));
 		reDraw();
