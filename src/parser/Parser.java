@@ -15,11 +15,59 @@ public class Parser {
   public static final String testMapFileName = "Testing Map.xml";
   public static final String dungeonMapName = "Dungeon Map.xml";
   public static final String dungeonSaveName = "Dungeon Map Save.xml";
+  public static final String playerLocationName = "PlayerStartData.xml";
+  public static final String playerSaveLocationName = "PlayerSavingData.xml";
 
   public static final String TRUECHECKER = "true";
   public static final String FALSECHECKER = "false";
 
-  private Segment[][] segments = new Segment[3][3];
+  private Segment[][] segments = new Segment[10][10];
+  private Player player = null;
+
+
+  /**
+   * Method to used to parse the player data
+   * into the main class
+   *
+   * @param playerFile
+   *          The source file storing the player information.
+   * @return
+   *          The player object.
+   */
+  public Player loadPlayer(File playerFile) {
+    try {
+      XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+
+      InputStream in = new FileInputStream(playerFile);
+      XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+      int x = 0;
+      int y = 0;
+
+      while (eventReader.hasNext()) {
+        XMLEvent event = eventReader.nextEvent();
+        if (event.isStartElement()) {
+          if (event.asStartElement().getName().getLocalPart().equals("CoordinateX")) {
+            event = eventReader.nextEvent();
+            x = Integer.parseInt(event.asCharacters().getData());
+            continue;
+          }
+          if (event.asStartElement().getName().getLocalPart().equals("CoordinateY")) {
+            event = eventReader.nextEvent();
+            y = Integer.parseInt(event.asCharacters().getData());
+            continue;
+          }
+        }
+      }
+      player = new Player(segments[x][y]);
+    }
+    catch (IOException e) {
+      System.out.println(e);
+    }
+    catch (XMLStreamException e) {
+      System.out.println(e);
+    }
+    return player;
+  }
 
   /**
    * Method to used to parse the segments into a
@@ -69,11 +117,8 @@ public class Parser {
             gameObjectType = new WinTile();
           }
           //Doors also require additional information to be parsed.
-          else if (event.asCharacters().getData().equals("Door Locked")) {
-            door = parseDoor(eventReader);
-            gameObjectType = door;
-          }
-          else if (event.asCharacters().getData().equals("Door Unlocked")) {
+          else if (event.asCharacters().getData().equals("Door Locked")
+                  || event.asCharacters().getData().equals("Door Unlocked")) {
             door = parseDoor(eventReader);
             gameObjectType = door;
           }
@@ -81,6 +126,12 @@ public class Parser {
           else if (event.asCharacters().getData().equals("Chest")) {
             key = parseKey(eventReader);
             gameObjectType = new Chest(key);
+          }
+          else if (event.asCharacters().getData().equals("Open Chest")) {
+            key = parseKey(eventReader);
+            Chest chest = new Chest(key);
+            chest.openAndClose();
+            gameObjectType = chest;
           }
           continue;
           }
@@ -286,7 +337,28 @@ public class Parser {
           createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
         }
         else if (segments[i][j].getObject().getStatus().equals("The chest is open and there is something inside.")) {
+          createNode(eventWriter, "GameObject", "Open Chest");
 
+          //Write the extra information required of a closed chest.
+          addTabs(eventWriter, 2);
+          eventWriter.add(eventFactory.createStartElement("","","Key"));
+          eventWriter.add(end);
+          addTabs(eventWriter, 1);
+          createNode(eventWriter, "ID", "" + ((Chest) segments[i][j].getObject()).getKey().getID());
+          addTabs(eventWriter, 1);
+          createNode(eventWriter, "Description",
+                  "" + ((Chest) segments[i][j].getObject()).getKey().getDescription());
+          addTabs(eventWriter, 1);
+          createNode(eventWriter, "Name",
+                  "" + ((Chest) segments[i][j].getObject()).getKey().getName());
+          addTabs(eventWriter, 2);
+          eventWriter.add(eventFactory.createEndElement("","","Key"));
+          eventWriter.add(end);
+          createNode(eventWriter, "chestClosed", "false");
+
+          createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+          createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+          createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
         }
         else if (segments[i][j].getObject().getStatus().equals("The chest is open and it is empty.")) {
 

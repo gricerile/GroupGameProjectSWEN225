@@ -27,7 +27,7 @@ public class Main {
 		this.g = new GUI(this);
 		p.loadMap(new File(Parser.testMapFileName));
 		this.segmentsBoard = this.makeTestSegment();
-		this.player = this.makeTestPlayer();
+		this.player = this.p.loadPlayer(new File(Parser.playerLocationName));
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
 		this.renderer = new Renderer(this);
@@ -214,7 +214,8 @@ public class Main {
 	}
 
 	public void loadGame() {
-		this.p.loadMap(new File(Parser.dungeonSaveName));
+		segmentsBoard = this.p.loadMap(new File(Parser.dungeonSaveName));
+		player = this.p.loadPlayer(new File(Parser.playerSaveLocationName));
 		reDraw();
 	}
 
