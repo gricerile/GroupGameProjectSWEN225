@@ -221,6 +221,21 @@ public class Main {
 
 	}
 
+	public void loadSpecificMap(File file) {
+		if (!file.getName().equals(Parser.testMapFileName)
+				&& !file.getName().equals(Parser.largeMapName)) {
+			System.out.println("Invalid file specified.");
+			this.g.getFrame().getEventOutputPanel().setTextOutput("Invalid Starting File Specified");
+		}
+		else {
+			segmentsBoard = this.p.loadMap(file);
+			player = this.p.loadPlayer(new File(Parser.playerLocationName),
+					new File(Parser.inventoryStartDataName));
+			this.g.getFrame().getEventOutputPanel().setTextOutput("");
+			reDraw();
+		}
+	}
+
 	public void loadGame() {
 		segmentsBoard = this.p.loadMap(new File(Parser.dungeonSaveName));
 		player = this.p.loadPlayer(new File(Parser.playerSaveLocationName),

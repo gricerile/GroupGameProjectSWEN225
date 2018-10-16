@@ -47,7 +47,7 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
 
 		// Initialize and setup menu
 
-		loadMap = new JMenuItem("Load Map");
+		loadMap = new JMenuItem("Load New Game");
 		save = new JMenuItem("Save Game");
 		load = new JMenuItem("Load Game");
 		quit = new JMenuItem("Quit");

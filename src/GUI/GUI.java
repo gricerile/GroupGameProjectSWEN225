@@ -55,7 +55,7 @@ public class GUI {
 	 */
 	private void initialise() {
 
-		loadMap();
+
 
 		frame = new GameFrame(gameName, this);
 		frame.setSize(frameWidth, frameHeight);
@@ -81,9 +81,8 @@ public class GUI {
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 		if (fileChooser.showOpenDialog(this.frame) == JFileChooser.APPROVE_OPTION) {
-			// this.main.loadSpecificSegmentGame(fileChooser.getSelectedFile());
-		} else {
-			loadMap();
+			File file = fileChooser.getSelectedFile();
+			this.main.loadSpecificMap(file);
 		}
 	}
 

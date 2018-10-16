@@ -13,7 +13,9 @@ import main.*;
 
 public class Parser {
   public static final String testMapFileName = "Testing Map.xml";
-  public static final String dungeonMapName = "Dungeon Map.xml";
+  public static final String mediumMapName = "Dungeon Map.xml";
+  public static final String largeMapName = "LargeDungeonInitialData.xml";
+
   public static final String dungeonSaveName = "Dungeon Map Save.xml";
   public static final String playerLocationName = "PlayerStartData.xml";
   public static final String playerSaveLocationName = "PlayerSavingData.xml";
