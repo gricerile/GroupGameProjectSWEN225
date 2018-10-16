@@ -65,6 +65,9 @@ public class Parser {
           else if (event.asCharacters().getData().equals("Wall")) {
             gameObjectType = new Wall();
           }
+          else if (event.asCharacters().getData().equals("WinTile")) {
+            gameObjectType = new WinTile();
+          }
           //Doors also require additional information to be parsed.
           else if (event.asCharacters().getData().equals("Door Locked")) {
             door = parseDoor(eventReader);

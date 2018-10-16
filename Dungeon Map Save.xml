@@ -67,7 +67,7 @@
 	</NewSegment>
 
 	<NewSegment>
-		<GameObject>FreeTile</GameObject>
+		<GameObject>WinTile</GameObject>
 		<CoordinateX>2</CoordinateX>
 		<CoordinateY>2</CoordinateY>
 		<hasPlayer>false</hasPlayer>
