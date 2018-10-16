@@ -26,6 +26,7 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
 
 	private JMenuBar menuBar;
 	private JMenu menu;
+	private JMenuItem loadMap;
 	private JMenuItem save;
 	private JMenuItem load;
 	private JMenuItem quit;
@@ -46,15 +47,18 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
 
 		// Initialize and setup menu
 
-		save = new JMenuItem("Save");
-		load = new JMenuItem("Load");
+		loadMap = new JMenuItem("Load New Game");
+		save = new JMenuItem("Save Game");
+		load = new JMenuItem("Load Game");
 		quit = new JMenuItem("Quit");
 
 		save.addActionListener(this);
 		load.addActionListener(this);
 		quit.addActionListener(this);
+		loadMap.addActionListener(this);
 
 		menu = new JMenu("Menu");
+		menu.add(loadMap);
 		menu.add(save);
 		menu.add(load);
 		menu.add(quit);
@@ -111,10 +115,6 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
 
 		if (e.getKeyCode() == 39 || e.getKeyCode() == 68) { // left
 			gui.getMain().movePlayer(moveDirection.downLeft);
@@ -129,6 +129,10 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
 	}
 
 	@Override
+	public void keyReleased(KeyEvent e) {
+	}
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == save) {
 			this.gui.getMain().saveGame();
@@ -136,8 +140,8 @@ public class GameFrame extends JFrame implements KeyListener, ActionListener {
 			this.gui.getMain().loadGame();
 		} else if (e.getSource() == quit) {
 			this.gui.getMain().quitGame();
-			;
-
+		} else if(e.getSource() == loadMap) {
+			this.gui.loadMap();
 		}
 	}
 }

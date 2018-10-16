@@ -13,17 +13,27 @@ import main.*;
 
 public class Parser {
   public static final String testMapFileName = "Testing Map.xml";
-  public static final String dungeonMapName = "Dungeon Map.xml";
+  public static final String mediumMapName = "Dungeon Map.xml";
+  public static final String largeMapName = "LargeDungeonInitialData.xml";
+
   public static final String dungeonSaveName = "Dungeon Map Save.xml";
   public static final String playerLocationName = "PlayerStartData.xml";
   public static final String playerSaveLocationName = "PlayerSavingData.xml";
+  public static final String inventoryStartDataName = "InventoryStartData.xml";
+  public static final String inventorySaveDataName = "InventorySaveData.xml";
 
   public static final String TRUECHECKER = "true";
   public static final String FALSECHECKER = "false";
 
+  private Main m = null;
+
   private Segment[][] segments = new Segment[30][30];
   private Player player = null;
 
+
+  public Parser(Main m) {
+    this.m = m;
+  }
 
   /**
    * Method used to parse the player data
@@ -34,7 +44,8 @@ public class Parser {
    * @return
    *          The player object.
    */
-  public Player loadPlayer(File playerFile) {
+  public Player loadPlayer(File playerFile, File inventoryFile) {
+    player = null;
     try {
       XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
@@ -59,6 +70,7 @@ public class Parser {
         }
       }
       player = new Player(segments[x][y]);
+      parseInventory(player, inventoryFile);
     }
     catch (IOException e) {
       System.out.println(e);
@@ -67,6 +79,40 @@ public class Parser {
       System.out.println(e);
     }
     return player;
+  }
+
+  public void parseInventory(Player player, File inventoryFile) {
+    m.getGUI().getFrame().getInventoryPanel().clearInventory();
+    try {
+      XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+
+      InputStream in = new FileInputStream(inventoryFile);
+      XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+
+      Key key = null;
+      while (eventReader.hasNext()) {
+        XMLEvent event = eventReader.nextEvent();
+        if (event.isStartElement()) {
+          if (event.asStartElement().getName().getLocalPart().equals("Inventory")) {
+            key = null;
+          }
+          key = parseKey(eventReader);
+          if (key != null) {
+            player.giveKey(key,m);
+          }
+        }
+        if (event.isEndElement()) {
+          if (event.asEndElement().getName().getLocalPart().equals("Inventory")) {
+          }
+        }
+      }
+    }
+    catch (IOException e) {
+      System.out.println(e);
+    }
+    catch (XMLStreamException e) {
+      System.out.println(e);
+    }
   }
 
   public void resetSegments() {
@@ -140,6 +186,11 @@ public class Parser {
           else if (event.asCharacters().getData().equals("Open Chest")) {
             key = parseKey(eventReader);
             Chest chest = new Chest(key);
+            chest.openAndClose();
+            gameObjectType = chest;
+          }
+          else if (event.asCharacters().getData().equals("Empty Chest")) {
+            Chest chest = new Chest(null);
             chest.openAndClose();
             gameObjectType = chest;
           }
@@ -311,6 +362,43 @@ public class Parser {
     createNode(eventWriter, "CoordinateY", "" + player.getSegment().getY());
 
     eventWriter.add(eventFactory.createEndElement("","","Player"));
+    saveInventory(player);
+  }
+
+  public void saveInventory(Player player) throws FileNotFoundException, XMLStreamException{
+    XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+    XMLEventWriter eventWriter =
+            outputFactory.createXMLEventWriter(new FileOutputStream(inventorySaveDataName));
+    XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+    XMLEvent end = eventFactory.createDTD("\n");
+
+    StartDocument startDocument = eventFactory.createStartDocument();
+    eventWriter.add(startDocument);
+    eventWriter.add(end);
+
+    StartElement segmentsStartElement = eventFactory.createStartElement("","","Inventory");
+    eventWriter.add(segmentsStartElement);
+    eventWriter.add(end);
+
+    for (GameItem k : player.getInventory()) {
+      if (k instanceof Key) {
+        Key key = (Key) k;
+        addTabs(eventWriter, 1);
+        eventWriter.add(eventFactory.createStartElement("", "", "Key"));
+        eventWriter.add(end);
+        createNode(eventWriter, "ID", "" + key.getID());
+        createNode(eventWriter, "Description",
+                "" + key.getDescription());
+        createNode(eventWriter, "Name",
+                "" + key.getName());
+        addTabs(eventWriter, 1);
+        eventWriter.add(eventFactory.createEndElement("", "", "Key"));
+        eventWriter.add(end);
+        eventWriter.add(end);
+      }
+    }
+
+    eventWriter.add(eventFactory.createEndElement("","","Inventory"));
   }
 
   /**
@@ -392,7 +480,11 @@ public class Parser {
             createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
           }
           else if (segments[i][j].getObject().getStatus().equals("The chest is open and it is empty.")) {
+            createNode(eventWriter, "GameObject", "Empty Chest");
 
+            createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
+            createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
+            createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
           }
           else if (segments[i][j].getObject().getStatus().equals("The chest is closed.")) {
             createNode(eventWriter, "GameObject", "Chest");
@@ -471,7 +563,7 @@ public class Parser {
   }
 
   public static void main(String[] args) {
-    Parser p = new Parser();
+    Parser p = new Parser(new Main());
     //p.loadMap(new File(testMapFileName));
     p.loadMap(new File(testMapFileName));
   }
