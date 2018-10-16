@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Inventory>
+    <Key>
+        <ID>42</ID>
+        <Description>Key opens door 42</Description>
+        <Name>Key ID 42</Name>
+    </Key>
+
+    <Key>
+        <ID>102</ID>
+        <Description>Key opens door 102</Description>
+        <Name>Key ID 102</Name>
+    </Key>
+</Inventory>

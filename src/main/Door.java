@@ -9,19 +9,44 @@ public class Door implements GameObject {
   private int ID; // code name for door and key association, unique for each door and key
   private boolean unlocked;
 
-  public Door( int s, boolean unlocked) {
+  /**
+   * constructor of door.
+   *
+   *@param id of door that is matched with key.
+   *
+   *@param boolean to determine if door locked or unlocked.
+   */
+  public Door(int s, boolean unlocked) {
     this.ID = s;
     this.unlocked = unlocked;
   }
 
-public int ID() {
+  /**
+   * gets door id.
+   *
+   *@return id field.
+   */
+  public int ID() {
     return this.ID;
   }
 
+  /**
+   * gets unlocked boolean.
+   *
+   *@return unlocked field.
+   */
   public boolean getUnlocked() {
     return this.unlocked;
   }
 
+  /**
+   * attempts to unlocked door with key.
+   * And changes unlocked boolean if a match.
+   *
+   *@param key which player has.
+   *
+   *@return String from the events that occur from unlock door attemp.
+   */
   public String unlock(Key k) {
     if (k.equals(this.ID)) {
       if (this.unlocked == false) {
@@ -32,6 +57,11 @@ public int ID() {
     return "You must use the correct key on the door.";
   }
 
+  /**
+   * gets state.
+   *
+   *@return String form of state.
+   */
   @Override
   public String getStatus() {
     if (this.unlocked == false) {
@@ -41,6 +71,11 @@ public int ID() {
     }
   }
 
+  /**
+   * gets game object type.
+   *
+   *@return game object type in string form.
+   */
   @Override
   public String getType() {
     if (unlocked) {

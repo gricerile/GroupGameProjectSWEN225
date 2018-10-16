@@ -36,13 +36,15 @@ public class GUI {
 
 	public GUI(Main main) {
 		this.main = main;
+		initialise();
+		/*
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
 				initialise();
 			}
-		});
+		});*/
 	}
 
 	public void redraw() {
@@ -77,9 +79,8 @@ public class GUI {
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 		if (fileChooser.showOpenDialog(this.frame) == JFileChooser.APPROVE_OPTION) {
-			// this.main.loadSpecificSegmentGame(fileChooser.getSelectedFile());
-		} else {
-			loadMap();
+			File file = fileChooser.getSelectedFile();
+			this.main.loadSpecificMap(file);
 		}
 	}
 
