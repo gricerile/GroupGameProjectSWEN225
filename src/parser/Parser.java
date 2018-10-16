@@ -73,6 +73,10 @@ public class Parser {
             door = parseDoor(eventReader);
             gameObjectType = door;
           }
+          else if (event.asCharacters().getData().equals("Door Unlocked")) {
+            door = parseDoor(eventReader);
+            gameObjectType = door;
+          }
           //Chests also require a key object to be created and stored within the chest.
           else if (event.asCharacters().getData().equals("Chest")) {
             key = parseKey(eventReader);
@@ -261,7 +265,8 @@ public class Parser {
         eventWriter.add(tab);
         eventWriter.add(newSegmentStartElement);
         eventWriter.add(end);
-        if (segments[i][j].getObject().getType().equals("Door Locked")) {
+        if (segments[i][j].getObject().getType().equals("Door Locked")
+                || segments[i][j].getObject().getType().equals("Door Unlocked")) {
           createNode(eventWriter, "GameObject", segments[i][j].getObject().getType());
 
           //Write the extra information required of a door.
@@ -279,9 +284,6 @@ public class Parser {
           createNode(eventWriter, "CoordinateX", "" + segments[i][j].getX());
           createNode(eventWriter, "CoordinateY", "" + segments[i][j].getY());
           createNode(eventWriter, "hasPlayer", "" + segments[i][j].hasPlayer());
-        }
-        else if (segments[i][j].getObject().getType().equals("Door Unlocked")) {
-
         }
         else if (segments[i][j].getObject().getStatus().equals("The chest is open and there is something inside.")) {
 
