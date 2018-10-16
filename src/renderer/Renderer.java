@@ -34,8 +34,8 @@ public class Renderer{
     this.m = main;
     // this.board = m.getSegments();
     // initialise the board with the 2D array of segs stored in the main class
-    this.board = m.makeTestSegment();
-//    this.board = m.createBoard();
+    //this.board = m.makeTestSegment();
+    this.board = m.makeBoard();
 
 
   }
