@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,7 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 
 	private GUI gui;
 
-	private boolean hasWon;
+	private boolean hasWon = false;
 	private int dimensionHeight = 600;
 	private int dimensionWidth = 600;
 
@@ -84,18 +85,22 @@ public class GraphicsWindow extends JPanel implements MouseListener, ActionListe
 		if (this.gui.getMain().getRenderer() == null) {
 			g.setColor(Color.BLACK);
 			g.drawString("NO IMAGE", this.getWidth() / 2, this.getHeight() / 2);
-		} else if(this.hasWon) {
+		} else if (hasWon) {
 			this.gui.getMain().getRenderer().draw(g, getWidth(), getHeight());
-			
-			String s = "Congratulations You Have Won!";
-			Font text = new Font("Dialog", Font.PLAIN, 25);
-			
-			g.setFont(text);
-			g.drawString(s, (getWidth()/2), (getHeight()/2));
-			
-			
-			
-			
+
+			Font f = new Font("SansSerif Plain", Font.BOLD, getWidth() / 30);
+			g.setFont(f);
+
+			String text = "Congratulations You Have Won!";
+			FontMetrics fontMetrics = g.getFontMetrics();
+			int stringWidth = (fontMetrics.stringWidth(text));
+
+			int x = (getWidth() - stringWidth) / 2;
+			int y = (getHeight() - fontMetrics.getHeight()) / 2;
+			g.setColor(Color.BLACK);
+
+			g.drawString(text, x, y);
+
 		} else {
 			this.gui.getMain().getRenderer().draw(g, getWidth(), getHeight());
 		}

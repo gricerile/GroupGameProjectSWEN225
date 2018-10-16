@@ -4,12 +4,13 @@ import java.awt.Image;
 import java.io.File;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import main.Main;
-import parser.Parser;
 
 public class GUI {
 
@@ -55,14 +56,11 @@ public class GUI {
 	 */
 	private void initialise() {
 
-
-
 		frame = new GameFrame(gameName, this);
 		frame.setSize(frameWidth, frameHeight);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-
 	}
 
 	public Main getMain() {
