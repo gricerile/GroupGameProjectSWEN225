@@ -1,9 +1,8 @@
 package main;
 
-import java.awt.Graphics;
-
 /**
  * Object that player must be on to win.
+ *
  * @author gricerile
  *
  */

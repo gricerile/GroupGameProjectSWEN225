@@ -2,6 +2,7 @@ package main;
 
 /**
  * Abstract class for items in player's inventory.
+ *
  * @author gricerile
  *
  */
@@ -10,12 +11,12 @@ public abstract class GameItem {
   private String name;
 
   /**
-   * contructor of a game item.
+   * constructor of a game item.
    *
-   * @param string
+   * @param d
    *          of description.
    *
-   * @param string
+   * @param n
    *          of name(type).
    */
   public GameItem(String d, String n) {

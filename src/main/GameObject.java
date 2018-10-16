@@ -1,9 +1,8 @@
 package main;
 
-import java.awt.Graphics;
-
 /**
  * Game object interface for objects on segments.
+ *
  * @author gricerile
  *
  */

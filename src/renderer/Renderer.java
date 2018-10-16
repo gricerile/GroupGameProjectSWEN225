@@ -11,30 +11,35 @@ import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
-import GUI.GUI;
-import GUI.GUI.moveDirection;
-import GUI.GameFrame;
+import gui.GUI;
+import gui.GameFrame;
+import gui.GUI.MoveDirection;
 import main.Main;
 import main.Segment;
 import main.Wall;
 
+/**
+ * this class renders out the board using isometric tiles.
+ * checks through the board to see what tile type it is and then renders that tile.
+ * draws based on how the game was setup with the different segment types.
+ * @author chenkelv.
+ *
+ */
 public class Renderer {
 
-  private Main m;
+  private Main mm;
   private main.Segment[][] board;
   private Image image;
-  public int isox;
-  public int isoy;
 
   /**
    * Renderer constructor that takes in the main.
-   * 
+   *
    * @param main
    *          from the main class that sets the board up.
    */
   public Renderer(Main main) {
-    this.m = main;
-    this.board = m.getSegments();
+    this.mm = main;
+    this.board = mm.getSegments();
     // initialise the board with the 2D array of segs stored in the main class
     // this.board = m.makeTestSegment();
     // this.board = m.makeBoard();
@@ -88,22 +93,22 @@ public class Renderer {
             this.image = t.onLoad("wall64");
             g.drawImage(image, (windowWidth / 2) - isoX(i, j),
                 (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
-          // check to render the chest (closed)
+            // check to render the chest (closed)
           } else if (board[i][j].getObject().getType().equals("YellowChest")) {
             this.image = t.onLoad("closedChest64");
             g.drawImage(image, (windowWidth / 2) - isoX(i, j),
                 (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
-          // check to render the chest (opened)
+            // check to render the chest (opened)
           } else if (board[i][j].getObject().getType().equals("RedChest")) {
             this.image = t.onLoad("openedChest64");
             g.drawImage(image, (windowWidth / 2) - isoX(i, j),
                 (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
-          // check to render the door
+            // check to render the door
           } else if (board[i][j].getObject().getType().equals("Door Locked")) {
             this.image = t.onLoad("door64");
             g.drawImage(image, (windowWidth / 2) - isoX(i, j),
                 (windowHeight / 2) - isoY(i, j) + imageSizing(image), null);
-          // check to render the player
+            // check to render the player
           } else if (board[i][j].hasPlayer()) { // else if check for the player
             this.image = t.onLoad("player64");
             g.drawImage(image, (windowWidth / 2) - isoX(i, j),
@@ -115,10 +120,11 @@ public class Renderer {
   }
 
   /**
-   *
    * Take in the height and width of a given image and then shift so it fixes the
    * screen.
-   * @param image that needs to be shifted.
+   *
+   * @param image
+   *          that needs to be shifted.
    * @return image shift value.
    */
   private int imageSizing(Image image) {
@@ -127,10 +133,13 @@ public class Renderer {
   }
 
   /**
-   * Method to convert cartisian to isometric, helps render out the images in a diamond shape.
-   * turning regular 2d array into isometric.
-   * @param x coord from loop.
-   * @param y coord from loop.
+   * Method to convert cartesian to isometric, helps render out the images in a
+   * diamond shape. turning regular 2d array into isometric.
+   *
+   * @param x
+   *          coord from loop.
+   * @param y
+   *          coord from loop.
    * @return new isometric X coord.
    */
   private int isoX(int x, int y) {
@@ -141,9 +150,9 @@ public class Renderer {
   }
 
   /**
-   * Method to convert cartisian to isometric, helps render out the images in a
+   * Method to convert cartesian to isometric, helps render out the images in a
    * diamond shape. turning regular 2d array into isometric.
-   * 
+   *
    * @param x
    *          coord from loop.
    * @param y
@@ -158,11 +167,5 @@ public class Renderer {
     isoY = (int) ((x * segHeight / 2) + (y * segHeight / 2));
     return isoY;
   }
-
-  /*
-   * each square in a 2d grid is an segment object get each segment and use coords
-   * to use in polygons to draw the new isometric square
-   *
-   */
 
 }

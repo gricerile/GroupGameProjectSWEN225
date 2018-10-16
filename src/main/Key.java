@@ -2,6 +2,7 @@ package main;
 
 /**
  * Key used to unlock doors, is stored in chests and player's inventory.
+ *
  * @author gricerile
  *
  */
@@ -12,7 +13,7 @@ public class Key extends GameItem {
   /**
    * Constructor of Key.
    *
-   * @param id
+   * @param ID
    *          of key that matches with door.
    *
    * @param description
@@ -21,7 +22,7 @@ public class Key extends GameItem {
    * @param name
    *          of game item.
    */
-  public Key(int ID, String description, String name) {
+  public Key (int ID, String description, String name) {
     super(description, name);
     this.ID = ID;
   }
@@ -56,12 +57,12 @@ public class Key extends GameItem {
   /**
    * compares id of door to key to find match.
    *
-   * @param door's
+   * @param doorID
    *          id.
    *
    * @return boolean of comparison.
    */
-  public boolean equals(int doorID) {
+  public boolean equals (int doorID) {
     if (this.ID == doorID) {
       return true;
     } else {

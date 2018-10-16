@@ -1,15 +1,11 @@
-package GUI;
+package gui;
 
 import java.awt.Image;
 import java.io.File;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-
 import main.Main;
 
 /**
@@ -36,7 +32,7 @@ public class GUI {
    * @author millerdani1
    *
    */
-  public enum moveDirection {
+  public enum MoveDirection {
     /**
      * player movement to the upper Left (NW).
      */

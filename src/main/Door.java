@@ -1,26 +1,26 @@
 package main;
 
-import java.awt.Graphics;
-
 import main.Key;
 
 /**
  * Door object on Segments that needs a key to unlock.
+ *
  * @author gricerile
  *
  */
 public class Door implements GameObject {
   // fields
-  private int ID; // code name for door and key association, unique for each door and key
+  private int ID;
+  // code name for door and key association, unique for each door and key
   private boolean unlocked;
 
   /**
    * constructor of door.
    *
-   * @param id
+   * @param s
    *          of door that is matched with key.
    *
-   * @param boolean
+   * @param unlocked
    *          to determine if door locked or unlocked.
    */
   public Door(int s, boolean unlocked) {
@@ -49,7 +49,7 @@ public class Door implements GameObject {
   /**
    * attempts to unlocked door with key. And changes unlocked boolean if a match.
    *
-   * @param key
+   * @param k
    *          which player has.
    *
    * @return String from the events that occur from unlock door attemp.

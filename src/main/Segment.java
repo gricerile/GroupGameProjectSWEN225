@@ -1,26 +1,22 @@
 package main;
 
-import java.awt.Image;
-
-import renderer.Texture;
-
 /**
- *Basic building block of the game.
+ * Basic building block of the game.
+ *
  * @author gricerile
  *
  */
 public class Segment {
   // fields
   private GameObject object;
-  private int x, y;
-  private Image image;
-  private Texture texture = new Texture();
+  private int xCoord;
+  private int yCoord;
   private boolean hasPlayer;
 
   /**
-   * Constructor of Segment
+   * Constructor of Segment.
    *
-   * @param the
+   * @param object
    *          game object type on the segment.
    *
    * @param x
@@ -31,8 +27,8 @@ public class Segment {
    */
   public Segment(GameObject object, int x, int y) {
     this.object = object;
-    this.x = x;
-    this.y = y;
+    this.xCoord = x;
+    this.yCoord = y;
     this.hasPlayer = false;
   }
 
@@ -49,7 +45,7 @@ public class Segment {
   /**
    * sets has player field.
    *
-   * @param boolean
+   * @param b
    *          which determines is has player field is true or false.
    */
   public void setHasPlayer(boolean b) {
@@ -71,7 +67,7 @@ public class Segment {
    * @return x coord of segment.
    */
   public int getX() {
-    return this.x;
+    return this.xCoord;
   }
 
   /**
@@ -80,13 +76,13 @@ public class Segment {
    * @return y coord of segment.
    */
   public int getY() {
-    return this.y;
+    return this.yCoord;
   }
 
   /**
    * Method to compare two segments to check if they're the same.
    *
-   * @param segment
+   * @param s
    *          that will be compared.
    *
    * @return boolean of comparison.

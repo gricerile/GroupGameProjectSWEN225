@@ -1,9 +1,8 @@
 package main;
 
-import java.awt.Graphics;
-
 /**
  * Chest object on Segments that hold keys.
+ *
  * @author gricerile
  *
  */
@@ -15,8 +14,7 @@ public class Chest implements GameObject {
   /**
    * constructor for chest.
    *
-   * @param key
-   *          assigned to chest.
+   * @param k assigned to chest.
    */
   public Chest(Key k) {
     this.key = k;
@@ -58,10 +56,8 @@ public class Chest implements GameObject {
       this.key = null;
       return k;
     } else if (this.open == false) {
-      // System.out.println("The Chest is not open.");
       return null;
     } else {
-      // System.out.println("Chest is empty");
       return null;
     }
   }

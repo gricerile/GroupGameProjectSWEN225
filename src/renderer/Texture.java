@@ -5,18 +5,26 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+/**
+ * Texture class that is an object that loads an image (isometric tiles and objects).
+ * @author chenkelv
+ *
+ */
 public class Texture {
 
   private String path = "/tx/"; // path to image
   private String imageName = "";
 
+  /**
+   * constructor for texture class.
+   */
   public Texture() {
   }
 
   /**
    * already considers the path from tx folder and file type .png, image is loaded
    * through typing the name of the image.
-   * 
+   *
    * @param imgName
    *          is the name of the file.
    * @return null if there is no image.

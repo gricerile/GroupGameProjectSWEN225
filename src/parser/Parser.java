@@ -6,45 +6,75 @@ import javax.xml.stream.events.*;
 
 import main.*;
 
-
 //@Author Victor Ong (ongvict), vogog2@gmail.com
+/**
+ * constructor for parser to take in the different xml files.
+ * @author ongvict.
+ *
+ */
 public class Parser {
+  /**
+   * static name for small map xml.
+   */
   public static final String smallMapName = "smallmap.xml";
+  /**
+   * static name for medium map xml.
+   */
   public static final String mediumMapName = "mediummap.xml";
+  /**
+   * static name for large map xml.
+   */
   public static final String largeMapName = "largemap.xml";
 
+  /**
+   * static name for save game xml.
+   */
   public static final String dungeonSaveName = "Dungeon Map Save.xml";
 
+  /**
+   * static name for saving player location xml.
+   */
   public static final String playerLocationName = "PlayerStartData.xml";
+  /**
+   * static name for saving location name.
+   */
   public static final String playerSaveLocationName = "PlayerSavingData.xml";
+  /**
+   * static name for inventory name.
+   */
   public static final String inventoryStartDataName = "InventoryStartData.xml";
+  /**
+   * static name for inventory start data xml.
+   */
   public static final String inventorySaveDataName = "InventorySaveData.xml";
 
+  /**
+   * static for true.
+   */
   public static final String TRUECHECKER = "true";
 
-  private Main m = null;
+  private Main main = null;
 
-  //Arbitrary size that serves as a maximum size.
+  // Arbitrary size that serves as a maximum size.
   private Segment[][] segments = new Segment[30][30];
   private Player player = null;
-
-
 
   /**
    * Simple constructor that stores the main class for use.
    *
-   * @param m
+   * @param m from the main class.
    */
 
   public Parser(Main m) {
-    this.m = m;
+    this.main = m;
   }
 
   /**
-   * Method used to parse the player data into the main class
+   * Method used to parse the player data into the main class.
    *
    * @param playerFile
    *          The source file storing the player information.
+   * @param inventoryFile the file.
    * @return The player object.
    */
   public Player loadPlayer(File playerFile, File inventoryFile) {
@@ -92,7 +122,7 @@ public class Parser {
    *          The inventory file that we are reading from.
    */
   private void parseInventory(Player player, File inventoryFile) {
-    m.getGUI().getFrame().getInventoryPanel().clearInventory();
+    main.getGui().getFrame().getInventoryPanel().clearInventory();
     try {
       XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
@@ -108,11 +138,7 @@ public class Parser {
           }
           key = parseKey(eventReader);
           if (key != null) {
-            player.giveKey(key, m);
-          }
-        }
-        if (event.isEndElement()) {
-          if (event.asEndElement().getName().getLocalPart().equals("Inventory")) {
+            player.giveKey(key, main);
           }
         }
       }
@@ -286,7 +312,7 @@ public class Parser {
         }
       }
     } catch (XMLStreamException e) {
-
+      e.printStackTrace();
     }
     return null;
   }
@@ -330,21 +356,23 @@ public class Parser {
           }
         }
       }
+    } catch (XMLStreamException e) {
+      e.printStackTrace();
     }
-    catch (XMLStreamException e) {}
     return null;
   }
 
   /**
-   * Helper method to insert tab characters into the
-   * XML documents for formatting purposes.
+   * Helper method to insert tab characters into the XML documents for formatting
+   * purposes.
+   *
    * @param eventWriter
    *          The XMLEventWriter we are currently writing with.
    * @param num
    *          The number of tabs we are inserting.
-   * @throws XMLStreamException
+   * @throws XMLStreamException XML exception.
    */
-  private void addTabs(XMLEventWriter eventWriter, int num) throws XMLStreamException{
+  private void addTabs(XMLEventWriter eventWriter, int num) throws XMLStreamException {
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();
     for (int i = 0; i < num; i++) {
       eventWriter.add(eventFactory.createDTD("\t"));
@@ -352,14 +380,14 @@ public class Parser {
   }
 
   /**
-   * Method used to save player information to a file:
-   * PlayerSavingData.xml.
+   * Method used to save player information to a file: PlayerSavingData.xml.
+   *
    * @param player
    *          The player we are taking data from.
-   * @throws FileNotFoundException
-   * @throws XMLStreamException
+   * @throws FileNotFoundException exception for missing file.
+   * @throws XMLStreamException exception for xml.
    */
-  public void savePlayer(Player player) throws FileNotFoundException, XMLStreamException{
+  public void savePlayer(Player player) throws FileNotFoundException, XMLStreamException {
     XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
     XMLEventWriter eventWriter = outputFactory
         .createXMLEventWriter(new FileOutputStream(playerSaveLocationName));
@@ -382,14 +410,15 @@ public class Parser {
   }
 
   /**
-   * Helper method to save the player's inventory information
-   * into a seperate InventorySaveData.xml file.
+   * Helper method to save the player's inventory information into a seperate
+   * InventorySaveData.xml file.
+   *
    * @param player
    *          The player we are taking data from.
-   * @throws FileNotFoundException
-   * @throws XMLStreamException
+   * @throws FileNotFoundException exception for missing file.
+   * @throws XMLStreamException exception for xml.
    */
-  private void saveInventory(Player player) throws FileNotFoundException, XMLStreamException{
+  private void saveInventory(Player player) throws FileNotFoundException, XMLStreamException {
     XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
     XMLEventWriter eventWriter = outputFactory
         .createXMLEventWriter(new FileOutputStream(inventorySaveDataName));
@@ -406,10 +435,11 @@ public class Parser {
 
     for (GameItem k : player.getInventory()) {
       if (k instanceof Key) {
-        Key key = (Key) k;
+
         addTabs(eventWriter, 1);
         eventWriter.add(eventFactory.createStartElement("", "", "Key"));
         eventWriter.add(end);
+        Key key = (Key) k;
         createNode(eventWriter, "ID", "" + key.getID());
         createNode(eventWriter, "Description", "" + key.getDescription());
         createNode(eventWriter, "Name", "" + key.getName());
@@ -428,6 +458,8 @@ public class Parser {
    *
    * @param segments
    *          The source array storing the segment information.
+   * @throws FileNotFoundException missing file exception.
+   * @throws XMLStreamException xml exception.
    *
    */
   public void saveMap(Segment[][] segments) throws FileNotFoundException, XMLStreamException {
@@ -563,7 +595,6 @@ public class Parser {
    * @param content
    *          The information to store in the line.
    *
-   * @return
    */
   private void createNode(XMLEventWriter eventWriter, String name, String content)
       throws XMLStreamException {
@@ -584,7 +615,11 @@ public class Parser {
     eventWriter.add(end);
   }
 
-  //Redundant method used for early testing.
+
+  /**
+   * Redundant method used for early testing.
+   * @param args main class.
+   */
   public static void main(String[] args) {
     Parser p = new Parser(new Main());
     p.loadMap(new File(smallMapName));

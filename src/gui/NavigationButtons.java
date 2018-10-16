@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import GUI.GUI.moveDirection;
+import gui.GUI.MoveDirection;
 
 /**
  * NavigationButton contains navigation buttons for the player to navigate the
@@ -102,13 +102,13 @@ public class NavigationButtons extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == upLeft) {
-      this.gui.getMain().movePlayer(moveDirection.upRight);
+      this.gui.getMain().movePlayer(MoveDirection.upRight);
     } else if (e.getSource() == upRight) {
-      this.gui.getMain().movePlayer(moveDirection.upLeft);
+      this.gui.getMain().movePlayer(MoveDirection.upLeft);
     } else if (e.getSource() == downLeft) {
-      this.gui.getMain().movePlayer(moveDirection.downRight);
+      this.gui.getMain().movePlayer(MoveDirection.downRight);
     } else if (e.getSource() == downRight) {
-      this.gui.getMain().movePlayer(moveDirection.downLeft);
+      this.gui.getMain().movePlayer(MoveDirection.downLeft);
     }
   }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Player is the users character, filled with moves and actions.
+ *
  * @author gricerile
  *
  */
@@ -15,7 +16,7 @@ public class Player {
   /**
    * Constructor of Player.
    *
-   * @param segment
+   * @param s
    *          the player will spawn on.
    */
   public Player(Segment s) {
@@ -34,7 +35,7 @@ public class Player {
   /**
    * sets segment field to new segment.
    *
-   * @param new
+   * @param s
    *          segment
    */
   public void move(Segment s) {
@@ -53,10 +54,10 @@ public class Player {
   /**
    * Gives only new keys into the inventory.
    *
-   * @param new
+   * @param k
    *          key
    *
-   * @param main
+   * @param m
    *          to alter inventory event panel.
    *
    * @return String of events that happened when attempting to add key.
@@ -64,7 +65,7 @@ public class Player {
   public String giveKey(Key k, Main m) {
     if (!this.inventory.contains(k)) {
       this.inventory.add(k);
-      m.getGUI().getFrame().getInventoryPanel().addItemToInventory(k);
+      m.getGui().getFrame().getInventoryPanel().addItemToInventory(k);
       return "Key " + k.getID() + " is the Inventory.";
     }
     return "The Key is already in the Inventory.";
