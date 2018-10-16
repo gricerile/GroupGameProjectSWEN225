@@ -599,6 +599,7 @@ public class Parser {
     eventWriter.add(end);
   }
 
+  //Redundant method used for early testing.
   public static void main(String[] args) {
     Parser p = new Parser(new Main());
     p.loadMap(new File(smallMapName));
