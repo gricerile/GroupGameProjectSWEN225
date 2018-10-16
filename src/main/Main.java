@@ -336,6 +336,7 @@ public class Main {
 	 */
 	public void loadSpecificMap(File file) {
 	  this.g.getFrame().getGraphicsWindow().setHasWon(false);
+	  winTile = findWinTile();
 		if (!file.getName().equals(Parser.smallMapName) && !file.getName().equals(Parser.largeMapName)
 				&& !file.getName().equals(Parser.mediumMapName)) {
 			System.out.println("Invalid file specified.");
@@ -354,6 +355,7 @@ public class Main {
 	 */
 	public void loadGame() {
 	   this.g.getFrame().getGraphicsWindow().setHasWon(false);
+	   winTile = findWinTile();
 		segmentsBoard = this.p.loadMap(new File(Parser.dungeonSaveName));
 		player = this.p.loadPlayer(new File(Parser.playerSaveLocationName), new File(Parser.inventorySaveDataName));
 		reDraw();
