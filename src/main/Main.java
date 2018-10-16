@@ -26,10 +26,10 @@ public class Main {
 		this.p = new Parser();
 		this.g = new GUI(this);
 		p.loadMap(new File(Parser.testMapFileName));
-		// this.segmentsBoard = this.makeTestSegment();
+		this.segmentsBoard = this.makeTestSegment();
 		//this.segmentsBoard = this.makeBoard();
 		//this.player = new Player(segmentsBoard[0][0]);
-		//this.player = this.p.loadPlayer(new File(Parser.playerLocationName));
+		this.player = this.p.loadPlayer(new File(Parser.playerLocationName));
 		// this.segmentsBpoard=p.getSegments(); will be created
 		// this.player=p.getPlayer(); will be created, lets do this
 		this.renderer = new Renderer(this);
@@ -235,21 +235,22 @@ public class Main {
 		this.g.getFrame().getGraphicsWindow().redraw();
 	}
 
-//	public Segment[][] makeTestSegment() {
-//		Segment[][] segmentsTest = new Segment[3][3];
-//		segmentsTest[0][0] = new Segment(new FreeSpaceTile(), 0, 0);
-//		segmentsTest[1][0] = new Segment(new Wall(), 1, 0);
-//		segmentsTest[2][0] = new Segment(new Wall(), 2, 0);
-//		segmentsTest[0][1] = new Segment(new FreeSpaceTile(), 0, 1);
-//		segmentsTest[1][1] = new Segment(new Door(101, false), 1, 1);
-//		segmentsTest[2][1] = new Segment(new FreeSpaceTile(), 2, 1);
-//		segmentsTest[0][2] = new Segment(new Chest(new Key(101, "Key opens door 101", "Key ID 101")), 0, 2);
-//		segmentsTest[1][2] = new Segment(new Wall(), 1, 2);
-//		segmentsTest[2][2] = new Segment(new WinTile(), 2, 2);
-//		//return segmentsTest;
-//		//return p.loadMap(new File(Parser.testMapFileName));
-//	}
+  	public Segment[][] makeTestSegment() {
+		Segment[][] segmentsTest = new Segment[3][3];
+		segmentsTest[0][0] = new Segment(new FreeSpaceTile(), 0, 0);
+		segmentsTest[1][0] = new Segment(new Wall(), 1, 0);
+		segmentsTest[2][0] = new Segment(new Wall(), 2, 0);
+		segmentsTest[0][1] = new Segment(new FreeSpaceTile(), 0, 1);
+		segmentsTest[1][1] = new Segment(new Door(101, false), 1, 1);
+		segmentsTest[2][1] = new Segment(new FreeSpaceTile(), 2, 1);
+		segmentsTest[0][2] = new Segment(new Chest(new Key(101, "Key opens door 101", "Key ID 101")), 0, 2);
+		segmentsTest[1][2] = new Segment(new Wall(), 1, 2);
+		segmentsTest[2][2] = new Segment(new WinTile(), 2, 2);
+		//return segmentsTest;
+		return p.loadMap(new File(Parser.testMapFileName));
+	}
 
+	/*
 	public Segment[][] makeBoard(){
     Segment[][] segmentBoard = new Segment[20][20];
     segmentBoard[0][0] = new Segment(new FreeSpaceTile(), 0, 0);
@@ -677,7 +678,7 @@ public class Main {
 
     return segmentBoard;
 
-	}
+	}*/
 
 	public Player makeTestPlayer() {
 		Player p = new Player(this.segmentsBoard[0][0]);
