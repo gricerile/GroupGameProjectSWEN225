@@ -1,36 +1,39 @@
 package parser;
 
 
-import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.xml.*;
 import javax.xml.stream.*;
 import javax.xml.stream.events.*;
 
 import main.*;
 
+
+//@Author Victor Ong (ongvict), vogog2@gmail.com
 public class Parser {
   public static final String smallMapName = "smallmap.xml";
   public static final String mediumMapName = "mediummap.xml";
   public static final String largeMapName = "largemap.xml";
 
   public static final String dungeonSaveName = "Dungeon Map Save.xml";
+
   public static final String playerLocationName = "PlayerStartData.xml";
   public static final String playerSaveLocationName = "PlayerSavingData.xml";
   public static final String inventoryStartDataName = "InventoryStartData.xml";
   public static final String inventorySaveDataName = "InventorySaveData.xml";
 
   public static final String TRUECHECKER = "true";
-  public static final String FALSECHECKER = "false";
 
   private Main m = null;
 
+  //Arbitrary size that serves as a maximum size.
   private Segment[][] segments = new Segment[30][30];
   private Player player = null;
 
-
+  /**
+   * Simple constructor that stores the main class for use.
+   *
+   * @param m
+   */
   public Parser(Main m) {
     this.m = m;
   }
@@ -81,7 +84,16 @@ public class Parser {
     return player;
   }
 
-  public void parseInventory(Player player, File inventoryFile) {
+  /**
+   * Helper method to parse player inventory information.
+   *
+   * @param player
+   *          The player which is having its inventory parsed.
+   *
+   * @param inventoryFile
+   *          The inventory file that we are reading from.
+   */
+  private void parseInventory(Player player, File inventoryFile) {
     m.getGUI().getFrame().getInventoryPanel().clearInventory();
     try {
       XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -115,13 +127,15 @@ public class Parser {
     }
   }
 
-  public void resetSegments() {
+  /**
+   * Helper method to empty the segments in the parser.
+   */
+  private void resetSegments() {
     for (int i = 0; i < segments.length; i++) {
       for (int j = 0; j < segments[i].length; j++) {
         segments[i][j] = null;
       }
     }
-    
   }
 
   /**
@@ -246,7 +260,7 @@ public class Parser {
    *          The XMLEventReader used for parsing.
    * @return
    */
-  public Key parseKey(XMLEventReader eventReader) {
+  private Key parseKey(XMLEventReader eventReader) {
     int id = 0;
     String description = "";
     String name = "";
@@ -296,7 +310,7 @@ public class Parser {
    *          The XMLEventReader used for parsing.
    * @return
    */
-  public Door parseDoor(XMLEventReader eventReader) {
+  private Door parseDoor(XMLEventReader eventReader) {
     int id = 0;
     boolean unlocked  = false;
     try {
@@ -330,19 +344,34 @@ public class Parser {
         }
       }
     }
-    catch (XMLStreamException e) {
-
-    }
+    catch (XMLStreamException e) {}
     return null;
   }
 
-  public void addTabs(XMLEventWriter eventWriter, int num) throws XMLStreamException{
+  /**
+   * Helper method to insert tab characters into the
+   * XML documents for formatting purposes.
+   * @param eventWriter
+   *          The XMLEventWriter we are currently writing with.
+   * @param num
+   *          The number of tabs we are inserting.
+   * @throws XMLStreamException
+   */
+  private void addTabs(XMLEventWriter eventWriter, int num) throws XMLStreamException{
     XMLEventFactory eventFactory = XMLEventFactory.newInstance();
     for (int i = 0; i < num; i++) {
       eventWriter.add(eventFactory.createDTD("\t"));
     }
   }
 
+  /**
+   * Method used to save player information to a file:
+   * PlayerSavingData.xml.
+   * @param player
+   *          The player we are taking data from.
+   * @throws FileNotFoundException
+   * @throws XMLStreamException
+   */
   public void savePlayer(Player player) throws FileNotFoundException, XMLStreamException{
     XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
     XMLEventWriter eventWriter =
@@ -365,7 +394,15 @@ public class Parser {
     saveInventory(player);
   }
 
-  public void saveInventory(Player player) throws FileNotFoundException, XMLStreamException{
+  /**
+   * Helper method to save the player's inventory information
+   * into a seperate InventorySaveData.xml file.
+   * @param player
+   *          The player we are taking data from.
+   * @throws FileNotFoundException
+   * @throws XMLStreamException
+   */
+  private void saveInventory(Player player) throws FileNotFoundException, XMLStreamException{
     XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
     XMLEventWriter eventWriter =
             outputFactory.createXMLEventWriter(new FileOutputStream(inventorySaveDataName));
@@ -562,9 +599,9 @@ public class Parser {
     eventWriter.add(end);
   }
 
+  //Redundant method used for early testing.
   public static void main(String[] args) {
     Parser p = new Parser(new Main());
-    //p.loadMap(new File(testMapFileName));
     p.loadMap(new File(smallMapName));
   }
 }

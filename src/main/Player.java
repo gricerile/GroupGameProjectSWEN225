@@ -2,6 +2,11 @@ package main;
 
 import java.util.ArrayList;
 
+/**
+ * Player is the users character, filled with moves and actions.
+ * @author gricerile
+ *
+ */
 public class Player {
   // fields
   private ArrayList<GameItem> inventory = new ArrayList<GameItem>();

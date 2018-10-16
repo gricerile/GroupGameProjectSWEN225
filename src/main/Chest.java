@@ -2,6 +2,11 @@ package main;
 
 import java.awt.Graphics;
 
+/**
+ * Chest object on Segments that hold keys.
+ * @author gricerile
+ *
+ */
 public class Chest implements GameObject {
   // fields
   private boolean open;
