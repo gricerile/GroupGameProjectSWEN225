@@ -4,7 +4,7 @@
 		<GameObject>FreeTile</GameObject>
 		<CoordinateX>0</CoordinateX>
 		<CoordinateY>0</CoordinateY>
-		<hasPlayer>false</hasPlayer>
+		<hasPlayer>true</hasPlayer>
 	</NewSegment>
 
 	<NewSegment>

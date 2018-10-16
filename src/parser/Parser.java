@@ -12,9 +12,9 @@ import javax.xml.stream.events.*;
 import main.*;
 
 public class Parser {
-  public static final String testMapFileName = "Testing Map.xml";
-  public static final String mediumMapName = "Dungeon Map.xml";
-  public static final String largeMapName = "LargeDungeonInitialData.xml";
+  public static final String smallMapName = "smallmap.xml";
+  public static final String mediumMapName = "mediummap.xml";
+  public static final String largeMapName = "largemap.xml";
 
   public static final String dungeonSaveName = "Dungeon Map Save.xml";
   public static final String playerLocationName = "PlayerStartData.xml";
@@ -565,6 +565,6 @@ public class Parser {
   public static void main(String[] args) {
     Parser p = new Parser(new Main());
     //p.loadMap(new File(testMapFileName));
-    p.loadMap(new File(testMapFileName));
+    p.loadMap(new File(smallMapName));
   }
 }
