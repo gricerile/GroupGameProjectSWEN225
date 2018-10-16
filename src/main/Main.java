@@ -385,7 +385,6 @@ public class Main {
 		// return segmentsTest;
 		return p.loadMap(new File(Parser.smallMapName));
 	}
-	
 
 	/**
 	 * Makes player for test along side segment maker tests.
